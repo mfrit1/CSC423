@@ -1,10 +1,10 @@
 div.fader {
 	height: 100vh; 
 	background: linear-gradient(to left,
-    	rgba(255, 255, 255, 0) 0%, 
-    	rgba(255, 255, 255, 1) 15%, 
-    	rgba(255, 255, 255, 1) 85%, 
-    	rgba(255, 255, 255, 0) 100%); 
+    	rgb(211,211,211, 0) 0%, 
+    	rgb(211,211,211, 1) 15%, 
+    	rgb(211,211,211, 1) 85%, 
+    	rgb(211,211,211, 0) 100%); 
     padding-left: 250px; 
     padding-right: 250px;
 }
