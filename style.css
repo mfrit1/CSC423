@@ -1,15 +1,31 @@
+/*Font imports*/
+@import url(https://fonts.googleapis.com/css?family=Oxygen);
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Oxygen', sans-serif;
+}
+
+body.background {
+    background-image: url('https://i.imgur.com/Nbi7bYI.jpg');
+    padding-top: 50px
+}
+
 div.fader {
 	height: 100vh; 
 	background: linear-gradient(to left,
-    	rgb(211,211,211, 0) 0%, 
-    	rgb(211,211,211, 1) 15%, 
-    	rgb(211,211,211, 1) 85%, 
-    	rgb(211,211,211, 0) 100%); 
+    	rgb(211,211,211, 0) 10%, 
+    	rgb(211,211,211, 1) 25%, 
+    	rgb(211,211,211, 1) 75%, 
+    	rgb(211,211,211, 0) 90%); 
     padding-left: 250px; 
     padding-right: 250px;
 }
 
-body.background {
-	background-image: url('https://i.imgur.com/Nbi7bYI.jpg'); 
-	padding-top: 50px
+img {
+    max-width: 100%;
+    height: auto;
 }
