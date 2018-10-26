@@ -64,76 +64,105 @@
 		</div>
 		<form class="form-horizontal" method="post" onsubmit="return checkFunctions()" action="/action_page.php">
 			 <div class="form-group row">
-				<label for="InputVendorId">Vendor ID</label>
-				<input type="text" class="form-control" id="InputVendorId" aria-describedby="emailHelp" placeholder="Enter Vendor ID">
+				<label for="InputVendorId">Vendor Code</label>
+				<input type="text" class="form-control" id="InputVendorCode" aria-describedby="emailHelp" placeholder="Enter Vendor Code">
 			 </div>
+			 <div style="height: 25px"></div>
 			 <div class="form-group row">
 				<label for="InputVendorName">Vendor Name</label>
 				<input type="text" class="form-control" id="InputVendorName" aria-describedby="emailHelp" placeholder="Enter Vendor Name">
 			 </div>
+			 <div style="height: 25px"></div>
 			 <div class="form-group row">
 				<label for="InputVendorAddress1">Vendor Address</label>
-				<input type="text" class="form-control" id="InputVendorAddress1" aria-describedby="emailHelp" placeholder="Enter Vendor Address Line 1">
+				<input type="text" class="form-control" id="InputVendorAddress" aria-describedby="emailHelp" placeholder="Enter Vendor Address">
 			 </div>
 			 <div class="form-group row">
-				<input type="text" class="form-control" id="InputVendorAddress2" aria-describedby="emailHelp" placeholder="Enter Vendor Address Line 2">
-			 </div>
-			 <div class="form-group">
-				<label for="stateSelect">Select Vendor State</label>
-				<select class="form-control" id="stateSelect" selected="New York">
-					<option value="AL">Alabama</option>
-					<option value="AK">Alaska</option>
-					<option value="AZ">Arizona</option>
-					<option value="AR">Arkansas</option>
-					<option value="CA">California</option>
-					<option value="CO">Colorado</option>
-					<option value="CT">Connecticut</option>
-					<option value="DE">Delaware</option>
-					<option value="DC">District Of Columbia</option>
-					<option value="FL">Florida</option>
-					<option value="GA">Georgia</option>
-					<option value="HI">Hawaii</option>
-					<option value="ID">Idaho</option>
-					<option value="IL">Illinois</option>
-					<option value="IN">Indiana</option>
-					<option value="IA">Iowa</option>
-					<option value="KS">Kansas</option>
-					<option value="KY">Kentucky</option>
-					<option value="LA">Louisiana</option>
-					<option value="ME">Maine</option>
-					<option value="MD">Maryland</option>
-					<option value="MA">Massachusetts</option>
-					<option value="MI">Michigan</option>
-					<option value="MN">Minnesota</option>
-					<option value="MS">Mississippi</option>
-					<option value="MO">Missouri</option>
-					<option value="MT">Montana</option>
-					<option value="NE">Nebraska</option>
-					<option value="NV">Nevada</option>
-					<option value="NH">New Hampshire</option>
-					<option value="NJ">New Jersey</option>
-					<option value="NM">New Mexico</option>
-					<option value="NY">New York</option>
-					<option value="NC">North Carolina</option>
-					<option value="ND">North Dakota</option>
-					<option value="OH">Ohio</option>
-					<option value="OK">Oklahoma</option>
-					<option value="OR">Oregon</option>
-					<option value="PA">Pennsylvania</option>
-					<option value="RI">Rhode Island</option>
-					<option value="SC">South Carolina</option>
-					<option value="SD">South Dakota</option>
-					<option value="TN">Tennessee</option>
-					<option value="TX">Texas</option>
-					<option value="UT">Utah</option>
-					<option value="VT">Vermont</option>
-					<option value="VA">Virginia</option>
-					<option value="WA">Washington</option>
-					<option value="WV">West Virginia</option>
-					<option value="WI">Wisconsin</option>
-					<option value="WY">Wyoming</option>
-				</select>
+			 	<table>
+			 		<tr>
+			 			<td width="550px">
+			 				<label for="InputVendorCity">Vendor City</label>
+							<input type="text" class="form-control" id="InputVendorCity" aria-describedby="emailHelp" placeholder="Enter Vendor City" style="width: 350px">
+						</td>
+						<td width="400px">
+							<label for="stateSelect">Select Vendor State</label>
+							<select class="form-control" id="stateSelect" selected="New York" style="width: 200px">
+								<option value="AL">Alabama</option>
+								<option value="AK">Alaska</option>
+								<option value="AZ">Arizona</option>
+								<option value="AR">Arkansas</option>
+								<option value="CA">California</option>
+								<option value="CO">Colorado</option>
+								<option value="CT">Connecticut</option>
+								<option value="DE">Delaware</option>
+								<option value="DC">District Of Columbia</option>
+								<option value="FL">Florida</option>
+								<option value="GA">Georgia</option>
+								<option value="HI">Hawaii</option>
+								<option value="ID">Idaho</option>
+								<option value="IL">Illinois</option>
+								<option value="IN">Indiana</option>
+								<option value="IA">Iowa</option>
+								<option value="KS">Kansas</option>
+								<option value="KY">Kentucky</option>
+								<option value="LA">Louisiana</option>
+								<option value="ME">Maine</option>
+								<option value="MD">Maryland</option>
+								<option value="MA">Massachusetts</option>
+								<option value="MI">Michigan</option>
+								<option value="MN">Minnesota</option>
+								<option value="MS">Mississippi</option>
+								<option value="MO">Missouri</option>
+								<option value="MT">Montana</option>
+								<option value="NE">Nebraska</option>
+								<option value="NV">Nevada</option>
+								<option value="NH">New Hampshire</option>
+								<option value="NJ">New Jersey</option>
+								<option value="NM">New Mexico</option>
+								<option value="NY">New York</option>
+								<option value="NC">North Carolina</option>
+								<option value="ND">North Dakota</option>
+								<option value="OH">Ohio</option>
+								<option value="OK">Oklahoma</option>
+								<option value="OR">Oregon</option>
+								<option value="PA">Pennsylvania</option>
+								<option value="RI">Rhode Island</option>
+								<option value="SC">South Carolina</option>
+								<option value="SD">South Dakota</option>
+								<option value="TN">Tennessee</option>
+								<option value="TX">Texas</option>
+								<option value="UT">Utah</option>
+								<option value="VT">Vermont</option>
+								<option value="VA">Virginia</option>
+								<option value="WA">Washington</option>
+								<option value="WV">West Virginia</option>
+								<option value="WI">Wisconsin</option>
+								<option value="WY">Wyoming</option>
+							</select>
+						</td>
+						<td>
+							<label for="InputVendorZip">Vendor Zip Code</label>
+							<input type="text" class="form-control" id="InputVendorZip" aria-describedby="emailHelp" placeholder="Enter Vendor Zip Code" style="width: 300px">
+						</td>
+					</tr>
+				</table>
 			  </div>
+			  <div style="height: 25px"></div>
+			  <div class="form-group">
+			  	<table>
+			  		<tr>
+			  			<td width="60%">
+			  				<label for="InputVendorContactName">Contact Person Name</label>
+			  				<input type="text" class="form-control" id="InputVendorContactName" aria-describedby="emailHelp" placeholder="Enter Vendor Contact Name" style="width: 575px;">
+			  			</td>
+			  			<td width="40%">
+			  				<label for="InputVendorContactNumber">Contact Person Phone Number</label>
+			  				<input type="text" class="form-control" id="InputVendorContactNumber" aria-describedby="emailHelp" placeholder="Enter Vendor Contact Number" style="width: 575px;">
+			  			</td>
+			  		</tr>
+			  	</table>
+			  </div>
+			  <div style="height: 25px"></div>
 			 <button type="submit" class="btn btn-primary btn-lg btn-block">Submit Vendor Information</button>
 		</form>
 	</div>
