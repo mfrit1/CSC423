@@ -1,6 +1,6 @@
 <?php
 
-require 'DBInfo.php';
+require '../DBInfo.php';
 
 $vendorId = test_input($_POST["InputVendorID"]);
 $vendorCode = test_input($_POST["InputVendorCode"]);
