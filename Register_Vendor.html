@@ -62,27 +62,33 @@
 				<hr>
   		<!-- <div class="col-lg-1"></div> -->
 		</div>
-		<form class="form-horizontal" method="post" onsubmit="return checkFunctions()" action="/action_page.php">
+		<form class="form-horizontal" method="post" onsubmit="return checkFunctions()" action="Register_Vendor_Submit.php">
 			 <div class="form-group row">
-				<label for="InputVendorId">Vendor Code</label>
-				<input type="text" class="form-control" id="InputVendorCode" aria-describedby="emailHelp" placeholder="Enter Vendor Code">
+				<label for="InputVendorId">Vendor ID</label>
+				<input type="text" class="form-control" id="InputVendorID"  placeholder="Enter Vendor ID">
+			 </div>
+			 <div style="height: 25px"></div>
+			 <div class="form-group row">
+				<label for="InputVendorCode">Vendor Code</label>
+				<input type="text" class="form-control" id="InputVendorCode" placeholder="Enter Vendor Code">
 			 </div>
 			 <div style="height: 25px"></div>
 			 <div class="form-group row">
 				<label for="InputVendorName">Vendor Name</label>
-				<input type="text" class="form-control" id="InputVendorName" aria-describedby="emailHelp" placeholder="Enter Vendor Name">
+				<input type="text" class="form-control" id="InputVendorName" placeholder="Enter Vendor Name">
 			 </div>
 			 <div style="height: 25px"></div>
 			 <div class="form-group row">
 				<label for="InputVendorAddress1">Vendor Address</label>
-				<input type="text" class="form-control" id="InputVendorAddress" aria-describedby="emailHelp" placeholder="Enter Vendor Address">
+				<input type="text" class="form-control" id="InputVendorAddress" placeholder="Enter Vendor Address">
 			 </div>
+			 <div style="height: 25px"></div>
 			 <div class="form-group row">
 			 	<table>
 			 		<tr>
 			 			<td width="550px">
 			 				<label for="InputVendorCity">Vendor City</label>
-							<input type="text" class="form-control" id="InputVendorCity" aria-describedby="emailHelp" placeholder="Enter Vendor City" style="width: 350px">
+							<input type="text" class="form-control" id="InputVendorCity" placeholder="Enter Vendor City" style="width: 350px">
 						</td>
 						<td width="400px">
 							<label for="stateSelect">Select Vendor State</label>
@@ -142,7 +148,7 @@
 						</td>
 						<td>
 							<label for="InputVendorZip">Vendor Zip Code</label>
-							<input type="text" class="form-control" id="InputVendorZip" aria-describedby="emailHelp" placeholder="Enter Vendor Zip Code" style="width: 300px">
+							<input type="text" class="form-control" id="InputVendorZip" placeholder="Enter Vendor Zip Code" style="width: 300px">
 						</td>
 					</tr>
 				</table>
@@ -153,11 +159,11 @@
 			  		<tr>
 			  			<td width="60%">
 			  				<label for="InputVendorContactName">Contact Person Name</label>
-			  				<input type="text" class="form-control" id="InputVendorContactName" aria-describedby="emailHelp" placeholder="Enter Vendor Contact Name" style="width: 575px;">
+			  				<input type="text" class="form-control" id="InputVendorContactName" placeholder="Enter Vendor Contact Name" style="width: 575px;">
 			  			</td>
 			  			<td width="40%">
 			  				<label for="InputVendorContactNumber">Contact Person Phone Number</label>
-			  				<input type="text" class="form-control" id="InputVendorContactNumber" aria-describedby="emailHelp" placeholder="Enter Vendor Contact Number" style="width: 575px;">
+			  				<input type="text" class="form-control" id="InputVendorContactNumber" placeholder="Enter Vendor Contact Number" style="width: 575px;">
 			  			</td>
 			  		</tr>
 			  	</table>
