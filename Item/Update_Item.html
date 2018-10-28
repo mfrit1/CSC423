@@ -54,13 +54,48 @@
   			</div>
 		</nav>
   	
-    <div class="row">
+    <div class ="col-lg-12 fader">
+		<div class="row">
+			<!-- <div class="col-lg-1"></div> -->
+				<img src="../Pictures/Logo2.png" class="center">
+			
+				<h2 align="left">UPDATE AN ITEM</h2>
+				<hr>
   		<!-- <div class="col-lg-1"></div> -->
-  		<div class="col-lg-12 fader">
-  			<img src="../Pictures/Logo2.png" class="center">
-  		</div>
-  		<!-- <div class="col-lg-1"></div> -->
-  	</div>
+		</div>
+		<form class="form-horizontal" method="post" onsubmit="return checkFunctions()" action="/action_page.php">
+      <div class="form-group row" align="center">
+		<font size="5"><u>Search by Item Code OR by Item Name</u></font>
+      </div>
+      <div style="height: 30px"></div>
+			 <div class="form-group row">
+				<label for="InputItemCode">Item Code</label>
+				<input type="text" class="form-control" id="InputItemCode" name="InputItemCode" aria-describedby="emailHelp" placeholder="Enter Item Code">
+			 </div>
+       <div class="form-group row">
+          <button type="submit" class="btn btn-primary btn-md" style="float: right; width: 200px; height: 40px">Submit Item Code</button>
+       </div>
+			 <div>
+        <div style="height: 10px"></div>
+			 </div>
+       <div style="height: 60px"></div>
+			 <div class="form-group row">
+				<label for="InputItemName">Item Name</label>
+          <select id="vendors" class="select2 form-control">
+            <option value="null">Select an Item...</option>
+            <option value="volvo">I1</option>
+            <option value="saab">I2</option>
+            <option value="mercedes">I3</option>
+            <option value="audi">I4</option>
+          </select>
+			 </div>
+       <div class="form-group row">
+          <button type="submit" class="btn btn-primary btn-md" style="float: right; width: 200px; height: 40px">Submit Item Name</button>
+       </div>
+				
+			 
+		</form>
+	</div>
 
   </body>
 
