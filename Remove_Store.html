@@ -54,13 +54,48 @@
   			</div>
 		</nav>
   	
-    <div class="row">
+    <div class ="col-lg-12 fader">
+		<div class="row">
+			<!-- <div class="col-lg-1"></div> -->
+				<img src="Pictures/Logo2.png" class="center">
+			
+				<h2 align="left">REMOVE A STORE</h2>
+				<hr>
   		<!-- <div class="col-lg-1"></div> -->
-  		<div class="col-lg-12 fader">
-  			<img src="Pictures/Logo2.png" class="center">
-  		</div>
-  		<!-- <div class="col-lg-1"></div> -->
-  	</div>
+		</div>
+		<form class="form-horizontal" method="post" onsubmit="return checkFunctions()" action="/action_page.php">
+      <div class="form-group row" align="center">
+        <font size="5"><u>Search by Store Code OR by Store Name</u></font>
+      </div>
+      <div style="height: 30px"></div>
+			 <div class="form-group row">
+				<label for="InputStoreCode">Store Code</label>
+				<input type="text" class="form-control" id="InputStoreCode" name="InputStoreCode" aria-describedby="emailHelp" placeholder="Enter Store Code">
+			 </div>
+       <div class="form-group row">
+          <button type="submit" class="btn btn-primary btn-md" style="float: right; width: 200px; height: 40px">Submit Store Code</button>
+       </div>
+			 <div>
+        <div style="height: 10px"></div>
+			 </div>
+       <div style="height: 60px"></div>
+			 <div class="form-group row">
+				<label for="InputStoreName">Store Name</label>
+          <select id="vendors" class="select2 form-control">
+            <option value="null">Select a Store...</option>
+            <option value="volvo">Jerry's Berries</option>
+            <option value="saab">Bob's Burgers</option>
+            <option value="mercedes">Falafel and Waffles</option>
+            <option value="audi">Luverne Pies Tires Fixed Also</option>
+          </select>
+			 </div>
+       <div class="form-group row">
+          <button type="submit" class="btn btn-primary btn-md" style="float: right; width: 200px; height: 40px">Submit Store Name</button>
+       </div>
+				
+			 
+		</form>
+	</div>
 
   </body>
 
