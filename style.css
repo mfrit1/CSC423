@@ -1,0 +1,48 @@
+/*Font imports*/
+@import url(https://fonts.googleapis.com/css?family=Oxygen);
+
+* {
+    box-sizing: border-box;
+}
+
+body, html {
+    font-family: 'Oxygen', sans-serif;
+	height: 100%;
+    margin: 0;
+}
+
+body.background {
+    background-image: url('https://i.imgur.com/Nbi7bYI.jpg');
+    background-position: center;
+	height: 100%;
+	background-size: cover; 
+}
+
+div.fader {
+	height: 100%; 
+	background: linear-gradient(to left,
+    	rgb(211,211,211, 0) 10%, 
+    	rgb(211,211,211, 1) 25%, 
+    	rgb(211,211,211, 1) 75%, 
+    	rgb(211,211,211, 0) 90%); 
+    padding-left: 250px; 
+    padding-right: 250px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+img.center {
+	padding-top: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+/*For the submit button*/
+.spacing {
+    margin-bottom:25px;
+}
