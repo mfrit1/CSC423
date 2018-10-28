@@ -15,7 +15,7 @@ body.background {
 }
 
 div.fader {
-	height: 100vh; 
+	height: 100%; 
 	background: linear-gradient(to left,
     	rgb(211,211,211, 0) 10%, 
     	rgb(211,211,211, 1) 25%, 
@@ -35,4 +35,9 @@ img.center {
     margin-left: auto;
     margin-right: auto;
     width: 50%;
+}
+
+/*For the submit button*/
+.spacing {
+    margin-bottom:25px;
 }
