@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+  <html>
   <head>
     <title>Nanno's Foods</title>
     <meta charset="utf-8">
@@ -8,7 +9,16 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
+    <script type="text/javascript">
+
+      $(document).ready(function() {$('select.form-control').select2();});
+
+    </script>
   </head>
+
 
   <body class="background">
   	
@@ -20,7 +30,7 @@
       		</div>
 
     			<ul class="nav navbar-nav">
-       			<li class="active"><a href="./Home_Screen.html">Home</a></li>
+       			<li class="active"><a href="index.html">Home</a></li>
         		<li class="dropdown">
 				<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 					Vendors <span class="caret"></span></a>
