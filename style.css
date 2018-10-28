@@ -15,7 +15,7 @@ body.background {
 }
 
 div.fader {
-	height: 100vh; 
+	height: 100%; 
 	background: linear-gradient(to left,
     	rgb(211,211,211, 0) 10%, 
     	rgb(211,211,211, 1) 25%, 
