@@ -72,7 +72,7 @@
 		
 		function checkId() {
 			var elem = document.getElementById("InputVendorID");
-			var elemPattern = /^\d*$/;
+			var elemPattern = /^\d+$/;
 			var re = new RegExp(elemPattern);
 			if(!re.test(elem.value))
 			{
@@ -126,7 +126,7 @@
 			var re = new RegExp(elemPattern);
 			if(!re.test(elem.value))
 			{
-				alertText = alertText.concat("\nVendor City");
+				alertText = alertText.concat("\nVendor Zip");
 			}
 		}
 		
