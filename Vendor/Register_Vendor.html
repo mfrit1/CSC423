@@ -9,17 +9,29 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="http://malsup.github.com/jquery.form.js"></script> 
+	<script>
+	
+	
+	
+	</script>
 
 	<script> 
+	
+		var alertText = "The following are entered incorrectly:";
+		var alertTextLength = alertText.length;
+	
+	
         // wait for the DOM to be loaded 
         $(document).ready(function() { 
             // bind 'myForm' and provide a simple callback function 
             // attach handler to form's submit event 
 			$('#myForm').submit(function() { 
-			// submit the form 
-			$(this).ajaxSubmit(); 
-			// return false to prevent normal browser submit and page navigation 
-			return false; 
+			
+			if(checkFunctions()){
+				$(this).ajaxSubmit(); // submit the form 
+			}
+			
+			return false; // return false to prevent normal browser submit and page navigation 
 			})
         }); 
 		
@@ -30,6 +42,124 @@
 		$(document).ajaxError(function (evt, jqXHR, settings, err) {
 		alert("Data Not Sent Correctly.");
 		});
+		
+		function checkFunctions() {
+		
+			alertText = "The following are entered incorrectly:";
+			
+			checkId();
+			checkCode();
+			checkName();
+			checkAddress();
+			checkPassword();
+			checkCity();
+			checkPersonName();
+			checkZip();
+			checkPhone();
+			
+			if(alertText.length == alertTextLength)
+			{
+				return true;
+				
+			}else{
+			
+				alert(alertText);
+				
+				return false;
+			
+			}
+		}
+		
+		function checkId() {
+			var elem = document.getElementById("InputVendorID");
+			var elemPattern = /^\d*$/;
+			var re = new RegExp(elemPattern);
+			if(!re.test(elem.value))
+			{
+				alertText = alertText.concat("\nVendor ID");
+			}
+		}
+		
+		function checkCode() {
+			var elem= document.getElementById("InputVendorCode");
+			var elemPattern = /^\d+$/;
+			var re = new RegExp(elemPattern);
+			if(!re.test(elem.value))
+			{
+				alertText = alertText.concat("\nVendor Code");
+			}
+		}
+		
+		function checkName() {
+			var elem= document.getElementById("InputVendorName");
+			var elemPattern = /^[A-Za-z0-9\ -]+$/;
+			var re = new RegExp(elemPattern);
+			if(!re.test(elem.value))
+			{
+				alertText = alertText.concat("\nVendor Name");
+			}
+		}
+		
+		function checkAddress() {
+			var elem= document.getElementById("InputVendorAddress");
+			var elemPattern = /^[A-Za-z0-9-\ ]+$/;
+			var re = new RegExp(elemPattern);
+			if(!re.test(elem.value))
+			{
+				alertText = alertText.concat("\nVendor Address");
+			}
+		}
+		
+		function checkCity() {
+			var elem= document.getElementById("InputVendorCity");
+			var elemPattern = /^[A-Z][a-z]*([A-Za-z]*[- ][A-Za-z]+)*$/;
+			var re = new RegExp(elemPattern);
+			if(!re.test(elem.value))
+			{
+				alertText = alertText.concat("\nVendor City");
+			}
+		}
+		
+		function checkZip() {
+			var elem= document.getElementById("InputVendorZip");
+			var elemPattern = /^\d{5}$/;
+			var re = new RegExp(elemPattern);
+			if(!re.test(elem.value))
+			{
+				alertText = alertText.concat("\nVendor City");
+			}
+		}
+		
+		function checkPersonName() {
+			var elem= document.getElementById("InputVendorContactName");
+			var elemPattern = /^[A-Za-z-\ ]+$/;
+			var re = new RegExp(elemPattern);
+			if(!re.test(elem.value))
+			{
+				alertText = alertText.concat("\nVendor Contact Name");
+			}
+		}
+		
+		function checkPhone() {
+			var elem= document.getElementById("InputVendorContactNumber");
+			var elemPattern = /^([0-9]{3}-[0-9]{3}-[0-9]{4})$/;
+			var re = new RegExp(elemPattern);
+			if(!re.test(elem.value))
+			{
+				alertText = alertText.concat("\nVendor Phone");
+			}
+		}
+		
+		function checkPassword() {
+			var elem= document.getElementById("InputVendorPassword");
+			var elemPattern = /^[A-Za-z0-9-\!\$\^]+$/;
+			var re = new RegExp(elemPattern);
+			if(!re.test(elem.value))
+			{
+				alertText = alertText.concat("\nVendor Password");
+			}
+		}
+		
  </script> 
 
 </head>
@@ -44,9 +174,9 @@
 			</div>
 
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="../index.html">Home</a></li>
-				<li class="dropdown">
-				<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+				<li><a href="../index.html">Home</a></li>
+				<li class="dropdown active">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#" >
 					Vendors <span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="Register_Vendor.html">Register a Vendor</a></li>
@@ -115,13 +245,6 @@
 				<div class ="col-lg-12">
 					<label for="InputVendorAddress">Vendor Address</label>
 					<input type="text" class="form-control" name="InputVendorAddress" id="InputVendorAddress" placeholder="Enter Vendor Address">
-				</div>
-			</div>
-			<div style="height: 25px"></div>
-			<div class="form-group row">
-				<div class ="col-lg-12">
-					<label for="InputVendorPassword">Vendor Password</label>
-					<input type="text" class="form-control" name="InputVendorPassword" id="InputVendorPassword" placeholder="Enter Vendor Password">
 				</div>
 			</div>
 			<div style="height: 25px"></div>
