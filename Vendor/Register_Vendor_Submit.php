@@ -2,30 +2,32 @@
 
 require '../DBInfo.php';
 
-$vendorId = test_input($_POST["InputVendorID"]);
-$vendorCode = test_input($_POST["InputVendorCode"]);
-$vendorName = test_input($_POST["InputVendorName"]);
-$address = test_input($_POST["InputVendorAddress"]);
-$city = test_input($_POST["InputVendorCity"]);
-$state = test_input($_POST["stateSelect"]);
-$zip = test_input($_POST["InputVendorZip"]);
-$phone = test_input($_POST["InputVendorContactNumber"]);
-$contactPersonName = test_input($_POST["InputVendorContactName"]);
-$password = test_input($_POST["InputVendorPassword"]);
+$vendorId = $_POST["InputVendorID"];
+$vendorCode = $_POST["InputVendorCode"];
+$vendorName = $_POST["InputVendorName"];
+$address = $_POST["InputVendorAddress"];
+$city = $_POST["InputVendorCity"];
+$state = $_POST["stateSelect"];
+$zip = $_POST["InputVendorZip"];
+$phone = $_POST["InputVendorContactNumber"];
+$contactPersonName = $_POST["InputVendorContactName"];
+$password = $_POST["InputVendorPassword"];
 
-function test_input($data) {
-  $data = trim($data);
-  $data = stripslashes($data);
-  $data = htmlspecialchars($data);
-  return $data;
-}
+//function test_input($data) {
+ // $data = trim($data);
+ // $data = stripslashes($data);
+ // $data = htmlspecialchars($data);
+//  return $data;
+//}
 
 $sql = "INSERT INTO vendor (vendorId, vendorCode, vendorName, address, city, state, zip, phone, contactPersonName, password) VALUES ('{$vendorId}','{$vendorCode}','{$vendorName}','{$address}','{$city}','{$state}','{$zip}','{$phone}','{$contactPersonName}','{$password}')";
 
 if ($conn->query($sql) === TRUE) {
-    echo "New record created successfully";
+    $res="Data Inserted Successfully:";
+	echo json_encode($res);
 } else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
+   $error="Not Inserted,Some Problem occur.";
+	echo json_encode($error);
 }
 
 $conn->close();

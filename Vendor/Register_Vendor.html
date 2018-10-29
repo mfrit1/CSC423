@@ -8,6 +8,30 @@
 	<link rel="stylesheet" type="text/css" href="../style.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="http://malsup.github.com/jquery.form.js"></script> 
+
+	<script> 
+        // wait for the DOM to be loaded 
+        $(document).ready(function() { 
+            // bind 'myForm' and provide a simple callback function 
+            // attach handler to form's submit event 
+			$('#myForm').submit(function() { 
+			// submit the form 
+			$(this).ajaxSubmit(); 
+			// return false to prevent normal browser submit and page navigation 
+			return false; 
+			})
+        }); 
+		
+		$(document).ajaxSuccess(function (evt, jqXHR, settings) {
+		alert("Data Sucessfully Sent.");
+		});
+
+		$(document).ajaxError(function (evt, jqXHR, settings, err) {
+		alert("Data Not Sent Correctly.");
+		});
+ </script> 
+
 </head>
 
 <body class="background">
@@ -52,6 +76,9 @@
 			</ul>
 		</div>
 	</nav>
+	
+
+
 	<div class = "fader">
 		<div class="row">
 			<div class ="col-lg-12">
@@ -61,7 +88,7 @@
 				<hr>
 			</div>
 		</div>
-		<form class="form-horizontal" method="post" onsubmit="return checkFunctions()" action="Register_Vendor_Submit.php">
+		<form class="form-horizontal" method="post" id = "myForm" action = "Register_Vendor_Submit.php"   >
 			<div class="form-group row">
 				<div class ="col-lg-12">
 					<label for="InputVendorID">Vendor ID</label>
@@ -180,8 +207,9 @@
 				</div>
 			</div>
 			<div style="height: 25px"></div>
-			<button type="submit" class="btn btn-primary btn-lg btn-block spacing">Submit Vendor Information</button>
+			<button type="submit" button name="submit" id="submit" class="btn btn-primary btn-lg btn-block spacing">Submit Vendor Information</button>
 		</form>
 	</div>
+
 </body>
 </html>
