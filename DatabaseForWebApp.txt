@@ -9,6 +9,7 @@ CREATE TABLE RETAILSTORE(
     zip char(5),
     phone varchar(15),
     managerName varchar(30),
+    status ENUM ('Active', 'Inactive') DEFAULT 'Active',
     PRIMARY KEY(storeId),
     UNIQUE(storeCode)
 );
@@ -25,6 +26,7 @@ CREATE TABLE VENDOR(
     phone varchar(15),
     contactPersonName varchar(40),
     password varchar(40),
+    status ENUM ('Active', 'Inactive') DEFAULT 'Active',
     PRIMARY KEY(vendorId),
     UNIQUE(vendorCode)
 );
@@ -41,6 +43,7 @@ CREATE TABLE INVENTORYITEM(
     itemRetail varchar(10),
     imageFileName varchar(50),
     vendorId varchar(20),
+    status ENUM ('Active', 'Inactive') DEFAULT 'Active',
     PRIMARY KEY(itemId),
     FOREIGN KEY (vendorId) REFERENCES VENDOR(vendorId)
 );
@@ -66,6 +69,7 @@ CREATE TABLE CUSTOMER(
     zip char(5),
     phone varchar(15),
     email varchar (20),
+    status ENUM ('Active', 'Inactive') DEFAULT 'Active',
     PRIMARY KEY(customerId)
 );
 
