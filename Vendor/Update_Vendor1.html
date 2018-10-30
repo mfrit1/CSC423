@@ -22,7 +22,8 @@
 		$(document).ready(function() {
 			var vendorCode = getUrlVars()["vendorCode"];
 			console.log(vendorCode);
-
+			var newURL = "Get_Vendor_Info.php?vendorCode=" + vendorCode;
+			console.log(newURL);
 			if (window.XMLHttpRequest) {
             	// code for IE7+, Firefox, Chrome, Opera, Safari
             	xmlhttp = new XMLHttpRequest();
@@ -33,9 +34,24 @@
         	xmlhttp.onreadystatechange = function() {
             	if (this.readyState == 4 && this.status == 200) {
                 	var record = this.responseText;
+                	var values = record.split('|');
+                	console.log(values);
+                	console.log(values[0]);
+                	document.getElementById("InputVendorID").value = values[0];
+                	document.getElementById("InputVendorCode").value = values[1];
+                	document.getElementById("InputVendorName").value = values[2];
+                	document.getElementById("InputVendorAddress").value = values[3];
+                	document.getElementById("InputVendorCity").value = values[4];
+                	console.log(values[5]);
+                	$("select option[value=" + values[5] + "]").attr('selected', 'selected');
+                	document.getElementById("InputVendorZip").value = values[6];
+                	document.getElementById("InputVendorContactName").value = values[7];
+                	document.getElementById("InputVendorContactNumber").value = values[8];
+                	document.getElementById("InputVendorPassword").value = values[9];
             	}
         	};
-        	xmlhttp.open("GET","Get_Vendor_Info.php",true);
+
+        	xmlhttp.open("GET",newURL,true);
         	xmlhttp.send();
 
 			})
@@ -72,7 +88,10 @@
         }); 
 		
 		$(document).ajaxSuccess(function (evt, jqXHR, settings) {
-		alert("Data Sucessfully Sent.");
+		alert("Your Vendor Has Been Updated!");
+		var thisURL = window.location.href;
+		var newURL = thisURL.substring(0, thisURL.length-32) + "Update_Vendor.html";
+		document.location.href = newURL;
 		});
 
 		$(document).ajaxError(function (evt, jqXHR, settings, err) {
@@ -266,14 +285,14 @@
 			<div class="form-group row">
 				<div class ="col-lg-12">
 					<label for="InputVendorID">Vendor ID</label>
-					<input type="text" class="form-control" name="InputVendorID" id="InputVendorID"  placeholder="Enter Vendor ID" disabled>
+					<input type="text" class="form-control" name="InputVendorID" id="InputVendorID"  placeholder="Enter Vendor ID" readonly>
 				</div>
 			</div>
 			<div style="height: 25px"></div>
 			<div class="form-group row">
 				<div class ="col-lg-12">
 					<label for="InputVendorCode">Vendor Code</label>
-					<input type="text" class="form-control" name="InputVendorCode" id="InputVendorCode" placeholder="Enter Vendor Code" disabled>
+					<input type="text" class="form-control" name="InputVendorCode" id="InputVendorCode" placeholder="Enter Vendor Code" readonly>
 				</div>
 			</div>
 			<div style="height: 25px"></div>
