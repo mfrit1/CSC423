@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS RETAILSTORE;
 CREATE TABLE RETAILSTORE(
-    storeId varchar(20),
+    storeId int NOT NULL AUTO_INCREMENT,
     storeCode varchar(30),
     storeName varchar(50),
     address varchar(50),
@@ -33,7 +33,7 @@ CREATE TABLE VENDOR(
 
 DROP TABLE IF EXISTS INVENTORYITEM;
 CREATE TABLE INVENTORYITEM(
-    itemId varchar(20),
+    itemId int NOT NULL AUTO_INCREMENT,
     description varchar(40),
     size varchar(10),
     division varchar(20),
@@ -42,7 +42,7 @@ CREATE TABLE INVENTORYITEM(
     itemCost varchar(10),
     itemRetail varchar(10),
     imageFileName varchar(50),
-    vendorId varchar(20),
+    vendorId int,
     status ENUM ('Active', 'Inactive') DEFAULT 'Active',
     PRIMARY KEY(itemId),
     FOREIGN KEY (vendorId) REFERENCES VENDOR(vendorId)
@@ -50,9 +50,9 @@ CREATE TABLE INVENTORYITEM(
 
 DROP TABLE IF EXISTS INVENTORY;
 CREATE TABLE INVENTORY(
-    inventoryId varchar(20),
-    storeId varchar(20),
-    itemId varchar(20),
+    inventoryId int NOT NULL AUTO_INCREMENT,
+    storeId int,
+    itemId int,
     quantityInStock int,
     FOREIGN KEY (storeId) REFERENCES RETAILSTORE(storeId),
     FOREIGN KEY (itemId) REFERENCES INVENTORYITEM(itemId),
@@ -61,7 +61,7 @@ CREATE TABLE INVENTORY(
 
 DROP TABLE IF EXISTS CUSTOMER;
 CREATE TABLE CUSTOMER(
-    customerId varchar(20),
+    customerId int NOT NULL AUTO_INCREMENT,
     name varchar(30),
     address varchar(50),
     city varchar(30),
@@ -75,10 +75,10 @@ CREATE TABLE CUSTOMER(
 
 DROP TABLE IF EXISTS CUSTOMERPURCHASE;
 CREATE TABLE CUSTOMERPURCHASE(
-    customerPurchaseId varchar(20),
-    customerId varchar(20),
-    itemId varchar(20),
-    storeId varchar(20),
+    customerPurchaseId int NOT NULL AUTO_INCREMENT,
+    customerId int,
+    itemId int,
+    storeId int,
     quantityPurchased int,
     dateTimeOfPurchase varchar(20),
     FOREIGN KEY (storeId) REFERENCES RETAILSTORE(storeId),
@@ -89,9 +89,9 @@ CREATE TABLE CUSTOMERPURCHASE(
 
 DROP TABLE IF EXISTS ORDERS;
 CREATE TABLE ORDERS(
-    orderId varchar(20),
-    vendorId varchar(20),
-    storeId varchar(20),
+    orderId int NOT NULL AUTO_INCREMENT,
+    vendorId int,
+    storeId int,
     dateTimeOfOrder varchar(20),
     status ENUM ('Pending', 'Delivered', 'Canceled'),
     dateTimeOfFulfilment varchar(20),
@@ -102,9 +102,9 @@ CREATE TABLE ORDERS(
 
 DROP TABLE IF EXISTS ORDERDETAIL;
 CREATE TABLE ORDERDETAIL(
-    orderDetailId varchar(20),
-    orderId varchar(20),
-    itemId varchar(20),
+    orderDetailId int NOT NULL AUTO_INCREMENT,
+    orderId int,
+    itemId int,
     quantityOrdered int,
     FOREIGN KEY (itemId) REFERENCES INVENTORYITEM(itemId),
     FOREIGN KEY (orderId) REFERENCES ORDERS(orderId),
@@ -113,9 +113,9 @@ CREATE TABLE ORDERDETAIL(
 
 DROP TABLE IF EXISTS RETURNTOVENDOR;
 CREATE TABLE RETURNTOVENDOR(
-   returnToVendorId varchar(20),
-    vendorId varchar(20),
-    storeId varchar(20),
+   returnToVendorId int NOT NULL AUTO_INCREMENT,
+    vendorId int,
+    storeId int,
     dateTimeOfReturn varchar(20),
     FOREIGN KEY (vendorId) REFERENCES VENDOR(vendorId),
     FOREIGN KEY (storeId) REFERENCES RETAILSTORE(storeId),
@@ -124,9 +124,9 @@ CREATE TABLE RETURNTOVENDOR(
 
 DROP TABLE IF EXISTS RETURNTOVENDORDETAIL;
 CREATE TABLE RETURNTOVENDORDETAIL(
-    returnToVendorDetailId varchar(20),
-    returnToVendorId varchar(20),
-    itemId varchar(20),
+    returnToVendorDetailId int NOT NULL AUTO_INCREMENT,
+    returnToVendorId int,
+    itemId int,
     quantityReturned int,
     FOREIGN KEY (returnToVendorId) REFERENCES RETURNTOVENDOR(returnToVendorId),
     FOREIGN KEY (itemId) REFERENCES INVENTORYITEM(itemId),
