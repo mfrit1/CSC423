@@ -15,9 +15,211 @@
 	
 	</script>
 
+	<script> 
+	
+	function populateFields()
+	{
+		$(document).ready(function() {
+			var vendorCode = getUrlVars()["InputVendorCode"];
+			console.log(vendorCode);
+			var newURL = "Get_Vendor_Info.php?vendorCode=" + vendorCode;
+			console.log(newURL);
+			if (window.XMLHttpRequest) {
+            	// code for IE7+, Firefox, Chrome, Opera, Safari
+            	xmlhttp = new XMLHttpRequest();
+        	} else {
+            	// code for IE6, IE5
+            	xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        	}
+        	xmlhttp.onreadystatechange = function() {
+            	if (this.readyState == 4 && this.status == 200) {
+                	var record = this.responseText;
+                	var values = record.split('|');
+                	console.log(values);
+                	console.log(values[0]);
+                	document.getElementById("InputVendorID").value = values[0];
+                	document.getElementById("InputVendorCode").value = values[1];
+                	document.getElementById("InputVendorName").value = values[2];
+                	document.getElementById("InputVendorAddress").value = values[3];
+                	document.getElementById("InputVendorCity").value = values[4];
+                	console.log(values[5]);
+                	$("select option[value=" + values[5] + "]").attr('selected', 'selected');
+                	document.getElementById("InputVendorZip").value = values[6];
+                	document.getElementById("InputVendorContactName").value = values[7];
+                	document.getElementById("InputVendorContactNumber").value = values[8];
+                	document.getElementById("InputVendorPassword").value = values[9];
+            	}
+        	};
+
+        	xmlhttp.open("GET",newURL,true);
+        	xmlhttp.send();
+
+			})
+	}
+
+
+		function getUrlVars() {
+    		var vars = {};
+    		var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        		vars[key] = value;
+    		});
+    	return vars;
+		}
+
+
+
+
+
+		var alertText = "The following are entered incorrectly:";
+		var alertTextLength = alertText.length;
+	
+        // wait for the DOM to be loaded 
+        $(document).ready(function() { 
+            // bind 'myForm' and provide a simple callback function 
+            // attach handler to form's submit event 
+			$('#myForm').submit(function() { 
+			
+			if(checkFunctions()){
+				$(this).ajaxSubmit(); // submit the form 
+			}
+			
+			return false; // return false to prevent normal browser submit and page navigation 
+			})
+        }); 
+		
+		$(document).ajaxSuccess(function (evt, jqXHR, settings) {
+		alert("Your Vendor Has Been Updated!");
+		var thisURL = window.location.href;
+		var newURL = thisURL.substring(0, thisURL.length-32) + "Update_Vendor.html";
+		document.location.href = newURL;
+		});
+
+		$(document).ajaxError(function (evt, jqXHR, settings, err) {
+		alert("Data Not Sent Correctly.");
+		});
+		
+		function checkFunctions() {
+		
+			alertText = "The following are entered incorrectly:";
+			
+			checkId();
+			checkCode();
+			checkName();
+			checkAddress();
+			checkPassword();
+			checkCity();
+			checkPersonName();
+			checkZip();
+			checkPhone();
+			
+			if(alertText.length == alertTextLength)
+			{
+				return true;
+				
+			}else{
+			
+				alert(alertText);
+				
+				return false;
+			
+			}
+		}
+		
+		function checkId() {
+			var elem = document.getElementById("InputVendorID");
+			var elemPattern = /^\d+$/;
+			var re = new RegExp(elemPattern);
+			if(!re.test(elem.value))
+			{
+				alertText = alertText.concat("\nVendor ID");
+			}
+		}
+		
+		function checkCode() {
+			var elem= document.getElementById("InputVendorCode");
+			var elemPattern = /^\d+$/;
+			var re = new RegExp(elemPattern);
+			if(!re.test(elem.value))
+			{
+				alertText = alertText.concat("\nVendor Code");
+			}
+		}
+		
+		function checkName() {
+			var elem= document.getElementById("InputVendorName");
+			var elemPattern = /^[A-Za-z0-9\ -]+$/;
+			var re = new RegExp(elemPattern);
+			if(!re.test(elem.value))
+			{
+				alertText = alertText.concat("\nVendor Name");
+			}
+		}
+		
+		function checkAddress() {
+			var elem= document.getElementById("InputVendorAddress");
+			var elemPattern = /^[A-Za-z0-9-\ ]+$/;
+			var re = new RegExp(elemPattern);
+			if(!re.test(elem.value))
+			{
+				alertText = alertText.concat("\nVendor Address");
+			}
+		}
+		
+		function checkCity() {
+			var elem= document.getElementById("InputVendorCity");
+			var elemPattern = /^[A-Z][a-z]*([A-Za-z]*[- ][A-Za-z]+)*$/;
+			var re = new RegExp(elemPattern);
+			if(!re.test(elem.value))
+			{
+				alertText = alertText.concat("\nVendor City");
+			}
+		}
+		
+		function checkZip() {
+			var elem= document.getElementById("InputVendorZip");
+			var elemPattern = /^\d{5}$/;
+			var re = new RegExp(elemPattern);
+			if(!re.test(elem.value))
+			{
+				alertText = alertText.concat("\nVendor Zip");
+			}
+		}
+		
+		function checkPersonName() {
+			var elem= document.getElementById("InputVendorContactName");
+			var elemPattern = /^[A-Za-z-\ ]+$/;
+			var re = new RegExp(elemPattern);
+			if(!re.test(elem.value))
+			{
+				alertText = alertText.concat("\nVendor Contact Name");
+			}
+		}
+		
+		function checkPhone() {
+			var elem= document.getElementById("InputVendorContactNumber");
+			var elemPattern = /^([0-9]{3}-[0-9]{3}-[0-9]{4})$/;
+			var re = new RegExp(elemPattern);
+			if(!re.test(elem.value))
+			{
+				alertText = alertText.concat("\nVendor Phone");
+			}
+		}
+		
+		function checkPassword() {
+			var elem= document.getElementById("InputVendorPassword");
+			var elemPattern = /^[A-Za-z0-9-\!\$\^]+$/;
+			var re = new RegExp(elemPattern);
+			if(!re.test(elem.value))
+			{
+				alertText = alertText.concat("\nVendor Password");
+			}
+		}
+		
+ </script> 
+
 </head>
 
-<body class="background">
+<body class="background" onload="populateFields()">
 
 	<nav class="navbar navbar-inverse navbar-fixed-top navbar-center">
 		<div class="container-fluid">
@@ -83,21 +285,21 @@
 			<div class="form-group row">
 				<div class ="col-lg-12">
 					<label for="InputVendorID">Vendor ID</label>
-					<input type="text" class="form-control" name="InputVendorID" id="InputVendorID"  placeholder="Enter Vendor ID" disabled>
+					<input type="text" class="form-control" name="InputVendorID" id="InputVendorID"  placeholder="Enter Vendor ID" readonly>
 				</div>
 			</div>
 			<div style="height: 25px"></div>
 			<div class="form-group row">
 				<div class ="col-lg-12">
 					<label for="InputVendorCode">Vendor Code</label>
-					<input type="text" class="form-control" name="InputVendorCode" id="InputVendorCode" placeholder="Enter Vendor Code" disabled>
+					<input type="text" class="form-control" name="InputVendorCode" id="InputVendorCode" placeholder="Enter Vendor Code" readonly>
 				</div>
 			</div>
 			<div style="height: 25px"></div>
 			<div class="form-group row">
 				<div class ="col-lg-12">
 					<label for="InputVendorName">Vendor Name</label>
-					<input type="text" class="form-control" name="InputVendorName" id="InputVendorName" placeholder="Enter Vendor Name" disabled>
+					<input type="text" class="form-control" name="InputVendorName" id="InputVendorName" placeholder="Enter Vendor Name" readonly>
 				</div>
 			</div>
 
@@ -105,18 +307,18 @@
 			<div class="form-group row">
 				<div class ="col-lg-12">
 					<label for="InputVendorAddress">Vendor Address</label>
-					<input type="text" class="form-control" name="InputVendorAddress" id="InputVendorAddress" placeholder="Enter Vendor Address" disabled>
+					<input type="text" class="form-control" name="InputVendorAddress" id="InputVendorAddress" placeholder="Enter Vendor Address" readonly>
 				</div>
 			</div>
 			<div style="height: 25px"></div>
 			<div class="form-group row">
 				<div class ="col-lg-5">
 					<label for="InputVendorCity">Vendor City</label>
-					<input type="text" class="form-control" name="InputVendorCity" id="InputVendorCity" placeholder="Enter Vendor City" disabled>
+					<input type="text" class="form-control" name="InputVendorCity" id="InputVendorCity" placeholder="Enter Vendor City" readonly>
 				</div>
 				<div class ="col-lg-2">
 					<label for="stateSelect">Vendor State</label>
-					<select class="form-control" name="stateSelect" id="stateSelect" selected="New York" disabled>
+					<select class="form-control" name="stateSelect" id="stateSelect" selected="New York" readonly>
 						<option value="AL">Alabama</option>
 						<option value="AK">Alaska</option>
 						<option value="AZ">Arizona</option>
@@ -172,22 +374,22 @@
 				</div>
 				<div class ="col-lg-5">
 					<label for="InputVendorZip">Vendor Zip Code</label>
-					<input type="text" class="form-control" name="InputVendorZip" id="InputVendorZip" placeholder="Enter Vendor Zip Code" disabled>
+					<input type="text" class="form-control" name="InputVendorZip" id="InputVendorZip" placeholder="Enter Vendor Zip Code" readonly>
 				</div>
 			</div>
 			<div style="height: 25px"></div>
 			<div class="form-group row">
 				<div class ="col-lg-4">
 					<label for="InputVendorContactName">Contact Person Name</label>
-					<input type="text" class="form-control" name="InputVendorContactName" id="InputVendorContactName" placeholder="Enter Vendor Contact Name" disabled>
+					<input type="text" class="form-control" name="InputVendorContactName" id="InputVendorContactName" placeholder="Enter Vendor Contact Name" readonly>
 				</div>
 				<div class ="col-lg-4">
 					<label for="InputVendorContactNumber">Contact Person Phone Number</label>
-					<input type="text" class="form-control" name="InputVendorContactNumber" id="InputVendorContactNumber" placeholder="Enter Vendor Contact Number" disabled>
+					<input type="text" class="form-control" name="InputVendorContactNumber" id="InputVendorContactNumber" placeholder="Enter Vendor Contact Number" readonly>
 				</div>
 				<div class ="col-lg-4">
 					<label for="InputVendorPassword">Vendor Password</label>
-					<input type="text" class="form-control" name="InputVendorPassword" id="InputVendorPassword" placeholder="Enter Vendor Password" disabled>
+					<input type="text" class="form-control" name="InputVendorPassword" id="InputVendorPassword" placeholder="Enter Vendor Password" readonly>
 				</div>
 			</div>
 			<div style="height: 25px"></div>
@@ -197,3 +399,4 @@
 
 </body>
 </html>
+
