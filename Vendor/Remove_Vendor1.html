@@ -88,10 +88,12 @@
         }); 
 		
 		$(document).ajaxSuccess(function (evt, jqXHR, settings) {
-		alert("Your Vendor Has Been Updated!");
-		var thisURL = window.location.href;
-		var newURL = thisURL.substring(0, thisURL.length-32) + "Update_Vendor.html";
-		document.location.href = newURL;
+		alert("Your Vendor Has Been Removed!");
+			var thisURL = window.location.href;
+			thisURL = thisURL.replace('/', '//')
+			var newURL = thisURL.substr(0, thisURL.lastIndexOf("\\")) + "Remove_Vendor.html";
+			thisURL = thisURL.replace('//', '/');
+			document.location.href = newURL;
 		});
 
 		$(document).ajaxError(function (evt, jqXHR, settings, err) {

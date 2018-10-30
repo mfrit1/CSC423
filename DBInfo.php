@@ -2,8 +2,8 @@
 
 $servername = "localhost";
 $username = "root";
-$password = "fku";
-$database = "test_database";
+$password = "";
+$database = "nannosdb";
 // Create connection
 $conn = new mysqli($servername, $username, $password, $database);
 
