@@ -36,7 +36,6 @@
         }); 
 		
 		$(document).ajaxSuccess(function (evt, jqXHR, settings) {
-			alert("Vendor Successfully Added.");
 			var thisURL = window.location.href;
 			var newURL = thisURL.substring(0, thisURL.length-20) + "Register_Vendor_Confirmation.html";
 			document.location.href = newURL;
