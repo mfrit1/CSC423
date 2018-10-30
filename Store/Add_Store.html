@@ -66,72 +66,72 @@
 		
 		
 		function checkCode() {
-			var elem= document.getElementById("InputVendorCode");
+			var elem= document.getElementById("InputStoreCode");
 			var elemPattern = /^\d+$/;
 			var re = new RegExp(elemPattern);
 			if(!re.test(elem.value))
 			{
-				alertText = alertText.concat("\nVendor Code");
+				alertText = alertText.concat("\nStore Code");
 			}
 		}
 		
 		function checkName() {
-			var elem= document.getElementById("InputVendorName");
-			var elemPattern = /^[A-Za-z0-9\ -]+$/;
+			var elem= document.getElementById("InputStoreName");
+			var elemPattern = /^[A-Z][a-z]*(-[A-Z][a-z]*)?$/;
 			var re = new RegExp(elemPattern);
 			if(!re.test(elem.value))
 			{
-				alertText = alertText.concat("\nVendor Name");
+				alertText = alertText.concat("\nStore Name");
 			}
 		}
 		
 		function checkAddress() {
-			var elem= document.getElementById("InputVendorAddress");
+			var elem= document.getElementById("InputStoreAddress");
 			var elemPattern = /^[A-Za-z0-9-\ ]+$/;
 			var re = new RegExp(elemPattern);
 			if(!re.test(elem.value))
 			{
-				alertText = alertText.concat("\nVendor Address");
+				alertText = alertText.concat("\nStore Address");
 			}
 		}
 		
 		function checkCity() {
-			var elem= document.getElementById("InputVendorCity");
+			var elem= document.getElementById("InputStoreCity");
 			var elemPattern = /^[A-Z][a-z]*([A-Za-z]*[- ][A-Za-z]+)*$/;
 			var re = new RegExp(elemPattern);
 			if(!re.test(elem.value))
 			{
-				alertText = alertText.concat("\nVendor City");
+				alertText = alertText.concat("\nStore City");
 			}
 		}
 		
 		function checkZip() {
-			var elem= document.getElementById("InputVendorZip");
+			var elem= document.getElementById("InputStoreZip");
 			var elemPattern = /^\d{5}$/;
 			var re = new RegExp(elemPattern);
 			if(!re.test(elem.value))
 			{
-				alertText = alertText.concat("\nVendor Zip");
+				alertText = alertText.concat("\nStore Zip");
 			}
 		}
 		
 		function checkPersonName() {
-			var elem= document.getElementById("InputVendorContactName");
+			var elem= document.getElementById("InputManagerName");
 			var elemPattern = /^[A-Za-z-\ ]+$/;
 			var re = new RegExp(elemPattern);
 			if(!re.test(elem.value))
 			{
-				alertText = alertText.concat("\nVendor Contact Name");
+				alertText = alertText.concat("\nManager Name");
 			}
 		}
 		
 		function checkPhone() {
-			var elem= document.getElementById("InputVendorContactNumber");
+			var elem= document.getElementById("InputManagerNumber");
 			var elemPattern = /^([0-9]{3}-[0-9]{3}-[0-9]{4})$/;
 			var re = new RegExp(elemPattern);
 			if(!re.test(elem.value))
 			{
-				alertText = alertText.concat("\nVendor Phone");
+				alertText = alertText.concat("\nManager Phone Number");
 			}
 		}
 
@@ -200,10 +200,10 @@
   		</div>
 		<form class="form-horizontal" method="post" id = "myForm" action = "Add_Store_Submit.php">
 		
-		<div class="form-group row">
+		<!-- <div class="form-group row">
 			<label for="InputStoreID">Store ID</label>
 			<input type="text" class="form-control" name="InputStoreID" id="InputStoreID"  placeholder="Enter Store ID">
-		</div>
+		</div> -->
 		<div style="height: 25px"></div>
 		<div class="form-group row">
 			<label for="InputStoreCode">Store Code</label>
@@ -298,6 +298,7 @@
 			  				<label for="InputManagerName">Manager Name</label>
 			  				<input type="text" class="form-control" name="InputManagerName" id="InputManagerName" placeholder="Enter Manager Name" style="width: 575px;">
 			  			</td>
+			  			<td width =20%></td>
 			  			<td width="40%">
 			  				<label for="InputManagerNumber">Manager Phone Number</label>
 			  				<input type="text" class="form-control" name="InputManagerNumber" id="InputManagerNumber" placeholder="Enter Manager Phone Number" style="width: 300px;">
