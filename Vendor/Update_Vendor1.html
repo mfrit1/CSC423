@@ -17,6 +17,20 @@
 
 	<script> 
 	
+	
+		function getUrlVars() {
+			var vars = {};
+			var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+			vars[key] = value;
+		});
+		return vars;
+		}
+		
+		var code = getUrlVars()["InputVendorCode"];
+		
+		alert(code);
+		
+		
 		var alertText = "The following are entered incorrectly:";
 		var alertTextLength = alertText.length;
 	
@@ -25,6 +39,7 @@
         $(document).ready(function() { 
             // bind 'myForm' and provide a simple callback function 
             // attach handler to form's submit event 
+			
 			$('#myForm').submit(function() { 
 			
 			if(checkFunctions()){
