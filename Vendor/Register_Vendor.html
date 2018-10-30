@@ -20,7 +20,6 @@
 		var alertText = "The following are entered incorrectly:";
 		var alertTextLength = alertText.length;
 	
-	
         // wait for the DOM to be loaded 
         $(document).ready(function() { 
             // bind 'myForm' and provide a simple callback function 
@@ -28,6 +27,7 @@
 			$('#myForm').submit(function() { 
 			
 			if(checkFunctions()){
+			//	console.log("I MADE IT");
 				$(this).ajaxSubmit(); // submit the form 
 			}
 			
@@ -36,22 +36,23 @@
         }); 
 		
 		$(document).ajaxSuccess(function (evt, jqXHR, settings) {
-		alert("Data Sucessfully Sent.");
+			alert("Vendor Successfully Added.");
+			var thisURL = window.location.href;
+			var newURL = thisURL.substring(0, thisURL.length-20) + "Register_Vendor_Confirmation.html";
+			document.location.href = newURL;
 		});
 
 		$(document).ajaxError(function (evt, jqXHR, settings, err) {
-		alert("Data Not Sent Correctly.");
+		alert("The Vendor Code must be unique. That Vendor Code has already been taken.");
 		});
 		
 		function checkFunctions() {
 		
 			alertText = "The following are entered incorrectly:";
 			
-			checkId();
 			checkCode();
 			checkName();
 			checkAddress();
-			checkPassword();
 			checkCity();
 			checkPersonName();
 			checkZip();
@@ -70,15 +71,6 @@
 			}
 		}
 		
-		function checkId() {
-			var elem = document.getElementById("InputVendorID");
-			var elemPattern = /^\d+$/;
-			var re = new RegExp(elemPattern);
-			if(!re.test(elem.value))
-			{
-				alertText = alertText.concat("\nVendor ID");
-			}
-		}
 		
 		function checkCode() {
 			var elem= document.getElementById("InputVendorCode");
@@ -149,16 +141,7 @@
 				alertText = alertText.concat("\nVendor Phone");
 			}
 		}
-		
-		function checkPassword() {
-			var elem= document.getElementById("InputVendorPassword");
-			var elemPattern = /^[A-Za-z0-9-\!\$\^]+$/;
-			var re = new RegExp(elemPattern);
-			if(!re.test(elem.value))
-			{
-				alertText = alertText.concat("\nVendor Password");
-			}
-		}
+
 		
  </script> 
 
@@ -219,12 +202,6 @@
 			</div>
 		</div>
 		<form class="form-horizontal" method="post" id = "myForm" action = "Register_Vendor_Submit.php"   >
-			<div class="form-group row">
-				<div class ="col-lg-12">
-					<label for="InputVendorID">Vendor ID</label>
-					<input type="text" class="form-control" name="InputVendorID" id="InputVendorID"  placeholder="Enter Vendor ID">
-				</div>
-			</div>
 			<div style="height: 25px"></div>
 			<div class="form-group row">
 				<div class ="col-lg-12">
@@ -316,17 +293,13 @@
 			</div>
 			<div style="height: 25px"></div>
 			<div class="form-group row">
-				<div class ="col-lg-4">
+				<div class ="col-lg-6">
 					<label for="InputVendorContactName">Contact Person Name</label>
 					<input type="text" class="form-control" name="InputVendorContactName" id="InputVendorContactName" placeholder="Enter Vendor Contact Name">
 				</div>
-				<div class ="col-lg-4">
+				<div class ="col-lg-6">
 					<label for="InputVendorContactNumber">Contact Person Phone Number</label>
 					<input type="text" class="form-control" name="InputVendorContactNumber" id="InputVendorContactNumber" placeholder="Enter Vendor Contact Number">
-				</div>
-				<div class ="col-lg-4">
-					<label for="InputVendorPassword">Vendor Password</label>
-					<input type="text" class="form-control" name="InputVendorPassword" id="InputVendorPassword" placeholder="Enter Vendor Password">
 				</div>
 			</div>
 			<div style="height: 25px"></div>
