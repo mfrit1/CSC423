@@ -9,6 +9,62 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </head>
+  
+  <script>
+	var alertText = "The following are entered incorrectly:";
+	var alertTextLength = alertText.length;
+	
+	function checkFunctions() {
+		
+			alertText = "The following are entered incorrectly:";
+			
+			checkDesciption();
+			checkPrice();
+			checkFile();
+			
+			if(alertText.length == alertTextLength)
+			{
+				return true;
+				
+			}else{
+			
+				alert(alertText);
+				
+				return false;
+			
+			}
+		}
+	function checkDescription() {
+			var elem= document.getElementById("InputItemDesciption");
+			if(elem.value.length>40)
+			{
+				alertText = alertText.concat("\nItem Description");
+			}
+	}
+	function checkPrice() {
+			var elem1 = document.getElementById("InputItemPrice");
+			var elem2 = document.getElementById("InputItemRetailPrice");
+			var elemPattern = /^\d*\.\d{2}+$/;
+			var re = new RegExp(elemPattern);
+			if(!re.test(elem1.value))
+			{
+				alertText = alertText.concat("\nItem Price");
+			}
+			if(!re.test(elem2.value))
+			{
+				alertText = alertText.concat("\nItem Retail Price");
+			}
+	}
+	function checkFile() {
+			var elem = document.getElementById("InputImageFile");
+			var elemPattern = /^[A-Za-z0-9\_\-]*(\.jpg|\.img)$/;
+			var re = new RegExp(elemPattern);
+			if(!re.test(elem.value))
+			{
+				alertText = alertText.concat("\nItem Image File");
+			}
+	}
+  </script>
 
   <body class="background">
   	
@@ -71,7 +127,7 @@
 		
 		<div class="form-group row">
 			<label for="InputItemID">Item ID</label>
-			<input type="text" class="form-control" name="InputItemI" id="InputItemI"  placeholder="Enter Item ID">
+			<input type="text" class="form-control" name="InputItemID" id="InputItemID"  placeholder="Enter Item ID">
 		</div>
 		<div style="height: 25px"></div>
 		<div class="form-group row">
