@@ -9,6 +9,135 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	
+	<script> 
+	
+		var alertText = "The following are entered incorrectly:";
+		var alertTextLength = alertText.length;
+	
+        // wait for the DOM to be loaded 
+        $(document).ready(function() { 
+            // bind 'myForm' and provide a simple callback function 
+            // attach handler to form's submit event 
+			$('#myForm').submit(function() { 
+			
+			if(checkFunctions()){
+			//	console.log("I MADE IT");
+				$(this).ajaxSubmit(); // submit the form 
+			}
+			
+			return false; // return false to prevent normal browser submit and page navigation 
+			})
+        }); 
+		
+		$(document).ajaxSuccess(function (evt, jqXHR, settings) {
+			var thisURL = window.location.href;
+			var newURL = thisURL.substring(0, thisURL.length-20) + "Register_Vendor_Confirmation.html";
+			document.location.href = newURL;
+		});
+
+		$(document).ajaxError(function (evt, jqXHR, settings, err) {
+		alert("The Vendor Code must be unique. That Vendor Code has already been taken.");
+		});
+		
+		function checkFunctions() {
+		
+			alertText = "The following are entered incorrectly:";
+			
+			checkCode();
+			checkName();
+			checkAddress();
+			checkCity();
+			checkPersonName();
+			checkZip();
+			checkPhone();
+			
+			if(alertText.length == alertTextLength)
+			{
+				return true;
+				
+			}else{
+			
+				alert(alertText);
+				
+				return false;
+			
+			}
+		}
+		
+		
+		function checkCode() {
+			var elem= document.getElementById("InputVendorCode");
+			var elemPattern = /^\d+$/;
+			var re = new RegExp(elemPattern);
+			if(!re.test(elem.value))
+			{
+				alertText = alertText.concat("\nVendor Code");
+			}
+		}
+		
+		function checkName() {
+			var elem= document.getElementById("InputVendorName");
+			var elemPattern = /^[A-Za-z0-9\ -]+$/;
+			var re = new RegExp(elemPattern);
+			if(!re.test(elem.value))
+			{
+				alertText = alertText.concat("\nVendor Name");
+			}
+		}
+		
+		function checkAddress() {
+			var elem= document.getElementById("InputVendorAddress");
+			var elemPattern = /^[A-Za-z0-9-\ ]+$/;
+			var re = new RegExp(elemPattern);
+			if(!re.test(elem.value))
+			{
+				alertText = alertText.concat("\nVendor Address");
+			}
+		}
+		
+		function checkCity() {
+			var elem= document.getElementById("InputVendorCity");
+			var elemPattern = /^[A-Z][a-z]*([A-Za-z]*[- ][A-Za-z]+)*$/;
+			var re = new RegExp(elemPattern);
+			if(!re.test(elem.value))
+			{
+				alertText = alertText.concat("\nVendor City");
+			}
+		}
+		
+		function checkZip() {
+			var elem= document.getElementById("InputVendorZip");
+			var elemPattern = /^\d{5}$/;
+			var re = new RegExp(elemPattern);
+			if(!re.test(elem.value))
+			{
+				alertText = alertText.concat("\nVendor Zip");
+			}
+		}
+		
+		function checkPersonName() {
+			var elem= document.getElementById("InputVendorContactName");
+			var elemPattern = /^[A-Za-z-\ ]+$/;
+			var re = new RegExp(elemPattern);
+			if(!re.test(elem.value))
+			{
+				alertText = alertText.concat("\nVendor Contact Name");
+			}
+		}
+		
+		function checkPhone() {
+			var elem= document.getElementById("InputVendorContactNumber");
+			var elemPattern = /^([0-9]{3}-[0-9]{3}-[0-9]{4})$/;
+			var re = new RegExp(elemPattern);
+			if(!re.test(elem.value))
+			{
+				alertText = alertText.concat("\nVendor Phone");
+			}
+		}
+
+		
+ </script> 
+
   </head>
 
   <body class="background">
@@ -69,7 +198,7 @@
 			<h2>ADD A STORE</h2>
 			<hr>
   		</div>
-		<form class="form-horizontal">
+		<form class="form-horizontal" method="post" id = "myForm" action = "Add_Store_Submit.php">
 		
 		<div class="form-group row">
 			<label for="InputStoreID">Store ID</label>
