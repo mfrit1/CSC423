@@ -22,7 +22,6 @@
 			$('#myForm').submit(function() { 
 			
 			if(checkFunctions()){
-			//	console.log("I MADE IT");
 				$(this).ajaxSubmit(); // submit the form 
 			}
 			
@@ -32,7 +31,9 @@
 		
 		$(document).ajaxSuccess(function (evt, jqXHR, settings) {
 			var thisURL = window.location.href;
-			var newURL = thisURL.substring(0, thisURL.length-20) + "Register_Vendor_Confirmation.html";
+			thisURL = thisURL.replace('/', '//')
+			var newURL = thisURL.substr(0, thisURL.lastIndexOf("\\")) + "Register_Vendor_Confirmation.html";
+			thisURL = thisURL.replace('//', '/');
 			document.location.href = newURL;
 		});
 

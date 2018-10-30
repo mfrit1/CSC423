@@ -18,9 +18,13 @@ $password = randomPassword();
  // $data = htmlspecialchars($data);
 //  return $data;
 //}
-	$sql = "SELECT * FROM vendor WHERE (vendorCode='{$vendorCode}')";
+$sql = "SELECT * FROM vendor WHERE (vendorCode='{$vendorCode}')";
 //echo $sql;
-	$result= $conn->query($sql);
+//echo $sql;
+
+echo $sql;
+
+$result= $conn->query($sql);
 
 if($result->num_rows == 0)
 {
