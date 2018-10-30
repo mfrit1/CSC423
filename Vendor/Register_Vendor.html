@@ -36,7 +36,6 @@
         }); 
 		
 		$(document).ajaxSuccess(function (evt, jqXHR, settings) {
-			alert("Vendor Successfully Added.");
 			var thisURL = window.location.href;
 			var newURL = thisURL.substring(0, thisURL.length-20) + "Register_Vendor_Confirmation.html";
 			document.location.href = newURL;
@@ -185,15 +184,7 @@
 						<li><a href="../Item/Remove_Item.html">Remove an Item</a></li>                           
 						</ul>
 					</li>
-				<li class="dropdown">
-				<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-					Customers <span class="caret"></span></a>
-					<ul class="dropdown-menu" role="menu">
-						<li><a href="Customer/Add_Customer.html">Add a Customer</a></li>
-						<li><a href="Customer/Update_Customer.html">Update a Customer</a></li>
-						<li><a href="Customer/Remove_Customer.html">Remove a Customer</a></li>                        
-					</ul>
-				</li>
+				<li><a href="#">Page 3</a></li>
 			</ul>
 		</div>
 	</nav>
