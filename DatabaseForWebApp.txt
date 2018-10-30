@@ -16,7 +16,7 @@ CREATE TABLE RETAILSTORE(
 
 DROP TABLE IF EXISTS VENDOR;
 CREATE TABLE VENDOR(
-    vendorId varchar(20),
+    vendorId int NOT NULL AUTO_INCREMENT,
     vendorCode varchar(30),
     vendorName varchar(50),
     address varchar(50),
