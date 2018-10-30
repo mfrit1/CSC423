@@ -9,17 +9,11 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="http://malsup.github.com/jquery.form.js"></script> 
-	<script>
-	
-	
-	
-	</script>
 
 	<script> 
 	
 		var alertText = "The following are entered incorrectly:";
 		var alertTextLength = alertText.length;
-	
 	
         // wait for the DOM to be loaded 
         $(document).ready(function() { 
@@ -36,24 +30,25 @@
         }); 
 		
 		$(document).ajaxSuccess(function (evt, jqXHR, settings) {
-		alert("Data Sucessfully Sent.");
-		});
+			var thisURL = window.location.href;
+			var newURL = thisURL.substring(0, thisURL.length-27) + "transaction_complete.html";
+			document.location.href = newURL;
+		});//
 
 		$(document).ajaxError(function (evt, jqXHR, settings, err) {
-		alert("Data Not Sent Correctly.");
+		alert("There was an error in adding the customer.");
 		});
 		
 		function checkFunctions() {
 		
 			alertText = "The following are entered incorrectly:";
 			
-			
 			checkName();
 			checkAddress();
 			checkCity();
-			checkEmail();
 			checkZip();
 			checkPhone();
+			checkEmail();
 			
 			if(alertText.length == alertTextLength)
 			{
@@ -67,8 +62,6 @@
 			
 			}
 		}
-		
-	
 		
 		function checkName() {
 			var elem= document.getElementById("InputCustomerName");
@@ -110,16 +103,6 @@
 			}
 		}
 		
-		function checkEmail() {
-			var elem= document.getElementById("InputCustomerEmail");
-			var elemPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/;
-			var re = new RegExp(elemPattern);
-			if(!re.test(elem.value))
-			{
-				alertText = alertText.concat("\nCustomer Email");
-			}
-		}
-		
 		function checkPhone() {
 			var elem= document.getElementById("InputCustomerPhone");
 			var elemPattern = /^([0-9]{3}-[0-9]{3}-[0-9]{4})$/;
@@ -129,8 +112,17 @@
 				alertText = alertText.concat("\nCustomer Phone");
 			}
 		}
-		
-	
+
+		function checkEmail() {
+			var elem= document.getElementById("InputCustomerEmail");
+			var elemPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/;
+			var re = new RegExp(elemPattern);
+			if(!re.test(elem.value))
+			{
+				alertText = alertText.concat("\nCustomer Phone");
+			}
+		}
+
 		
  </script> 
 
