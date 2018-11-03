@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="http://malsup.github.com/jquery.form.js"></script> 
+	<script src="http://malsup.github.com/jquery.form.js"></script>
+	<script type="text/javascript" src="../Scripts.js"></script>  	
 	
 
     <script type="text/javascript">
@@ -47,7 +48,7 @@
 
 	function addVendorStart(){
 	
-	 loadDoc('addVendor.php', addVendors);
+	 loadDoc('Register_Vendor.php', addVendors);
 
       //By doing this, we take whatever strings have been echoed by the php file and put it into our current webpage. No need to load a whole new page, It edits the one we are currently on.
     }
@@ -155,13 +156,13 @@
 		
 		alertText = "The following are entered incorrectly:";
 			
-		checkCode();
-		checkName();
-		checkAddress();
-		checkCity();
-		checkPersonName();
-		checkZip();
-		checkPhone();
+		checkCode(document.getElementById("Code"));
+		checkName(document.getElementById("Name"));
+		checkAddress(document.getElementById("Address"));
+		checkCity(document.getElementById("City"));
+		checkZip(document.getElementById("Zip"));
+		checkName(document.getElementById("PersonName"));
+		checkPhone(document.getElementById("Phone"));
 			
 		if(alertText.length == alertTextLength)
 		{
@@ -175,77 +176,6 @@
 			
 		}
 	}
-		
-		
-		function checkCode() {
-			var elem= document.getElementById("InputVendorCode");
-			var elemPattern = /^\d+$/;
-			var re = new RegExp(elemPattern);
-			if(!re.test(elem.value))
-			{
-				alertText = alertText.concat("\nVendor Code");
-			}
-		}
-		
-		function checkName() {
-			var elem= document.getElementById("InputVendorName");
-			var elemPattern = /^[A-Za-z0-9\ -]+$/;
-			var re = new RegExp(elemPattern);
-			if(!re.test(elem.value))
-			{
-				alertText = alertText.concat("\nVendor Name");
-			}
-		}
-		
-		function checkAddress() {
-			var elem= document.getElementById("InputVendorAddress");
-			var elemPattern = /^[A-Za-z0-9-\ ]+$/;
-			var re = new RegExp(elemPattern);
-			if(!re.test(elem.value))
-			{
-				alertText = alertText.concat("\nVendor Address");
-			}
-		}
-		
-		function checkCity() {
-			var elem= document.getElementById("InputVendorCity");
-			var elemPattern = /^[A-Z][a-z]*([A-Za-z]*[- ][A-Za-z]+)*$/;
-			var re = new RegExp(elemPattern);
-			if(!re.test(elem.value))
-			{
-				alertText = alertText.concat("\nVendor City");
-			}
-		}
-		
-		function checkZip() {
-			var elem= document.getElementById("InputVendorZip");
-			var elemPattern = /^\d{5}$/;
-			var re = new RegExp(elemPattern);
-			if(!re.test(elem.value))
-			{
-				alertText = alertText.concat("\nVendor Zip");
-			}
-		}
-		
-		function checkPersonName() {
-			var elem= document.getElementById("InputVendorContactName");
-			var elemPattern = /^[A-Za-z-\ ]+$/;
-			var re = new RegExp(elemPattern);
-			if(!re.test(elem.value))
-			{
-				alertText = alertText.concat("\nVendor Contact Name");
-			}
-		}
-		
-		function checkPhone() {
-			var elem= document.getElementById("InputVendorContactNumber");
-			var elemPattern = /^([0-9]{3}-[0-9]{3}-[0-9]{4})$/;
-			var re = new RegExp(elemPattern);
-			if(!re.test(elem.value))
-			{
-				alertText = alertText.concat("\nVendor Phone");
-			}
-		}
 
     </script>
 
