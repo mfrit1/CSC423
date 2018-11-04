@@ -15,7 +15,7 @@ $result= $conn->query($sql);
 //As long as there is another row to be processed, do the following loop. This adds all returned DB records to the table.
 while($data = mysqli_fetch_row($result))
 {   
-    echo "<tr>";
+    echo "<tr id='$data[0]'>";
     echo "<td scope='row'><b>$data[1]</b></td>";
     echo "<td align=center>$data[2]</td>";
     echo "<td align=center>$data[3]</td>";
@@ -24,7 +24,7 @@ while($data = mysqli_fetch_row($result))
     echo "<td align=center>$data[6]</td>";
     echo "<td align=center>$data[7]</td>";
     echo "<td align=center>$data[8]</td>";
-    echo "<td align=center><button type='button' class='btn btn-warning' style='padding-right: 10px'><i class='fa fa-pencil'></i></button><div class='divider'></div><button type='button' class='btn btn-danger'><i class='fa fa-trash'></i></button></td>";
+    echo "<td align=center><button type='button' class='btn btn-warning' style='padding-right: 10px' onclick='modifyVendor($(this))'><i class='fa fa-pencil'></i></button><div class='divider'></div><button type='button' class='btn btn-danger'><i class='fa fa-trash'></i></button></td>";
     echo "</tr>";
 }
 
