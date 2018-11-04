@@ -14,7 +14,7 @@ echo '<div class="col-lg-12" style="text-align: center">
                   </th>
                   <th colspan="5">
                     <form class="form-inline my-2 my-lg-0" style="float: right;">
-                    <button type="button" class="btn btn-success" onclick="addVendorStart();">Add a Vendor</button>
+                    <button type="button" class="btn btn-success" onclick="registerVendorStart();">Add a Vendor</button>
                   </form>
                   </th>
                 </tr>
