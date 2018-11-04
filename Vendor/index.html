@@ -21,23 +21,21 @@
 
     //Creates an object to run php file
       var xhttp;
-
-      xhttp=new XMLHttpRequest();
-
-      //This tells the program to run the following code once the php file has run.
+	  xhttp=new XMLHttpRequest();
+      //HERE is when the program actually switches over to the php and runs the file.
+      xhttp.open("POST", url, true);
+      xhttp.send();
+	  
+	  //This tells the program to run the following code once the php file has run.
       xhttp.onreadystatechange = function() {
 
         //A ready status of both 4 and 200 mean that the php file ran okay, meaning no errors.
         if (this.readyState == 4 && this.status == 200) {
           //cFunction can change depending on what the user enters as a parameter.
             cFunction(this);
-
+			
         }
       };
-
-      //HERE is when the program actually switches over to the php and runs the file.
-      xhttp.open("POST", url, true);
-      xhttp.send();
     }
 	
 	 function getVendors(xhttp){
@@ -46,14 +44,14 @@
     }
 	
 
-	function addVendorStart(){
+	function registerVendorStart(){
 	
-	 loadDoc('Register_Vendor.php', addVendors);
+	 loadDoc('Register_Vendor.php', registerVendors);
 
       //By doing this, we take whatever strings have been echoed by the php file and put it into our current webpage. No need to load a whole new page, It edits the one we are currently on.
     }
 	
-	function addVendors(xhttp){
+	function registerVendors(xhttp){
      //By doing this, we take whatever strings have been echoed by the php file and put it into our current webpage. No need to load a whole new page, It edits the one we are currently on.
      document.getElementById("outsideVendorTable").innerHTML = xhttp.responseText;
 	 
@@ -64,6 +62,7 @@
 			
 			if(checkFunctions()){
 			//	console.log("I MADE IT");
+				//alert($('#myForm').serialize()+"&id=registerVendorSubmit");
 				$(this).ajaxSubmit(); // submit the form 
 			}
 			
@@ -98,24 +97,8 @@
 	
 	function getPassword(xhttp){
 	
-		$(document).ready(function() { 
-		
-				if (window.XMLHttpRequest) {
-				// code for IE7+, Firefox, Chrome, Opera, Safari
-				xmlhttp = new XMLHttpRequest();
-			} else {
-				// code for IE6, IE5
-				xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-			}
-			xmlhttp.onreadystatechange = function() {
-				if (this.readyState == 4 && this.status == 200) {
-					document.getElementById("passwordSpot").innerHTML = this.responseText;
-				}
-			};
-			xmlhttp.open("GET","getPassword.php",true);
-			xmlhttp.send();
-	
-		});
+		document.getElementById("passwordSpot").innerHTML = xhttp.responseText;
+			
 	}
 	
 	function fixFormatStart(){
@@ -237,7 +220,7 @@
                   </th>
                   <th colspan="5">
                     <form class="form-inline my-2 my-lg-0" style="float: right;">
-                    <button type="button" class="btn btn-success" onclick="addVendorStart();">Add a Vendor</button>
+                    <button type="button" class="btn btn-success" onclick="registerVendorStart();">Add a Vendor</button>
                   </form>
                   </th>
                 </tr>
