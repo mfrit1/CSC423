@@ -1,6 +1,7 @@
 <?php
 
 require '../DBInfo.php';
+
 echo '<div class="col-lg-12" style="text-align: center">
           <div style="text-align: center" >
             <table class="table table-bordered" style="max-width: 80% " align="center" >
@@ -29,7 +30,6 @@ echo '<div class="col-lg-12" style="text-align: center">
                   <th scope="col">Zip</th>
                   <th scope="col">Phone Number</th>
                   <th scope="col">Contact Name</th>
-                  <th scope="col">Status</th>
                   <th scope="col" wdith="200px">Action</th>
                 </tr>
               </thead>
