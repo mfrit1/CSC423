@@ -14,7 +14,9 @@
 	
 
     <script type="text/javascript">
-      
+
+
+      //This loads all current vendors onto the page.
       $(document).ready(loadDoc('getVendor.php', getVendors))
 
       function loadDoc(url, cFunction) {
@@ -42,8 +44,14 @@
       //By doing this, we take whatever strings have been echoed by the php file and put it into our current webpage. No need to load a whole new page, It edits the one we are currently on.
       document.getElementById("vendorTable").innerHTML = xhttp.responseText;
     }
-	
 
+
+
+
+
+
+	
+    //start the register vendor stuff.
 	function registerVendorStart(){
 	
 	 loadDoc('Register_Vendor.php', registerVendors);
@@ -80,8 +88,6 @@
 	
 	}
 
-
-   
 	
 	function getPasswordStart(){
 	
@@ -101,6 +107,8 @@
 			
 	}
 	
+
+  //This sets the format back to the origional table.
 	function fixFormatStart(){
 	loadDoc('fixFormatBackToVendorTable.php', getFormat);
 	}
@@ -110,6 +118,51 @@
 	document.getElementById("vendorTable").innerHTML = loadDoc('getVendor.php', getVendors).responseText;
 	}
 	
+
+
+
+  //Start the modify vendor stuff
+  function modifyVendor(button){
+    var trid = button.closest('tr').attr('id');
+    var url = 'modifyVendor.php?id=' + trid;
+    loadDoc(url, getTableRow);
+  }
+
+  function getTableRow(xhttp){
+    document.getElementById("outsideVendorTable").innerHTML = xhttp.responseText;
+    //document.getElementsByName("stateSelect").val = $('[name="stateSelect"]').attr("id");
+    var state = $('[name="stateSelect"]').attr("id");
+    $("select option[value=" + state + "]").attr('selected', 'selected');
+
+    $(document).ready(function() { 
+            // bind 'myForm' and provide a simple callback function 
+            // attach handler to form's submit event 
+      $('#myForm').submit(function() { 
+      
+      if(checkFunctions()){
+      //  console.log("I MADE IT");
+        //alert($('#myForm').serialize()+"&id=registerVendorSubmit");
+        $(this).ajaxSubmit(); // submit the form 
+      }
+      
+      return false; // return false to prevent normal browser submit and page navigation 
+      })
+        }); 
+    
+    $(document).ajaxSuccess(function (evt, jqXHR, settings) {
+      confirmUpdate();
+    });
+  }
+
+
+  function confirmUpdate(){
+    alert("The vendor has been updated.");
+    document.location.href="index.html";
+  }
+
+
+
+
 
 
     function filterTable() {
@@ -132,6 +185,12 @@
       }
     }
 	
+
+
+
+
+
+
 	var alertText = "The following are entered incorrectly:";
 	var alertTextLength = alertText.length;
 
