@@ -24,7 +24,7 @@ echo '<div class = "container">
 			
 				<div class ="col-lg-6">
 					<label for="InputVendorCode">Vendor Code</label>
-					<input type="text" class="form-control" name="InputVendorCode" id="Code" placeholder="Enter Vendor Code">
+					<input type="text" class="form-control" name="InputVendorCode" id="Code" onchange="setVendorName()" placeholder="Enter Vendor Code">
 				</div>
 			</div>
 			<div style="height: 25px"></div>

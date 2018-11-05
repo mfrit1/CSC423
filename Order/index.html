@@ -113,10 +113,20 @@
 			
 		}
 	}
-	
+	 
 	
 	function setVendorCode() {
 	document.getElementById("Code").value = document.getElementById("vendorName").value;
+	}
+	
+	function setVendorName() {
+	var temp = document.getElementById("vendorName").value
+	document.getElementById("vendorName").value = document.getElementById("Code").value;
+	if(document.getElementById("vendorName").value == ''){
+		alert("Invalid vendor code, try another.");
+		document.getElementById("vendorName").value = temp;
+		document.getElementById("Code").value = '';
+		}
 	}
 
     </script>
