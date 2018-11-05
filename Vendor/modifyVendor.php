@@ -123,7 +123,7 @@ echo '<div class = "container">
 				</div>
 			</div>
 			<div style="height: 25px"></div>
-			<button type="submit" button name="submit" id="submit" class="btn btn-primary btn-lg btn-block spacing">Submit Vendor Information</button>
+			<button type="submit" button name="submit" id="submit" class="btn btn-primary btn-lg btn-block spacing">Update Vendor Information</button>
 		</form>
 	</div>';
 
