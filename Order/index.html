@@ -54,6 +54,7 @@
       document.getElementById("outsideOrderTable").innerHTML = xhttp.responseText;
 	  $(document).ready(loadDoc('getVendorName.php', getVendorName));
 	  
+	  
 	 
 	//put all doc load fcns here.   
 	}
@@ -115,11 +116,7 @@
 	
 	
 	function setVendorCode() {
-	loadDoc('setVendorCode.php',setVendorCodeNow, 'id='+document.getElementById("vendorName").value);
-	}
-	
-	function setVendorCodeNow(xhttp){
-	document.getElementById("Code").value = xhttp.responseText;
+	document.getElementById("Code").value = document.getElementById("vendorName").value;
 	}
 
     </script>

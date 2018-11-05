@@ -4,7 +4,7 @@
 require '../DBInfo.php';
 
 //SQL statement to get the record.
-$sql = "SELECT vendorId, vendorName FROM vendor ORDER BY vendorName ASC";
+$sql = "SELECT vendorCode, vendorName FROM vendor ORDER BY vendorName ASC";
 
 //Run the SQL statement and store the returned values in result.
 $result= $conn->query($sql);
