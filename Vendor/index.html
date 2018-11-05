@@ -165,6 +165,49 @@
 
 
 
+  //This is where the delete stuff will be
+  function deleteVendor(button){
+    var trid = button.closest('tr').attr('id');
+    var url = 'deleteVendor.php?id=' + trid;
+    loadDoc(url, getTableRow);
+  }
+
+  function getTableRow(xhttp){
+    document.getElementById("outsideVendorTable").innerHTML = xhttp.responseText;
+    //document.getElementsByName("stateSelect").val = $('[name="stateSelect"]').attr("id");
+    var state = $('[name="stateSelect"]').attr("id");
+    $("select option[value=" + state + "]").attr('selected', 'selected');
+    $("select").attr('disabled', 'disabled');
+
+    $(document).ready(function() { 
+            // bind 'myForm' and provide a simple callback function 
+            // attach handler to form's submit event 
+      $('#myForm').submit(function() { 
+      
+      //  console.log("I MADE IT");
+        //alert($('#myForm').serialize()+"&id=registerVendorSubmit");
+        $(this).ajaxSubmit(); // submit the form 
+      
+      return false; // return false to prevent normal browser submit and page navigation 
+      })
+        }); 
+    
+    $(document).ajaxSuccess(function (evt, jqXHR, settings) {
+      confirmDelete();
+    });
+  }
+
+
+  function confirmDelete(){
+    alert("The vendor has been deleted.");
+    document.location.href="index.html";
+  }
+
+
+
+
+
+
     function filterTable() {
       var input, filter, table, tr, td, i;
       input = document.getElementById("searchBar");
