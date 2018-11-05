@@ -16,15 +16,15 @@ echo '<div class = "container">
 			<div style="height: 25px"></div>
 			<div class="form-group row">
 			<div class ="col-lg-2">
-					<label for="stateSelect">Vendor Name</label>
-					<select class="form-control" name="stateSelect" id="vendorName" selected="New York">
+					<label for="vendorSelect">Vendor Name</label>
+					<select class="form-control" name="vendorSelect" id="vendorName"  onchange="setVendorCode()">
 						
 					</select>
 				</div>
 			
 				<div class ="col-lg-6">
 					<label for="InputVendorCode">Vendor Code</label>
-					<input type="text" class="form-control" name="InputVendorId" id="Code" placeholder="Enter Vendor Code">
+					<input type="text" class="form-control" name="InputVendorCode" id="Code" placeholder="Enter Vendor Code">
 				</div>
 			</div>
 			<div style="height: 25px"></div>
@@ -63,7 +63,7 @@ echo '<div class = "container">
 			</div>
 			<div style="height: 25px"></div>
 			<div class="form-group row">
-				<div class ="col-lg-12">
+				<div class ="col-lg-6">
 					<table class="table">
 					<thead>
 						<tr>

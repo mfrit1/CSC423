@@ -17,14 +17,15 @@
       
       $(document).ready(loadDoc('getOrders.php', getOrders))
 
-      function loadDoc(url, cFunction) {
-
+      function loadDoc(url, cFunction, params) {
+	 // params = params || 0;
     //Creates an object to run php file
       var xhttp;
 	  xhttp=new XMLHttpRequest();
       //HERE is when the program actually switches over to the php and runs the file.
       xhttp.open("POST", url, true);
-      xhttp.send();
+      xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      xhttp.send(params);
 	  
 	  //This tells the program to run the following code once the php file has run.
       xhttp.onreadystatechange = function() {
@@ -51,8 +52,19 @@
 	function getNewOrderPHP(xhttp){
       //By doing this, we take whatever strings have been echoed by the php file and put it into our current webpage. No need to load a whole new page, It edits the one we are currently on.
       document.getElementById("outsideOrderTable").innerHTML = xhttp.responseText;
-
+	  $(document).ready(loadDoc('getVendorName.php', getVendorName));
+	  
+	 
+	//put all doc load fcns here.   
 	}
+	
+	 function getVendorName(xhttp){
+      //By doing this, we take whatever strings have been echoed by the php file and put it into our current webpage. No need to load a whole new page, It edits the one we are currently on.
+      document.getElementById("vendorName").innerHTML = xhttp.responseText;
+    }
+	
+	
+	
     function filterTable() {
       var input, filter, table, tr, td, i;
       input = document.getElementById("searchBar");
@@ -99,6 +111,15 @@
 			return false;
 			
 		}
+	}
+	
+	
+	function setVendorCode() {
+	loadDoc('setVendorCode.php',setVendorCodeNow, 'id='+document.getElementById("vendorName").value);
+	}
+	
+	function setVendorCodeNow(xhttp){
+	document.getElementById("Code").value = xhttp.responseText;
 	}
 
     </script>
