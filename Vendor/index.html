@@ -125,10 +125,10 @@
   function modifyVendor(button){
     var trid = button.closest('tr').attr('id');
     var url = 'modifyVendor.php?id=' + trid;
-    loadDoc(url, getTableRow);
+    loadDoc(url, getTableRowModify);
   }
 
-  function getTableRow(xhttp){
+  function getTableRowModify(xhttp){
     document.getElementById("outsideVendorTable").innerHTML = xhttp.responseText;
     //document.getElementsByName("stateSelect").val = $('[name="stateSelect"]').attr("id");
     var state = $('[name="stateSelect"]').attr("id");
@@ -169,10 +169,10 @@
   function deleteVendor(button){
     var trid = button.closest('tr').attr('id');
     var url = 'deleteVendor.php?id=' + trid;
-    loadDoc(url, getTableRow);
+    loadDoc(url, getTableRowDelete);
   }
 
-  function getTableRow(xhttp){
+  function getTableRowDelete(xhttp){
     document.getElementById("outsideVendorTable").innerHTML = xhttp.responseText;
     //document.getElementsByName("stateSelect").val = $('[name="stateSelect"]').attr("id");
     var state = $('[name="stateSelect"]').attr("id");
