@@ -10,6 +10,16 @@ $trid = $_GET['id'];
  // $data = htmlspecialchars($data);
 //  return $data;
 //}
+	$sql = "UPDATE inventoryitem SET status='Inacive' WHERE vendorId=$trid";
+	
+	if ($conn->query($sql) === TRUE) {
+    	$res="Data Deleted Successfully:";
+		echo json_encode($res);
+	} else {
+   		$error="Not Inserted, Some Problems Occurred.";
+		echo json_encode($error);
+	}
+
 	$sql = "UPDATE vendor SET status='Inactive' WHERE vendorId=$trid";
 	echo $sql;
 //echo $sql;
