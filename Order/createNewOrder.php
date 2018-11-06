@@ -41,7 +41,7 @@ echo '<div class = "container">
 				</div>
 				<div class ="col-lg-2">
 					<label for="button">&nbsp;</label>
-					<button type="button" class="btn btn-info" name="button" onclick = "setFields()">Lock in Store/Vendor</button>
+					<button type="button" class="btn btn-info" name="button" onclick = "setFields()">Lock in Vendor</button>
 				</div>
 			</div>
 			<div style="height: 25px"></div>
