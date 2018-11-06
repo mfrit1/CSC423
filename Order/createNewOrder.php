@@ -24,41 +24,45 @@ echo '<div class = "container">
 			
 				<div class ="col-lg-6">
 					<label for="InputVendorCode">Vendor Code</label>
-					<input type="text" class="form-control" name="InputVendorCode" id="Code" onchange="setVendorName()" placeholder="Enter Vendor Code">
+					<input type="text" class="form-control" name="InputVendorCode" id="vendorCode" onchange="setVendorName()" placeholder="Enter Vendor Code">
 				</div>
 			</div>
 			<div style="height: 25px"></div>
 			<div class="form-group row">
 			<div class ="col-lg-2">
-					<label for="stateSelect">Store Name</label>
-					<select class="form-control" name="stateSelect" id="vendorName" selected="New York">
+					<label for="storeSelect">Store Name</label>
+					<select class="form-control" name="storeSelect" id="storeName" onchange="setStoreCode()">
 						
 					</select>
 				</div>
 				<div class ="col-lg-6">
-					<label for="InputVendorCode">Store Code</label>
-					<input type="text" class="form-control" name="InputVendorId" id="Code" placeholder="Enter Vendor Code">
+					<label for="InputStoreCode">Store Code</label>
+					<input type="text" class="form-control" name="InputStoreCode" id="storeCode" onchange="setStoreName()" placeholder="Enter Store Code">
+				</div>
+				<div class ="col-lg-2">
+					<label for="button">&nbsp;</label>
+					<button type="button" class="btn btn-info" name="button" onclick = "setFields()">Lock in Store/Vendor</button>
 				</div>
 			</div>
 			<div style="height: 25px"></div>
 			<div class="form-group row">
 			<div class ="col-lg-2">
-					<label for="stateSelect">Item Description</label>
-					<select class="form-control" name="stateSelect" id="vendorName" selected="New York">
+					<label for="itemDescription">Item Description</label>
+					<select class="form-control" name="itemDescription" id="itemDesc" selected="New York" disabled>
 						
 					</select>
 				</div>
 			
 				<div class ="col-lg-6">
-					<label for="InputVendorCode">Item Id</label>
-					<input type="text" class="form-control" name="InputVendorId" id="Code" placeholder="Enter Vendor Code">
+					<label for="itemId">Item Id</label>
+					<input type="text" class="form-control" name="itemId" id="itemId" placeholder="Enter Vendor Code" disabled>
 				</div>
 			</div>
 			<div style="height: 25px"></div>
 			<div class="form-group row">
 				<div class ="col-lg-5">
-					<label for="InputVendorCity">Quantity Ordered</label>
-					<input type="text" class="form-control" name="InputQuantityOrdered" id="City" placeholder="Enter Vendor City">
+					<label for="quanitiyOrdered">Quantity Ordered</label>
+					<input type="text" class="form-control" name="quanitiyOrdered" id="qOrdered" placeholder="Enter Vendor City" disabled>
 				</div>
 			</div>
 			<div style="height: 25px"></div>

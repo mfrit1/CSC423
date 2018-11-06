@@ -39,7 +39,7 @@
       };
     }
 	
-	 function getOrders(xhttp){
+	function getOrders(xhttp){
       //By doing this, we take whatever strings have been echoed by the php file and put it into our current webpage. No need to load a whole new page, It edits the one we are currently on.
       document.getElementById("orderTable").innerHTML = xhttp.responseText;
     }
@@ -53,10 +53,8 @@
       //By doing this, we take whatever strings have been echoed by the php file and put it into our current webpage. No need to load a whole new page, It edits the one we are currently on.
       document.getElementById("outsideOrderTable").innerHTML = xhttp.responseText;
 	  $(document).ready(loadDoc('getVendorName.php', getVendorName));
+	  $(document).ready(loadDoc('getStoreName.php', getStoreName));
 	  
-	  
-	 
-	//put all doc load fcns here.   
 	}
 	
 	 function getVendorName(xhttp){
@@ -64,6 +62,30 @@
       document.getElementById("vendorName").innerHTML = xhttp.responseText;
     }
 	
+	 function setFields(){
+      //By doing this, we take whatever strings have been echoed by the php file and put it into our current webpage. No need to load a whole new page, It edits the one we are currently on.
+		if(document.getElementById("vendorCode").value != '' && document.getElementById("vendorName").value != '')
+		{
+			document.getElementById("vendorCode").disabled = true;
+			document.getElementById("vendorName").disabled = true;
+			document.getElementById("itemDesc").disabled = false;
+			document.getElementById("itemId").disabled = false;
+			document.getElementById("qOrdered").disabled = false;
+			$(document).ready(loadDoc('getItemDesc.php', getItemDesc, "vendorCode="+document.getElementById("vendorCode").value));
+		}
+		else alert("You need to set the Vendor fields");
+    }
+	
+	function getStoreName(xhttp){
+      //By doing this, we take whatever strings have been echoed by the php file and put it into our current webpage. No need to load a whole new page, It edits the one we are currently on.
+      document.getElementById("storeName").innerHTML = xhttp.responseText;
+    }
+	
+	 function getItemDesc(xhttp){
+      //By doing this, we take whatever strings have been echoed by the php file and put it into our current webpage. No need to load a whole new page, It edits the one we are currently on.
+	  alert("here");
+      document.getElementById("itemDesc").innerHTML = xhttp.responseText;
+    }
 	
 	
     function filterTable() {
@@ -116,17 +138,34 @@
 	 
 	
 	function setVendorCode() {
-	document.getElementById("Code").value = document.getElementById("vendorName").value;
+	document.getElementById("vendorCode").value = document.getElementById("vendorName").value;
 	}
 	
 	function setVendorName() {
 	var temp = document.getElementById("vendorName").value
-	document.getElementById("vendorName").value = document.getElementById("Code").value;
+	document.getElementById("vendorName").value = document.getElementById("vendorCode").value;
 	if(document.getElementById("vendorName").value == ''){
 		alert("Invalid vendor code, try another.");
 		document.getElementById("vendorName").value = temp;
-		document.getElementById("Code").value = '';
+		document.getElementById("vendorCode").value = '';
 		}
+	}
+	
+	function setStoreCode() {
+	document.getElementById("storeCode").value = document.getElementById("storeName").value;
+	$(document).ready(loadDoc('getItemDesc.php', getItemDesc, "vendorCode="+document.getElementById("vendorCode").value));
+	}
+	
+	function setStoreName() {
+	var temp = document.getElementById("storeName").value
+	document.getElementById("storeName").value = document.getElementById("storeCode").value;
+	if(document.getElementById("storeName").value == ''){
+		alert("Invalid store code, try another.");
+		document.getElementById("storeName").value = temp;
+		document.getElementById("storeCode").value = '';
+		}
+	else
+		$(document).ready(loadDoc('getItemDesc.php', getItemDesc, "vendorCode="+document.getElementById("vendorCode").value));
 	}
 
     </script>
