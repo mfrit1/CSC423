@@ -73,7 +73,8 @@ echo '<div class = "container">
 			<div style="height: 25px"></div>
 			<div class="form-group row">
 				<div class ="col-lg-6">
-						<table class="table table-fixed" id="myTable" style="table-layout: fixed; word-wrap: break-word; height: 10vh; overflow-y: auto; ">
+					<div class = "container" style="height: 200px; overflow-y: auto;">
+						<table class="table" id="myTable" style="table-layout: fixed;  word-wrap: break-word; width: 100%;">
 							<thead>
 								<tr>
 									<th scope="col">Item Description</th>
@@ -82,11 +83,12 @@ echo '<div class = "container">
 									<th scope="col">Action</th>
 								</tr>
 							</thead>
-						<tbody>
+						<tbody  style="background-color: white;">
 						
 							
 						</tbody>
 						</table>
+					</div>
 				</div>
 				<div class ="col-lg-6">
 					<button type="submit" button name="submit" id="submit" class="btn btn-primary btn-lg btn-block spacing">Create New Order</button>
