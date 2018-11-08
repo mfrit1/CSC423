@@ -7,38 +7,30 @@
 
 body{
     font-family: 'Oxygen', sans-serif;
-    height: 100%;
-    margin: 0;
 }
 
 html {
     font-family: 'Oxygen', sans-serif;
-    margin: 0;
     min-height:100vh;
 }
 
-body.background {
-    background-image: url('https://i.imgur.com/Nbi7bYI.jpg');
-    background-position: center;
-	height: 100%;
-	background-size: cover; 
-}
-
-div.fader {
-	height: 100%; 
-	background: linear-gradient(to left,
-    	rgb(211,211,211, 0) 10%, 
-    	rgb(211,211,211, 1) 25%, 
-    	rgb(211,211,211, 1) 75%, 
-    	rgb(211,211,211, 0) 90%); 
-    padding-left: 250px; 
-    padding-right: 250px;
-}
 
 img {
     max-width: 100%;
     height: auto;
 }
+
+div.container4 {
+    height: 10em;
+    position: relative }
+div.container4 p {
+    margin: 0;
+    background: yellow;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%) }
 
 img.center {
 	padding-top: 30px;
@@ -50,4 +42,10 @@ img.center {
 /*For the submit button*/
 .spacing {
     margin-bottom:25px;
+}
+
+.divider{
+    width:5px;
+    height:auto;
+    display:inline-block;
 }
