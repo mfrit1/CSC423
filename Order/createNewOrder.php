@@ -75,9 +75,9 @@ echo '<div class = "container">
 				<div class ="col-lg-6">
 					<div class = "container" style="height: 200px; overflow-y: auto;">
 						<table class="table" id="myTable" style="table-layout: fixed;  word-wrap: break-word; width: 100%;">
-							<thead>
+							<thead class="bg-secondary">
 								<tr>
-									<th scope="col">Item Description</th>
+									<th scope="col">Item Desc</th>
 									<th scope="col">Item ID</th>
 									<th scope="col">Quantity</th>
 									<th scope="col">Action</th>
