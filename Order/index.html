@@ -212,6 +212,17 @@
 		}
 	}
 
+	function addItem(){
+		var tr = '<tr><td scope = "col" style= "width: 1%">aa111111qwerwerqwerqwerwqerwqerqwreqwerwqerqwerqwerqwerwqerqwrea</td><td>aaaaaaaaaa</td><td>yes</td><td><input type="button" class="ibtnDel btn btn-md btn-danger " onclick="deleteRow()" value="Delete"></td></tr>';
+		 $('#myTable').append(tr);
+	}
+	
+	function deleteRow() {
+      // event.target will be the input element.
+      var td = event.target.parentNode; 
+      var tr = td.parentNode; // the row to be removed
+      tr.parentNode.removeChild(tr);
+	}
     </script>
 
   </head>

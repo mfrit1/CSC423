@@ -55,36 +55,43 @@ echo '<div class = "container">
 			
 				<div class ="col-lg-6">
 					<label for="itemId">Item Id</label>
-					<input type="text" class="form-control" name="itemId" id="itemId" onchange="setItemDesc()" placeholder="Enter Vendor Code" disabled>
+					<input type="text" class="form-control" name="itemId" id="itemId" onchange="setItemDesc()" placeholder="Enter Item ID" disabled>
 				</div>
 			</div>
 			<div style="height: 25px"></div>
 			<div class="form-group row">
 				<div class ="col-lg-5">
 					<label for="quanitiyOrdered">Quantity Ordered</label>
-					<input type="text" class="form-control" name="quanitiyOrdered" id="qOrdered" placeholder="Enter Vendor City" disabled>
+					<input type="text" class="form-control" name="quanitiyOrdered" id="qOrdered" placeholder="Enter Item quantity" disabled>
+				</div>
+				
+				<div class ="col-lg-2">
+					<label for="button">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+					<button type="button" class="btn btn-success" name="button" onclick = "addItem()">Add Item to Order</button>
 				</div>
 			</div>
 			<div style="height: 25px"></div>
 			<div class="form-group row">
 				<div class ="col-lg-6">
-					<table class="table">
-					<thead>
-						<tr>
-						<th scope="col">Item Name</th>
-						<th scope="col">Item ID</th>
-						<th scope="col">Quantity</th>
-						<th scope="col">Action</th>
-						</tr>
-					</thead>
-					<tbody>
+						<table class="table table-fixed" id="myTable" style="table-layout: fixed; word-wrap: break-word; height: 10vh; overflow-y: auto; ">
+							<thead>
+								<tr>
+									<th scope="col">Item Description</th>
+									<th scope="col">Item ID</th>
+									<th scope="col">Quantity</th>
+									<th scope="col">Action</th>
+								</tr>
+							</thead>
+						<tbody>
 						
-					</tbody>
-					</table>
+							
+						</tbody>
+						</table>
+				</div>
+				<div class ="col-lg-6">
+					<button type="submit" button name="submit" id="submit" class="btn btn-primary btn-lg btn-block spacing">Create New Order</button>
 				</div>
 			</div>
-			<div style="height: 25px"></div>
-			<button type="submit" button name="submit" id="submit" class="btn btn-primary btn-lg btn-block spacing">Create New Order</button>
 		</form>
 	</div>';
 //As long as there is another row to be processed, do the following loop. This adds all returned DB records to the table.
