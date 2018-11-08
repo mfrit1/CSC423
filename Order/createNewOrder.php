@@ -26,36 +26,36 @@ echo '<div class = "container">
 					<label for="InputVendorCode">Vendor Code</label>
 					<input type="text" class="form-control" name="InputVendorCode" id="vendorCode" onchange="setVendorName()" placeholder="Enter Vendor Code">
 				</div>
+				<div class ="col-lg-2">
+					<label for="button">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+					<button type="button" class="btn btn-info" name="button" onclick = "setFields()">Lock/Unlock Vendor</button>
+				</div>
 			</div>
 			<div style="height: 25px"></div>
 			<div class="form-group row">
 			<div class ="col-lg-2">
 					<label for="storeSelect">Store Name</label>
-					<select class="form-control" name="storeSelect" id="storeName" onchange="setStoreCode()">
+					<select class="form-control" name="storeSelect" id="storeName" onchange="setStoreCode()" disabled>
 						
 					</select>
 				</div>
 				<div class ="col-lg-6">
 					<label for="InputStoreCode">Store Code</label>
-					<input type="text" class="form-control" name="InputStoreCode" id="storeCode" onchange="setStoreName()" placeholder="Enter Store Code">
-				</div>
-				<div class ="col-lg-2">
-					<label for="button">&nbsp;</label>
-					<button type="button" class="btn btn-info" name="button" onclick = "setFields()">Lock in Vendor</button>
+					<input type="text" class="form-control" name="InputStoreCode" id="storeCode" onchange="setStoreName()" placeholder="Enter Store Code" disabled>
 				</div>
 			</div>
 			<div style="height: 25px"></div>
 			<div class="form-group row">
 			<div class ="col-lg-2">
 					<label for="itemDescription">Item Description</label>
-					<select class="form-control" name="itemDescription" id="itemDesc" selected="New York" disabled>
+					<select class="form-control" name="itemDescription" id="itemDesc" onchange="setItemId()" disabled>
 						
 					</select>
 				</div>
 			
 				<div class ="col-lg-6">
 					<label for="itemId">Item Id</label>
-					<input type="text" class="form-control" name="itemId" id="itemId" placeholder="Enter Vendor Code" disabled>
+					<input type="text" class="form-control" name="itemId" id="itemId" onchange="setItemDesc()" placeholder="Enter Vendor Code" disabled>
 				</div>
 			</div>
 			<div style="height: 25px"></div>

@@ -14,7 +14,9 @@
 	
 
     <script type="text/javascript">
-      
+	
+      var fieldCheck = true;
+	  
       $(document).ready(loadDoc('getOrders.php', getOrders))
 
       function loadDoc(url, cFunction, params) {
@@ -60,30 +62,59 @@
 	 function getVendorName(xhttp){
       //By doing this, we take whatever strings have been echoed by the php file and put it into our current webpage. No need to load a whole new page, It edits the one we are currently on.
       document.getElementById("vendorName").innerHTML = xhttp.responseText;
+	  setVendorCode();
     }
 	
 	 function setFields(){
       //By doing this, we take whatever strings have been echoed by the php file and put it into our current webpage. No need to load a whole new page, It edits the one we are currently on.
-		if(document.getElementById("vendorCode").value != '' && document.getElementById("vendorName").value != '')
-		{
-			document.getElementById("vendorCode").disabled = true;
-			document.getElementById("vendorName").disabled = true;
-			document.getElementById("itemDesc").disabled = false;
-			document.getElementById("itemId").disabled = false;
-			document.getElementById("qOrdered").disabled = false;
-			$(document).ready(loadDoc('getItemDesc.php', getItemDesc, "vendorCode="+document.getElementById("vendorCode").value));
+	  
+	    if(fieldCheck)
+	    {
+		  if(document.getElementById("vendorCode").value != '' && document.getElementById("vendorName").value != '')
+			{
+				document.getElementById("vendorCode").disabled = true;
+				document.getElementById("vendorName").disabled = true;
+				document.getElementById("itemDesc").disabled = false;
+				document.getElementById("itemId").disabled = false;
+				document.getElementById("qOrdered").disabled = false;
+				document.getElementById("storeCode").disabled = false;
+				document.getElementById("storeName").disabled = false;
+				$(document).ready(loadDoc('getItemDesc.php', getItemDesc, "vendorCode="+document.getElementById("vendorCode").value));
+				fieldCheck = false;
+			}
+			else{
+				alert("You need to set the Vendor fields");
+				fieldCheck = false;
+			}
 		}
-		else alert("You need to set the Vendor fields");
+		else{
+			document.getElementById("vendorCode").disabled = false;
+			document.getElementById("vendorName").disabled = false;
+			document.getElementById("itemDesc").disabled = true;
+			document.getElementById("itemId").disabled = true;
+			document.getElementById("qOrdered").disabled = true;
+			document.getElementById("storeCode").disabled = true;
+			document.getElementById("storeName").disabled = true;
+			
+			document.getElementById("itemDesc").value = '';
+			document.getElementById("itemId").value = '';
+			document.getElementById("qOrdered").value = '';
+			fieldCheck = true;
+	    }
     }
+	
+	
 	
 	function getStoreName(xhttp){
       //By doing this, we take whatever strings have been echoed by the php file and put it into our current webpage. No need to load a whole new page, It edits the one we are currently on.
       document.getElementById("storeName").innerHTML = xhttp.responseText;
+	  setStoreCode();
     }
 	
 	 function getItemDesc(xhttp){
       //By doing this, we take whatever strings have been echoed by the php file and put it into our current webpage. No need to load a whole new page, It edits the one we are currently on.
       document.getElementById("itemDesc").innerHTML = xhttp.responseText;
+	  setItemId();
     }
 	
 	
@@ -146,7 +177,7 @@
 	if(document.getElementById("vendorName").value == ''){
 		alert("Invalid vendor code, try another.");
 		document.getElementById("vendorName").value = temp;
-		document.getElementById("vendorCode").value = '';
+		setVendorCode();
 		}
 	}
 	
@@ -161,10 +192,24 @@
 	if(document.getElementById("storeName").value == ''){
 		alert("Invalid store code, try another.");
 		document.getElementById("storeName").value = temp;
-		document.getElementById("storeCode").value = '';
+		setStoreCode();
 		}
 	else
 		$(document).ready(loadDoc('getItemDesc.php', getItemDesc, "vendorCode="+document.getElementById("vendorCode").value));
+	}
+	
+	function setItemId() {
+	document.getElementById("itemId").value = document.getElementById("itemDesc").value;
+	}
+	
+	function setItemName() {
+	var temp = document.getElementById("itemDesc").value
+	document.getElementById("itemDesc").value = document.getElementById("itemId").value;
+	if(document.getElementById("itemDesc").value == ''){
+		alert("Invalid vendor code, try another.");
+		document.getElementById("itemDesc").value = temp;
+		setVendorCode();
+		}
 	}
 
     </script>
