@@ -7,9 +7,7 @@ require '../DBInfo.php';
 echo '<div class = "container">
 		<div class="row">
 			<div class ="col-lg-12">
-				
 				<h2 align="left">CREATE AN ORDER</h2>
-				
 			</div>
 		</div>
 		<form class="form-horizontal" method="post" id = "myForm" action = "Create_Order_Submit.php"   >
@@ -83,7 +81,7 @@ echo '<div class = "container">
 									<th scope="col">Action</th>
 								</tr>
 							</thead>
-						<tbody  style="background-color: white;">
+						<tbody  id="tBody" style="background-color: white;">
 						
 							
 						</tbody>

@@ -99,6 +99,8 @@
 			document.getElementById("itemDesc").value = '';
 			document.getElementById("itemId").value = '';
 			document.getElementById("qOrdered").value = '';
+			document.getElementById("tBody").innerHTML = '';
+			
 			fieldCheck = true;
 	    }
     }
@@ -213,6 +215,7 @@
 	}
 
 	function addItem(){
+		if(!fieldCheck)
 		var tr = '<tr><td scope = "col" style= "width: 1%">aa111111qwerwerqwerqwerwqerwqerqwreqwerwqerqwerqwerqwerwqerqwrea</td><td>aaaaaaaaaa</td><td>yes</td><td><input type="button" class="ibtnDel btn btn-md btn-danger " onclick="deleteRow()" value="Delete"></td></tr>';
 		 $('#myTable').append(tr);
 	}
