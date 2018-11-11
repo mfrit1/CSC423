@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="../style.css">
 	
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="http://malsup.github.com/jquery.form.js"></script>
@@ -15,7 +15,10 @@
 
     <script type="text/javascript">
 	
-      var fieldCheck = true;
+	var itemIds = [];
+	var itemIndex = 0;
+	var itemTotal = 0;
+    var fieldCheck = true;
 	  
       $(document).ready(loadDoc('getOrders.php', getOrders))
 
@@ -41,6 +44,16 @@
       };
     }
 	
+	
+	function checkFunctions(){
+		if(itemTotal === 0){
+			alert("You are not yet finished!");
+			return false;
+		}
+		
+		return true;
+	}
+	
 	function getOrders(xhttp){
       //By doing this, we take whatever strings have been echoed by the php file and put it into our current webpage. No need to load a whole new page, It edits the one we are currently on.
       document.getElementById("orderTable").innerHTML = xhttp.responseText;
@@ -56,7 +69,6 @@
       document.getElementById("outsideOrderTable").innerHTML = xhttp.responseText;
 	  $(document).ready(loadDoc('getVendorName.php', getVendorName));
 	  $(document).ready(loadDoc('getStoreName.php', getStoreName));
-	  
 	}
 	
 	 function getVendorName(xhttp){
@@ -204,20 +216,38 @@
 	document.getElementById("itemId").value = document.getElementById("itemDesc").value;
 	}
 	
-	function setItemName() {
+	function setItemDesc() {
 	var temp = document.getElementById("itemDesc").value
 	document.getElementById("itemDesc").value = document.getElementById("itemId").value;
 	if(document.getElementById("itemDesc").value == ''){
-		alert("Invalid vendor code, try another.");
+		alert("Invalid item ID, try another.");
 		document.getElementById("itemDesc").value = temp;
-		setVendorCode();
+		setItemId();
 		}
 	}
 
 	function addItem(){
-		if(!fieldCheck)
-		var tr = '<tr><td scope = "col" style= "width: 1%">aa111111qwerwerqwerqwerwqerwqerqwreqwerwqerqwerqwerqwerwqerqwrea</td><td>aaaaaaaaaa</td><td>yes</td><td><input type="button" class="ibtnDel btn btn-md btn-danger " onclick="deleteRow()" value="Delete"></td></tr>';
-		 $('#myTable').append(tr);
+		if(!fieldCheck && checkQuantityOrdered() && checkForTableDuplicates()){
+			var sel =  document.getElementById("itemDesc");
+			var text= sel.options[sel.selectedIndex].text;
+			var tr = '<tr><td scope = "col" style= "width: 1%" name="itemDescTd">' + text + '</td><td id="Id'+itemIndex+'">' + document.getElementById("itemDesc").value + '</td><td id="Quant'+itemIndex+'">' + document.getElementById("qOrdered").value + '</td><td><input type="button" class="ibtnDel btn btn-md btn-danger " onclick="deleteRow()" value="Delete"></td></tr>';
+			 $('#myTable').append(tr);
+			 itemIndex++;
+			 itemTotal++;
+			 itemIds.push(document.getElementById("itemDesc").value);
+		 }
+	}
+	
+	function checkQuantityOrdered(){
+		var elemPattern = /^\d{1,10}$/;
+		var re = new RegExp(elemPattern);
+		if(!re.test(document.getElementById("qOrdered").value))
+		{
+			alert("Quantity Ordered is not in a correct format!");
+			return false;
+		}
+		else
+			return true;
 	}
 	
 	function deleteRow() {
@@ -225,6 +255,76 @@
       var td = event.target.parentNode; 
       var tr = td.parentNode; // the row to be removed
       tr.parentNode.removeChild(tr);
+	  itemTotal--;
+	  removeFromItemIds();
+	}
+	
+	function removeFromItemIds(){
+		var i = 0;
+		itemIds = [];
+		while(i < itemIndex){
+			var test = document.getElementById("Id"+i);
+			if(test){
+				itemIds.push(document.getElementById("Id"+i).innerHTML);
+			}
+			i++;
+		}
+	}
+
+	function checkForTableDuplicates(){
+		for(var i = 0; i < itemTotal; i++)
+		{	
+			if(itemIds[i] === document.getElementById("itemDesc").value)
+			{
+				alert("This item is already in your order!");
+				return false;
+			}
+		}
+		return true;
+	}
+
+	function turnTableToArray(){
+		var tableData = [];
+		var i = 0;
+		var newIndex = 1;
+		while(i < itemIndex){
+			var test = document.getElementById("Id"+i);
+			if(test){
+				tableData.push("ID" + newIndex + "=" + document.getElementById("Id"+i).innerHTML + "&" + "Quant" + newIndex + "=" + document.getElementById("Quant"+i).innerHTML + "&");
+				newIndex++;
+			}
+			i++;
+		}
+		
+		return tableToString(tableData);
+	}
+
+    function tableToString(tableData){
+		var tableString = '';
+		for(var i = 0; i < itemTotal; i++)
+		{	
+			tableString = tableString + tableData[i];
+		}
+		tableString = tableString.substring(0,tableString.length - 1);
+		return tableString;
+	}
+	
+	function sendToPHP(){
+		
+		if(checkFunctions())
+		{
+			alert("here1");
+			var vendorCode = "vendorCode=" + document.getElementById("vendorCode").value; 
+			var storeCode = "storeCode=" + document.getElementById("storeCode").value;
+			var totalIds = "idCount=" + itemTotal;
+			var send = vendorCode + "&" + storeCode + "&" + totalIds + "&" + turnTableToArray();
+			$(document).ready(loadDoc('submitOrder.php', endMessage, send));
+		}
+		alert("here");
+	}
+	
+	function endMessage(){
+		alert("Order has been submitted");
 	}
 	
     </script>

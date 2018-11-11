@@ -10,7 +10,7 @@ echo '<div class = "container">
 				<h2 align="left">CREATE AN ORDER</h2>
 			</div>
 		</div>
-		<form class="form-horizontal" method="post" id = "myForm" action = "Create_Order_Submit.php"   >
+		<form class="form-horizontal">
 			<div style="height: 25px"></div>
 			<div class="form-group row">
 			<div class ="col-lg-2">
@@ -19,7 +19,7 @@ echo '<div class = "container">
 						
 					</select>
 				</div>
-			
+				
 				<div class ="col-lg-6">
 					<label for="InputVendorCode">Vendor Code</label>
 					<input type="text" class="form-control" name="InputVendorCode" id="vendorCode" onchange="setVendorName()" placeholder="Enter Vendor Code">
@@ -89,7 +89,7 @@ echo '<div class = "container">
 					</div>
 				</div>
 				<div class ="col-lg-6">
-					<button type="submit" button name="submit" id="submit" class="btn btn-primary btn-lg btn-block spacing">Create New Order</button>
+					<button  type="button" onclick="sendToPHP()" name="button" class="btn btn-primary btn-lg btn-block spacing">Submit Order Information</button>
 				</div>
 			</div>
 		</form>
