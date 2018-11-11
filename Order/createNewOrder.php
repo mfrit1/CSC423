@@ -47,7 +47,7 @@ echo '<div class = "container">
 			<div class ="col-lg-2">
 					<label for="itemDescription">Item Description</label>
 					<select class="form-control" name="itemDescription" id="itemDesc" onchange="setItemId()" disabled>
-						
+						<option value="" disabled selected hidden>Items...</option>"
 					</select>
 				</div>
 			

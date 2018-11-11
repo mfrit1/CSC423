@@ -113,6 +113,8 @@
 			document.getElementById("itemId").value = '';
 			document.getElementById("qOrdered").value = '';
 			document.getElementById("tBody").innerHTML = '';
+			document.getElementById("storeCode").value = '';
+			document.getElementById("storeName").value = '';
 			
 			itemIds = [];
 			itemIndex = 0;
@@ -304,22 +306,41 @@
 		return tableString;
 	}
 	
+	function getTodayDate()
+	{
+		var today = new Date();
+		var dd = today.getDate();
+		var mm = today.getMonth()+1; //January is 0!
+		var yyyy = today.getFullYear();
+
+		if(dd<10) {
+			dd = '0'+dd
+		} 
+
+		if(mm<10) {
+			mm = '0'+mm
+		} 
+
+		today = mm + '/' + dd + '/' + yyyy;
+		return today;
+	}
+	
 	function sendToPHP(){
-		
 		if(checkFunctions())
 		{
-			alert("here1");
 			var vendorCode = "vendorCode=" + document.getElementById("vendorCode").value; 
 			var storeCode = "storeCode=" + document.getElementById("storeCode").value;
 			var totalIds = "idCount=" + itemTotal;
-			var send = vendorCode + "&" + storeCode + "&" + totalIds + "&" + turnTableToArray();
+			var todayDate = "date=" + getTodayDate();
+			var send = vendorCode + "&" + storeCode + "&" + totalIds + "&" + todayDate + "&" + turnTableToArray();
 			$(document).ready(loadDoc('submitOrder.php', endMessage, send));
 		}
-		alert("here");
+		
 	}
 	
-	function endMessage(){
+	function endMessage(xhttp){
 		alert("Order has been submitted");
+		setFields();
 	}
 	
     </script>
@@ -336,16 +357,16 @@
   <!-- Links -->
   <ul class="navbar-nav">
     <li class="nav-item ">
-      <a class="nav-link" href="index.html">Vendors</a>
+      <a class="nav-link" href="../Vendor">Vendors</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">Stores</a>
+      <a class="nav-link" href="../Store">Stores</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">Items</a>
+      <a class="nav-link" href="../Items">Items</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">Customers</a>
+      <a class="nav-link" href="../Customers">Customers</a>
     </li>
 	<li class="nav-item active" >
       <a class="nav-link" href="index.html">Orders</a>
