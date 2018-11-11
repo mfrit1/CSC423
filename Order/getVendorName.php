@@ -10,9 +10,10 @@ $sql = "SELECT vendorCode, vendorName FROM vendor ORDER BY vendorName ASC";
 $result= $conn->query($sql);
 
 
-
+echo '<option value="" disabled selected hidden>Vendors...</option>"';
 
 //As long as there is another row to be processed, do the following loop. This adds all returned DB records to the table.
+
 while($data = mysqli_fetch_row($result))
 {   
     echo "<option value='$data[0]'>$data[1]</option>";

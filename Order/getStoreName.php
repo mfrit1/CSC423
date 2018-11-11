@@ -9,8 +9,7 @@ $sql = "SELECT storeCode, storeName FROM retailstore ORDER BY storeName ASC";
 //Run the SQL statement and store the returned values in result.
 $result= $conn->query($sql);
 
-
-
+echo '<option value="" disabled selected hidden>Stores...</option>"';
 
 //As long as there is another row to be processed, do the following loop. This adds all returned DB records to the table.
 while($data = mysqli_fetch_row($result))
