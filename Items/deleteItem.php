@@ -98,7 +98,7 @@ echo '<div class = "container">
           <input readonly type="text" class="form-control" name="itemImagePath" id="itemImagePath" value="' . $data[8] . '" onkeyup="getImage()">
         </div>
         <div class ="col-lg-4">
-          <img src="../' . $data[8] . '" id="itemImage">
+          <img src="../FD Images/' . $data[8] . '" id="itemImage">
         </div>
       </div>
       <div style="height: 25px"></div>
