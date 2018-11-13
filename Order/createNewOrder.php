@@ -70,7 +70,7 @@ echo '<div class = "container">
 			</div>
 			<div style="height: 25px"></div>
 			<div class="form-group row">
-				<div class ="col-lg-6">
+				<div class ="col-lg-8">
 					<div class = "container" style="height: 200px; overflow-y: auto;">
 						<table class="table" id="myTable" style="table-layout: fixed;  word-wrap: break-word; width: 100%;">
 							<thead class="bg-secondary">
@@ -78,6 +78,7 @@ echo '<div class = "container">
 									<th scope="col">Item Desc</th>
 									<th scope="col">Item ID</th>
 									<th scope="col">Quantity</th>
+									<th scope="col" id="totalPrice">Price:</th>
 									<th scope="col">Action</th>
 								</tr>
 							</thead>
@@ -88,7 +89,7 @@ echo '<div class = "container">
 						</table>
 					</div>
 				</div>
-				<div class ="col-lg-6">
+				<div class ="col-lg-4">
 					<button  type="button" onclick="sendToPHP()" name="button" class="btn btn-primary btn-lg btn-block spacing">Submit Order Information</button>
 				</div>
 			</div>

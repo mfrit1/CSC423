@@ -4,7 +4,7 @@
 require '../DBInfo.php';
 
 //SQL statement to get the record.
-$sql = "SELECT storeCode, storeName FROM retailstore ORDER BY storeName ASC";
+$sql = "SELECT storeCode, storeName FROM retailstore WHERE status = 'Active' ORDER BY storeName ASC";
 
 //Run the SQL statement and store the returned values in result.
 $result= $conn->query($sql);
