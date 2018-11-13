@@ -63,6 +63,7 @@
       document.getElementById("orderTable").innerHTML = xhttp.responseText;
     }
 	
+	
 	function createOrderStart(){
 	 loadDoc('createNewOrder.php', getNewOrderPHP);
       //By doing this, we take whatever strings have been echoed by the php file and put it into our current webpage. No need to load a whole new page, It edits the one we are currently on.
@@ -375,8 +376,34 @@
 		
 	}
 	
+	
+	function modifyOrder(button){
+		var trId = button.closest('tr').attr('id');
+		var trStatus = button.closest('tr').attr('status');
+		if(trStatus === "Pending"){
+			loadDoc('addItemsToExistingOrder.php', addItemsToExistingOrder, "id="+trId);
+		}	
+	}
+	
+	function addItemsToExistingOrder(xhttp){
+		 document.getElementById("outsideOrderTable").innerHTML = xhttp.responseText;
+		 //fillFields();
+	}
+	function fillFields(){
+		loadDoc('fillItemsFields.php', fillFieldsEnd, "id="+trId);
+	}
+	function fillFieldsEnd(xhttp){
+		var fields = xhttp;
+		alert(fields);
+	}
+	
 	function endMessage(xhttp){
 		alert("Order has been submitted");
+		itemIds = [];
+		itemIndex = 0;
+		itemTotal = 0;
+		fieldCheck = true;
+		alertText= '';
 		window.location.href = ".";
 	}
 	
