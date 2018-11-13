@@ -39,13 +39,13 @@ echo '<div class = "container">
 			<div class ="col-lg-2">
 					<label for="vendorSelect">Vendor Name</label>
 					<select class="form-control" name="vendorSelect" id="vendorName"  onchange="setVendorCode()" disabled>
-						
+						<option value='."$data[1] id=$data[1] selected>$data[2]".'</option>
 					</select>
 				</div>
 				
 				<div class ="col-lg-6">
 					<label for="InputVendorCode">Vendor Code</label>
-					<input type="text" class="form-control" name="InputVendorCode" id="vendorCode" onchange="setVendorName()" placeholder="Enter Vendor Code"  disabled>
+					<input type="text" class="form-control" name="InputVendorCode" id="vendorCode" onchange="setVendorName()" placeholder="Enter Vendor Code"  value= '."$vendorCode".' disabled>
 				</div>
 			</div>
 			<div style="height: 25px"></div>
