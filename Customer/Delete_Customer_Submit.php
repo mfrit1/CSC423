@@ -11,7 +11,7 @@ $trid = $_GET['id'];
 //  return $data;
 //}
 	echo $trid;
-	$sql = "UPDATE inventoryitem SET status='Inactive' WHERE itemId=$trid";
+	$sql = "UPDATE Customer SET status='Inactive' WHERE customerId=$trid";
 //echo $sql;
 
 	if ($conn->query($sql) === TRUE) {

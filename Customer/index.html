@@ -55,7 +55,7 @@
     //start the register vendor stuff.
 	function addItemStart() {
 	
-	 loadDoc('addItem.php', addItem);
+	 loadDoc('addCustomer.php', addItem);
 
    }
 
@@ -221,9 +221,9 @@
 
 
   //This is where the delete stuff will be
-  function deleteItem(button){
+  function deleteCustomer(button){
     var trid = button.closest('tr').attr('id');
-    var url = 'deleteItem.php?id=' + trid;
+    var url = 'deleteCustomer.php?id=' + trid;
     loadDoc(url, getTableRowDelete);
   }
 

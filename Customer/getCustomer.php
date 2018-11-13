@@ -4,7 +4,7 @@
 require '../DBInfo.php';
 
 //SQL statement to get the record.
-$sql = "SELECT * FROM inventoryitem WHERE status='Active' ORDER BY ItemId";
+$sql = "SELECT * FROM Customer WHERE status='Active' ORDER BY customerId";
 
 //Run the SQL statement and store the returned values in result.
 $result= $conn->query($sql);
@@ -25,7 +25,7 @@ while($data = mysqli_fetch_row($result))
     echo "<td align=center style='padding-top: 50px'>$data[6]</td>";
     echo "<td align=center style='padding-top: 50px'>$data[7]</td>";
     echo "<td align=center><img src='../FD Images/$data[8]' height='125px' width='125px' class='zoom'></td>";
-    echo "<td align=center style='padding-top: 45px'><button type='button' class='btn btn-warning' style='padding-right: 10px' onclick='modifyItem($(this))'><i class='fa fa-pencil'></i></button><div class='divider'></div><button type='button' class='btn btn-danger' onclick='deleteItem($(this))'><i class='fa fa-trash'></i></button></td>";
+    echo "<td align=center style='padding-top: 45px'><button type='button' class='btn btn-warning' style='padding-right: 10px' onclick='modifyCustomer($(this))'><i class='fa fa-pencil'></i></button><div class='divider'></div><button type='button' class='btn btn-danger' onclick='deleteCustomer($(this))'><i class='fa fa-trash'></i></button></td>";
     echo "</tr>";
 }
 
