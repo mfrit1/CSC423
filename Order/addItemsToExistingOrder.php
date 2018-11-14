@@ -21,65 +21,87 @@ $storeCode = $data[3];
 $storeName = $data[4];
 $dateOfOrder = $data[5];
 
+$sql = "SELECT inventoryitem.itemId, inventoryitem.description, inventoryitem.itemCost FROM inventoryitem, vendor where ((vendor.vendorCode='{$vendorCode}') AND (inventoryitem.vendorId = vendor.vendorId) AND (inventoryitem.status = 'Active'))";
 
 
-//$sql = "SELECT * FROM orderdetail WHERE orderId='$orderId' ORDER BY ItemId";
+$result= $conn->query($sql);
+
+$htmlString = "";
+
+//echo '<option value="" disabled selected hidden>Items...</option>"';
+//As long as there is another row to be processed, do the following loop. This adds all returned DB records to the table.
+while($data = mysqli_fetch_row($result))
+{   
+    $htmlString = $htmlString."<option value='$data[0]' id='$data[0]' price='$data[2]'>$data[1]</option>";
+}
 
 
+$sql = "SELECT * FROM orderdetail WHERE orderId='$orderId' ORDER BY ItemId";
+
+$htmlString2 = "";
+
+$sql = "SELECT orderdetail.orderId, orderdetail.itemId, inventoryitem.description, orderdetail.quantityOrdered, inventoryitem.itemCost FROM orderdetail, inventoryitem WHERE ((orderdetail.orderId='{$orderId}') AND (inventoryitem.itemId = orderdetail.itemId)) ORDER BY ItemId";
+
+$result= $conn->query($sql);
+
+$itemIndex = 0;
+
+while($data = mysqli_fetch_row($result))
+{   
+    $htmlString2 = $htmlString2.'<tr><td name="itemDescTd">'.$data[2].'</td><td id="Id'.$itemIndex.'">'.$data[1].'</td><td id="Quant'.$itemIndex.'">'.$data[3].'</td><td id="Price'.$itemIndex.'">$'.$data[4].'</td><td><input type="button" class="ibtnDel btn btn-md btn-danger " onclick="deleteRow()" value="Delete"></td></tr>';
+	$itemIndex++; 
+}
 
 echo '<div class = "container">
 		<div class="row">
 			<div class ="col-lg-12">
-				<h2 align="left">ADD ITEMS TO EXISTING ORDER</h2>
+				<h2 align="left">ADD ITEMS TO ORDER WHERE ID: '.$orderId.'</h2>
 			</div>
 		</div>
 		<form class="form-horizontal">
 			<div style="height: 25px"></div>
 			<div class="form-group row">
-			<div class ="col-lg-2">
+				<div class ="col-lg-5">
 					<label for="vendorSelect">Vendor Name</label>
-					<select class="form-control" name="vendorSelect" id="vendorName"  onchange="setVendorCode()" disabled>
-						<option value='."$data[1] id=$data[1] selected>$data[2]".'</option>
-					</select>
+						<input type="text" class="form-control" name="vendorSelect" id="vendorName" onchange="setVendorName()" placeholder="Enter Vendor Code"  value= '."$vendorName".' disabled>
 				</div>
 				
-				<div class ="col-lg-6">
+				<div class ="col-lg-4">
 					<label for="InputVendorCode">Vendor Code</label>
 					<input type="text" class="form-control" name="InputVendorCode" id="vendorCode" onchange="setVendorName()" placeholder="Enter Vendor Code"  value= '."$vendorCode".' disabled>
 				</div>
 			</div>
 			<div style="height: 25px"></div>
 			<div class="form-group row">
-			<div class ="col-lg-2">
+			<div class ="col-lg-5">
 					<label for="storeSelect">Store Name</label>
-					<select class="form-control" name="storeSelect" id="storeName" onchange="setStoreCode()" disabled>
-						
-					</select>
+					<input type="text" class="form-control" name="storeSelect" id="storeName" onchange="setStoreName()" placeholder="Enter Store Code"  value= '."$storeName".'  disabled>
 				</div>
-				<div class ="col-lg-6">
+				<div class ="col-lg-4">
 					<label for="InputStoreCode">Store Code</label>
-					<input type="text" class="form-control" name="InputStoreCode" id="storeCode" onchange="setStoreName()" placeholder="Enter Store Code"  disabled>
+					<input type="text" class="form-control" name="InputStoreCode" id="storeCode" onchange="setStoreName()" placeholder="Enter Store Code" value= '."$storeCode".'  disabled>
 				</div>
 			</div>
 			<div style="height: 25px"></div>
 			<div class="form-group row">
 			<div class ="col-lg-2">
 					<label for="itemDescription">Item Description</label>
-					<select class="form-control" name="itemDescription" id="itemDesc" onchange="setItemId()" disabled>
+					<select class="form-control" name="itemDescription" id="itemDesc" onchange="setItemId()" >
 						<option value="" disabled selected hidden>Items...</option>"
+						'.$htmlString.'
 					</select>
 				</div>
 			
 				<div class ="col-lg-6">
 					<label for="itemId">Item Id</label>
-					<input type="text" class="form-control" name="itemId" id="itemId" onchange="setItemDesc()" placeholder="Enter Item ID" disabled>
+					<input type="text" class="form-control" name="itemId" id="itemId" onchange="setItemDesc()" placeholder="Enter Item ID" >
 				</div>
 			</div>
 			<div style="height: 25px"></div>
 			<div class="form-group row">
 				<div class ="col-lg-5">
 					<label for="quanitiyOrdered">Quantity Ordered</label>
-					<input type="text" class="form-control" name="quanitiyOrdered" id="qOrdered" placeholder="Enter Item quantity" disabled>
+					<input type="text" class="form-control" name="quanitiyOrdered" id="qOrdered" placeholder="Enter Item quantity" >
 				</div>
 				
 				<div class ="col-lg-2">
@@ -102,7 +124,7 @@ echo '<div class = "container">
 								</tr>
 							</thead>
 						<tbody  id="tBody" style="background-color: white;">
-						
+						'.$htmlString2.'
 							
 						</tbody>
 						</table>
@@ -113,6 +135,7 @@ echo '<div class = "container">
 				</div>
 			</div>
 		</form>
+		<div id="getIndexFromPhp" currentIndex= "'.$itemIndex.'" dateOfTheOrder="'.$dateOfOrder.'" orderId= "'.$orderId.'"></div>
 	</div>';
 //As long as there is another row to be processed, do the following loop. This adds all returned DB records to the table.
 ?>

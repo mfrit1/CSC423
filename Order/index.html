@@ -22,6 +22,7 @@
 	var itemTotal = 0;
     var fieldCheck = true;
 	var alertText= '';
+	var createOrder = true;
 	  
       $(document).ready(loadDoc('getOrders.php', getOrders))
 
@@ -212,7 +213,6 @@
 		if(!fieldCheck && checkForTableDuplicates() && checkForItemAndStore() && checkQuantityOrdered() ){
 			 
 		
-		
 			var sel =  document.getElementById("itemDesc");
 			var text= sel.options[sel.selectedIndex].text;
 			var tr = '<tr><td name="itemDescTd">' + text + '</td><td id="Id'+itemIndex+'">' + document.getElementById("itemDesc").value + '</td><td id="Quant'+itemIndex+'">' + document.getElementById("qOrdered").value + '</td><td id="Price'+itemIndex+'">' + getPrice() + '</td><td><input type="button" class="ibtnDel btn btn-md btn-danger " onclick="deleteRow()" value="Delete"></td></tr>';
@@ -290,11 +290,11 @@
       var tr = td.parentNode; // the row to be removed
       tr.parentNode.removeChild(tr);
 	  itemTotal--;
-	  removeFromItemIds();
+	  getItemIds();
 	  calculateTotalPrice();
 	}
 	
-	function removeFromItemIds(){
+	function getItemIds(){
 		var i = 0;
 		itemIds = [];
 		while(i < itemIndex){
@@ -364,7 +364,7 @@
 	}
 	
 	function sendToPHP(){
-		if(checkFunctions())
+		if(createOrder && checkFunctions())
 		{
 			var vendorCode = "vendorCode=" + document.getElementById("vendorCode").value; 
 			var storeCode = "storeCode=" + document.getElementById("storeCode").value;
@@ -372,6 +372,17 @@
 			var todayDate = "date=" + getTodayDate();
 			var send = vendorCode + "&" + storeCode + "&" + totalIds + "&" + todayDate + "&" + turnTableToArray();
 			$(document).ready(loadDoc('submitOrder.php', endMessage, send));
+		}
+		else if(checkFunctions() && !createOrder)
+		{
+			var orderId = "orderId=" + document.getElementById("getIndexFromPhp").getAttribute("orderId");
+			var vendorCode = "vendorCode=" + document.getElementById("vendorCode").value; 
+			var storeCode = "storeCode=" + document.getElementById("storeCode").value;
+			var totalIds = "idCount=" + itemTotal;
+			var todayDate = "date=" + document.getElementById("getIndexFromPhp").getAttribute("dateOfTheOrder");
+			var send = orderId + "&" + vendorCode + "&" + storeCode + "&" + totalIds + "&" + todayDate + "&" + turnTableToArray();
+			$(document).ready(loadDoc('submitOrder.php', endMessage, send));
+		
 		}
 		
 	}
@@ -382,19 +393,21 @@
 		var trStatus = button.closest('tr').attr('status');
 		if(trStatus === "Pending"){
 			loadDoc('addItemsToExistingOrder.php', addItemsToExistingOrder, "id="+trId);
-		}	
+		}
+		else{
+			alert("You cannot edit Active or Delivered orders");
+		}
 	}
 	
 	function addItemsToExistingOrder(xhttp){
 		 document.getElementById("outsideOrderTable").innerHTML = xhttp.responseText;
-		 //fillFields();
-	}
-	function fillFields(){
-		loadDoc('fillItemsFields.php', fillFieldsEnd, "id="+trId);
-	}
-	function fillFieldsEnd(xhttp){
-		var fields = xhttp;
-		alert(fields);
+		 itemIndex = document.getElementById("getIndexFromPhp").getAttribute("currentIndex");
+		 itemTotal = document.getElementById("getIndexFromPhp").getAttribute("currentIndex");
+		 calculateTotalPrice();
+		 getItemIds();
+		 fieldCheck = false;
+		 createOrder = false;
+		 
 	}
 	
 	function endMessage(xhttp){
