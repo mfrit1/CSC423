@@ -48,7 +48,7 @@ $itemIndex = 0;
 
 while($data = mysqli_fetch_row($result))
 {   
-    $htmlString2 = $htmlString2.'<tr><td name="itemDescTd">'.$data[2].'</td><td id="Id'.$itemIndex.'">'.$data[1].'</td><td id="Quant'.$itemIndex.'">'.$data[3].'</td><td id="Price'.$itemIndex.'">$'.$data[4].'</td><td><input type="button" class="ibtnDel btn btn-md btn-danger " onclick="deleteRow()" value="Delete"></td></tr>';
+    $htmlString2 = $htmlString2.'<tr><td name="itemDescTd">'.$data[2].'</td><td id="Id'.$itemIndex.'">'.$data[1].'</td><td id="Quant'.$itemIndex.'">'.$data[3].'</td><td id="Price'.$itemIndex.'">$'.($data[4]*$data[3]).'</td><td><input type="button" class="ibtnDel btn btn-md btn-danger " onclick="deleteRow()" value="Delete"></td></tr>';
 	$itemIndex++; 
 }
 
