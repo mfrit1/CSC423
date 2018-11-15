@@ -93,7 +93,7 @@ CREATE TABLE ORDERS(
     vendorId int,
     storeId int,
     dateTimeOfOrder varchar(20),
-    status ENUM ('Pending', 'Delivered', 'Canceled'),
+    status ENUM ('Pending', 'Delivered', 'Canceled') DEFAULT 'Pending',
     dateTimeOfFulfilment varchar(20),
     FOREIGN KEY (storeId) REFERENCES RETAILSTORE(storeId),
     FOREIGN KEY (vendorId) REFERENCES VENDOR(vendorId),
