@@ -63,23 +63,23 @@ echo '<div class = "container">
 			<div class="form-group row">
 				<div class ="col-lg-5">
 					<label for="vendorSelect">Vendor Name</label>
-						<input type="text" class="form-control" name="vendorSelect" id="vendorName" onchange="setVendorName()" placeholder="Enter Vendor Code"  value= '."$vendorName".' disabled>
+						<input type="text" class="form-control" name="vendorSelect" id="vendorName" onchange="setVendorName()" placeholder="Enter Vendor Code"  value= "'.$vendorName.'" disabled>
 				</div>
 				
 				<div class ="col-lg-4">
 					<label for="InputVendorCode">Vendor Code</label>
-					<input type="text" class="form-control" name="InputVendorCode" id="vendorCode" onchange="setVendorName()" placeholder="Enter Vendor Code"  value= '."$vendorCode".' disabled>
+					<input type="text" class="form-control" name="InputVendorCode" id="vendorCode" onchange="setVendorName()" placeholder="Enter Vendor Code"  value= "'.$vendorCode.'" disabled>
 				</div>
 			</div>
 			<div style="height: 25px"></div>
 			<div class="form-group row">
 			<div class ="col-lg-5">
 					<label for="storeSelect">Store Name</label>
-					<input type="text" class="form-control" name="storeSelect" id="storeName" onchange="setStoreName()" placeholder="Enter Store Code"  value= '."$storeName".'  disabled>
+					<input type="text" class="form-control" name="storeSelect" id="storeName" onchange="setStoreName()" placeholder="Enter Store Code"  value= "'.$storeName.'"  disabled>
 				</div>
 				<div class ="col-lg-4">
 					<label for="InputStoreCode">Store Code</label>
-					<input type="text" class="form-control" name="InputStoreCode" id="storeCode" onchange="setStoreName()" placeholder="Enter Store Code" value= '."$storeCode".'  disabled>
+					<input type="text" class="form-control" name="InputStoreCode" id="storeCode" onchange="setStoreName()" placeholder="Enter Store Code" value= "'.$storeCode.'"  disabled>
 				</div>
 			</div>
 			<div style="height: 25px"></div>
