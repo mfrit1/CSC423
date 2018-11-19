@@ -19,7 +19,7 @@ echo '<div class = "container">
     <div class="row">
       <div class ="col-lg-12">
         
-        <h2 align="left">DELETE AN CUSTOMER</h2>
+        <h2 align="left">DELETE A CUSTOMER</h2>
         
       </div>
     </div>
