@@ -39,9 +39,9 @@ while($data = mysqli_fetch_row($result))
     echo "<tr id='$data[0]' height='130px'>";
     echo "<td scope='row' style='padding-top: 50px'><b>$data[0]</b></td>";
     echo "<td align=center  style='padding-top: 50px'>$data[1]</td>";
-    echo "<td align=center><img src='../FD Images/$data[2]' height='125px' width='125px' class='zoom'></td>";
-    echo "<td align=center  style='padding-top: 50px'>$data[3]</td>";
-    echo "<td align=center style='padding-top: 45px'><button type='button' class='btn btn-warning' style='padding-right: 10px' onclick='modifyItem($(this))'><i class='fa fa-pencil'></i></button><div class='divider'></div><button type='button' class='btn btn-danger' onclick='deleteItem($(this))'><i class='fa fa-trash'></i></button></td>";
+    echo "<td align=center  style='padding-top: 50px'>$data[2]</td>";
+    echo "<td align=center><img src='../FD Images/$data[3]' height='125px' width='125px' class='zoom'></td>";
+    echo "<td align=center  style='padding-top: 50px'>$data[4]</td>";
     echo "</tr>";
 }
 
