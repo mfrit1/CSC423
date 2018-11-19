@@ -62,15 +62,15 @@
    function addItem(xhttp){
      //By doing this, we take whatever strings have been echoed by the php file and put it into our current webpage. No need to load a whole new page, It edits the one we are currently on.
      document.getElementById("outsideItemTable").innerHTML = xhttp.responseText;
-
-
    
    $(document).ready(function() { 
             // bind 'myForm' and provide a simple callback function 
             // attach handler to form's submit event 
-
-
       getVendorDropdown();
+
+      getCategoryDropdown();
+
+      getDivisionDropdown();
 
 
       $('#myForm').submit(function() { 
@@ -104,26 +104,24 @@
    function buildVendorDropdown(xhttp)
     {
         document.getElementsByName("vendorDropdown")[0].innerHTML = xhttp.responseText;
-        getCategoryDropdown();
     }
 
-    function getCategoryDropdown()
+   function getDivisionDropdown()
+   {
+    loadDoc('getDivisionDropdown.php', buildDivisionDropdown)
+   }
+   function buildDivisionDropdown(xhttp)
+    {
+      document.getElementsByName("divisionDropdown")[0].innerHTML = xhttp.responseText;
+    }
+
+     function getCategoryDropdown()
     {
      loadDoc('getCategoryDropdown.php', buildCategoryDropdown)
     }
     function buildCategoryDropdown(xhttp)
     {
         document.getElementsByName("categoryDropdown")[0].innerHTML = xhttp.responseText;
-        getDivisionDropdown();
-    }
-
-    function getDivisionDropdown()
-    {
-      loadDoc('getDivisionDropdown.php', buildDivisionDropdown)
-    }
-    function buildDivisionDropdown(xhttp)
-    {
-      document.getElementsByName("divisionDropdown")[0].innerHTML = xhttp.responseText;
     }
 
 
@@ -159,7 +157,7 @@
 
     function getImage()
     {
-      document.getElementById("itemImage").src = "../FD Images/" + document.getElementById("itemImagePath").value;
+      document.getElementById("itemImage").src = "../" + document.getElementById("itemImagePath").value;
     }
 
     function setDropdowns()
@@ -435,16 +433,19 @@
   <!-- Links -->
   <ul class="navbar-nav">
     <li class="nav-item">
-      <a class="nav-link" href="../Vendor/index.html">Vendors</a>
+      <a class="nav-link" href="../Vendor">Vendors</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="../Store/index.html">Stores</a>
+      <a class="nav-link" href="../Store">Stores</a>
     </li>
     <li class="nav-item active">
       <a class="nav-link" href="index.html">Items</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="../Customer/index.html">Customers</a>
+      <a class="nav-link" href="../Customer">Customers</a>
+    </li>
+	<li class="nav-item">
+      <a class="nav-link" href="../Order">Orders</a>
     </li>
   </ul>
 </nav>
