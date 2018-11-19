@@ -17,7 +17,7 @@ while($data = mysqli_fetch_row($result))
     echo "<td align=center>$data[5]</td>";
     echo "<td align=center>$data[6]</td>";
 	 echo "<td align=center>$data[7]</td>";
-    echo "<td align=center><button type='button' class='btn btn-warning' onclick='modifyOrder($(this))' style='padding-right: 10px'><i class='fa fa-pencil'></i></button><div class='divider'></div><button type='button' class='btn btn-info'><i class='fa fa-folder-open'></i></button></td>";
+    echo "<td align=center><button type='button' class='btn btn-warning' onclick='modifyOrder($(this))' style='padding-right: 10px'><i class='fa fa-pencil'></i></button><div class='divider'></div></td>";
     echo "</tr>";
 }
 ?>
