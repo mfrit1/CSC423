@@ -17,7 +17,7 @@ while($data = mysqli_fetch_row($result))
 {   
     echo "<tr id='$data[0]' height='130px'>";
     echo "<td scope='row' style='padding-top: 50px'><b>$data[0]</b></td>";
-    echo "<td align=center  style='padding-top: 50px'>$data[1]</td>";
+    echo "<td align=center style='padding-top: 50px'>$data[1]</td>";
     echo "<td align=center style='padding-top: 50px; ma'><a>$data[2]</a></td>";
     echo "<td align=center style='padding-top: 50px'>$data[3]</td>";
     echo "<td align=center style='padding-top: 50px'>$data[4]</td>";

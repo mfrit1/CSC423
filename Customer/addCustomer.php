@@ -18,79 +18,92 @@ echo '<div class = "container">
     <form class="form-horizontal" method="post" id = "myForm" action = "Add_Customer_Submit.php"   >
       <div style="height: 25px"></div>
       <div class="form-group row">
-        <div class ="col-lg-3">
-          <label for="customerId">Customer Number</label>
-          <input type="text" class="form-control" name="customerId" id="number" placeholder="Enter Customer Number">
-        </div>
-        <div class ="col-lg-9">
-          <label for="customerDepartment">Department</label>
-          <input type="text" class="form-control" name="customerDepartment" id="customerDepartment" placeholder="Enter Department of Customer">
-        </div>
-      </div>
-      <div style="height: 25px"></div>
-      <div class="form-group row">
-        <div class ="col-lg-4">
-          <label for="customerSize">Size</label>
-          <input type="text" class="form-control" name="customerSize" id="Size" placeholder="Enter Customer Size">
-        </div>
-        <div class ="col-lg-4">
-          <label for="customerCost">Customer Cost</label>
-          <input type="text" class="form-control" name="customerCost" id="customerCost" placeholder="Enter Customer Cost">
-        </div>
-        <div class ="col-lg-4">
-          <label for="retailPrice">Retail Price</label>
-          <input type="text" class="form-control" name="retailPrice" id="retailPrice" placeholder="Enter Customer Retail Price">
-        </div>
-      </div>
-      <div style="height: 25px"></div>
-      <div class="form-group row">
-        <div class ="col-lg-12">
-          <label for="customerDescription">Description</label>
-          <input type="text" class="form-control" name="customerDescription" id="Description" placeholder="Enter Customer Description">
-        </div>
-      </div>
-      <div style="height: 25px"></div>
-      <div class="form-group row">
-        <div class ="col-lg-4">
-          <label for="divisionDropdown">Division</label>
-          <select class="form-control" name="divisionDropdown" id="divisionDropdown" selected="">
-          <option value="" selected>Select a Division</option>
-
-
-
-
-
-          </select>
-        </div>
-        <div class ="col-lg-4">
-          <label for="categoryDropdown">Category</label>
-          <select class="form-control" name="categoryDropdown" id="categoryDropdown" selected="">
-          <option value="" selected>Select a Category</option>
-
-
-
-
-          </select>
-        </div>
-        <div class ="col-lg-4">
-          <label for="vendorDropdown">Vendor</label>
-          <select class="form-control" name="vendorDropdown" id="vendorDropdown" selected="">
-          <option value="" selected>Select a Vendor</option>
-
-
-
-
-          </select>
-        </div>    
-      </div>
-      <div style="height: 25px"></div>
-      <div class="form-group row">
         <div class ="col-lg-8">
-          <label for="customerImagePath" style="padding-top: 10%">Image File</label>
-          <input type="text" class="form-control" name="customerImagePath" id="customerImagePath" placeholder="Enter Customer Image Name" onkeyup="getImage()">
+          <label for="customerName">Customer Name</label>
+          <input type="text" class="form-control" name="customerName" id="customerName" placeholder="Enter Customer Name">
+        </div>
+      </div>
+      <div style="height: 25px"></div>
+      <div class="form-group row">
+        <div class ="col-lg-4">
+          <label for="customerAddress">Address</label>
+          <input type="text" class="form-control" name="customerAddress" id="customerAddress" placeholder="Enter Address of Customer">
         </div>
         <div class ="col-lg-4">
-          <img src="" id="customerImage" class="">
+          <label for="customerCity">City</label>
+          <input type="text" class="form-control" name="customerCity" id="customerCity" placeholder="Enter City">
+        </div>
+        <div class ="col-lg-2">
+          <label for="customerState">State</label>
+          <select class="form-control" name="customerState" id="customerState" selected="">
+          <option value="" selected>Select a State</option>
+          <option value="AL">AL</option>
+          <option value="AK">AK</option>
+          <option value="AR">AR</option>  
+          <option value="AZ">AZ</option>
+          <option value="CA">CA</option>
+          <option value="CO">CO</option>
+          <option value="CT">CT</option>
+          <option value="DC">DC</option>
+          <option value="DE">DE</option>
+          <option value="FL">FL</option>
+          <option value="GA">GA</option>
+          <option value="HI">HI</option>
+          <option value="IA">IA</option>  
+          <option value="ID">ID</option>
+          <option value="IL">IL</option>
+          <option value="IN">IN</option>
+          <option value="KS">KS</option>
+          <option value="KY">KY</option>
+          <option value="LA">LA</option>
+          <option value="MA">MA</option>
+          <option value="MD">MD</option>
+          <option value="ME">ME</option>
+          <option value="MI">MI</option>
+          <option value="MN">MN</option>
+          <option value="MO">MO</option>  
+          <option value="MS">MS</option>
+          <option value="MT">MT</option>
+          <option value="NC">NC</option>  
+          <option value="NE">NE</option>
+          <option value="NH">NH</option>
+          <option value="NJ">NJ</option>
+          <option value="NM">NM</option>      
+          <option value="NV">NV</option>
+          <option value="NY">NY</option>
+          <option value="ND">ND</option>
+          <option value="OH">OH</option>
+          <option value="OK">OK</option>
+          <option value="OR">OR</option>
+          <option value="PA">PA</option>
+          <option value="RI">RI</option>
+          <option value="SC">SC</option>
+          <option value="SD">SD</option>
+          <option value="TN">TN</option>
+          <option value="TX">TX</option>
+          <option value="UT">UT</option>
+          <option value="VT">VT</option>
+          <option value="VA">VA</option>
+          <option value="WA">WA</option>
+          <option value="WI">WI</option>  
+          <option value="WV">WV</option>
+          <option value="WY">WY</option>
+          </select>
+        </div>
+        <div class ="col-lg-2">
+            <label for="customerZip">Zip</label>
+            <input type="text" class="form-control" name="customerZip" id="customerZip" placeholder="Enter Zip">
+        </div>
+      </div>
+      <div style="height: 25px"></div>
+      <div class="form-group row">
+        <div class ="col-lg-4">
+          <label for="customerDescription">Phone</label>
+          <input type="text" class="form-control" name="customerPhone" id="customerPhone" placeholder="Enter Phone">
+        </div>
+        <div class ="col-lg-8">
+          <label for="customerDescription">Email</label>
+          <input type="text" class="form-control" name="customerEmail" id="customerEmail" placeholder="Enter Email">
         </div>
       </div>
       <div style="height: 25px"></div>

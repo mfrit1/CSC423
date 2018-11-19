@@ -2,28 +2,22 @@
 
 require '../DBInfo.php';
 
-$customerId = $_POST["customerId"];
-$name = $_POST["name"];
-$address = $_POST["address"];
-$city = $_POST["city"];
-$state = $_POST["state"];
-$zip = $_POST["zip"];
-$phone = $_POST["phone"];
-$email = $_POST["email"];
+$name = $_POST["customerName"];
+$address = $_POST["customerAddress"];
+$city = $_POST["customerCity"];
+$state = $_POST["customerState"];
+$zip = $_POST["customerZip"];
+$phone = $_POST["customerPhone"];
+$email = $_POST["customerEmail"];
 
-//function test_input($data) {
- // $data = trim($data);
- // $data = stripslashes($data);
- // $data = htmlspecialchars($data);
-//  return $data;
-//}
-	$sql = "SELECT * FROM inventorycustomer WHERE (customerId='{$customerId}')";
-//echo $sql;
-	$result= $conn->query($sql);
 
-if($result->num_rows == 0)
-{
-	$sql = "INSERT INTO Customer (customerId, name, address, city, state, zip, phone, email) VALUES ('{$customerId}','{$name}','{$address}','{$city}','{$state}','{$zip}','{$phone}','{$email}')";
+	// $sql = "SELECT * FROM customer WHERE (customerId='{$customerId}')";
+
+	// $result= $conn->query($sql);
+
+// if($result->num_rows == 0)
+// {
+	$sql = "INSERT INTO Customer (name, address, city, state, zip, phone, email) VALUES ('{$name}','{$address}','{$city}','{$state}','{$zip}','{$phone}','{$email}')";
 
 	if ($conn->query($sql) === TRUE) {
     	$res="Data Inserted Successfully:";
@@ -34,12 +28,12 @@ if($result->num_rows == 0)
 	}
 
 	$conn->close();
-}
+// }
 
-else
-{
-	header("HTTP/1.0 404 Not Found");
-  	exit();
-}
+// else
+// {
+// 	header("HTTP/1.0 404 Not Found");
+//   	exit();
+// }
 
 ?>

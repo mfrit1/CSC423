@@ -3,14 +3,13 @@
 require '../DBInfo.php';
 
 $customerId = $_POST["customerId"];
-$name = $_POST["name"];
-$address = $_POST["address"];
-$city = $_POST["city"];
-$state = $_POST["state"];
-$zip = $_POST["zip"];
-$phone = $_POST["phone"];
-$email = $_POST["email"];
-$trid = $_GET['id'];
+$name = $_POST["customerName"];
+$address = $_POST["customerAddress"];
+$city = $_POST["customerCity"];
+$state = $_POST["customerState"];
+$zip = $_POST["customerZip"];
+$phone = $_POST["customerPhone"];
+$email = $_POST["customerEmail"];
 
 //function test_input($data) {
  // $data = trim($data);
@@ -26,7 +25,7 @@ $trid = $_GET['id'];
 		$result= $conn->query($sql);
 		if($result->num_rows == 0)
 		{
-			$sql = "UPDATE Customer SET customerId='{$customerId}', name='{$name}', address='{$Address}', city='{$city}', state='{$state}', zip='{$zip}', phone='{$phone}', email='{$email}' WHERE customerId=$trid";
+			$sql = "UPDATE Customer SET name='{$name}', address='{$address}', city='{$city}', state='{$state}', zip='{$zip}', phone='{$phone}', email='{$email}' WHERE customerId=$trid";
 			if ($conn->query($sql) === TRUE) {
     			$res="Data Inserted Successfully:";
 				echo json_encode($res);

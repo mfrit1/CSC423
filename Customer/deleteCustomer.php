@@ -26,79 +26,39 @@ echo '<div class = "container">
     <form class="form-horizontal" method="post" id = "myForm" action = "Delete_Customer_Submit.php?id=' .  $data[0]  .'" >
       <div style="height: 25px"></div>
       <div class="form-group row">
-        <div class ="col-lg-3">
-          <label for="customerId">Customer Number</label>
-          <input readonly type="text" class="form-control" name="customerId" id="number" value="' . $data[0] . '">
-        </div>
-        <div class ="col-lg-9">
-          <label for="customerDepartment">Department</label>
-          <input readonly type="text" class="form-control" name="customerDepartment" id="customerDepartment" value="' . $data[4] . '">
-        </div>
-      </div>
-      <div style="height: 25px"></div>
-      <div class="form-group row">
-        <div class ="col-lg-4">
-          <label for="customerSize">Size</label>
-          <input readonly type="text" class="form-control" name="customerSize" id="Size" value="' . $data[2] . '">
-        </div>
-        <div class ="col-lg-4">
-          <label for="customerCost">Customer Cost</label>
-          <input readonly type="text" class="form-control" name="customerCost" id="customerCost" value="'  . $data[6] .  '">
-        </div>
-        <div class ="col-lg-4">
-          <label for="retailPrice">Retail Price</label>
-          <input readonly type="text" class="form-control" name="retailPrice" id="retailPrice" value="' . $data[7] . '">
-        </div>
-      </div>
-      <div style="height: 25px"></div>
-      <div class="form-group row">
-        <div class ="col-lg-12">
-          <label for="customerDescription">Description</label>
-          <input readonly type="text" class="form-control" name="customerDescription" id="Description" value="' . $data[1] . '">
-        </div>
-      </div>
-      <div style="height: 25px"></div>
-      <div class="form-group row">
-        <div class ="col-lg-4">
-          <label for="divisionDropdown">Division</label>
-          <select disabled="disabled" class="form-control" name="divisionDropdown" id="' . $data[3] . '">
-          <option value="" selected>Select a Division</option>
-
-
-
-
-
-          </select>
-        </div>
-        <div class ="col-lg-4">
-          <label for="categoryDropdown">Category</label>
-          <select disabled="disabled" class="form-control" name="categoryDropdown" id="' . $data[5] . '">
-          <option value="" selected>Select a Category</option>
-
-
-
-
-          </select>
-        </div>
-        <div class ="col-lg-4">
-          <label for="vendorDropdown">Vendor</label>
-          <select disabled="disabled" class="form-control" name="vendorDropdown" id="'  . $data[9] . '">
-          <option value="" selected>Select a Vendor</option>
-
-
-
-
-          </select>
-        </div>    
-      </div>
-      <div style="height: 25px"></div>
-      <div class="form-group row">
         <div class ="col-lg-8">
-          <label for="customerImagePath" style="padding-top: 10%">Image File</label>
-          <input readonly type="text" class="form-control" name="customerImagePath" id="customerImagePath" value="' . $data[8] . '" onkeyup="getImage()">
+          <label for="customerName">Customer Name</label>
+          <input readonly type="text" class="form-control" name="customerName" id="customerName" value="' . $data[1] . '">
+        </div>
+      </div>
+      <div style="height: 25px"></div>
+      <div class="form-group row">
+        <div class ="col-lg-4">
+          <label for="customerAddress">Address</label>
+          <input readonly type="text" class="form-control" name="customerAddress" id="customerAddress" value="' . $data[2] . '">
         </div>
         <div class ="col-lg-4">
-          <img src="../FD Images/' . $data[8] . '" id="customerImage">
+          <label for="customerCity">City</label>
+          <input readonly type="text" class="form-control" name="customerCity" id="customerCity" value="' . $data[3] . '">
+        </div>
+        <div class ="col-lg-2">
+          <label for="customerState">State</label>
+          <input readonly type="text" class="form-control" name="customerState" id="customerState" value="' . $data[4] . '">
+        </div>
+        <div class ="col-lg-2">
+            <label for="customerZip">Zip</label>
+            <input readonly type="text" class="form-control" name="customerZip" id="customerZip" value="' . $data[5] . '">
+        </div>
+      </div>
+      <div style="height: 25px"></div>
+      <div class="form-group row">
+        <div class ="col-lg-4">
+          <label for="customerDescription">Phone</label>
+          <input readonly type="text" class="form-control" name="customerPhone" id="customerPhone" value="' . $data[6] . '">
+        </div>
+        <div class ="col-lg-8">
+          <label for="customerDescription">Email</label>
+          <input readonly type="text" class="form-control" name="customerEmail" id="customerEmail" value="' . $data[7] . '">
         </div>
       </div>
       <div style="height: 25px"></div>
