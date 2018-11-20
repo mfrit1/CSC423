@@ -26,14 +26,14 @@ echo '<div class = "container">
 			<div class="form-group row">
 				<div class ="col-lg-12">
 					<label for="InputVendorCode">Vendor Code</label>
-					<input type="text" class="form-control" name="InputVendorCode" id="Code" value="' . $data[1] . '">
+					<input type="text" class="form-control" name="InputVendorCode" id="Code" value="' . $data[1] . '" required>
 				</div>
 			</div>
 			<div style="height: 25px"></div>
 			<div class="form-group row">
 				<div class ="col-lg-12">
 					<label for="InputVendorName">Vendor Name</label>
-					<input type="text" class="form-control" name="InputVendorName" id="Name" value="' . $data[2] . '">
+					<input type="text" class="form-control" name="InputVendorName" id="Name" value="' . $data[2] . '" required>
 				</div>
 			</div>
 
@@ -41,18 +41,18 @@ echo '<div class = "container">
 			<div class="form-group row">
 				<div class ="col-lg-12">
 					<label for="InputVendorAddress">Vendor Address</label>
-					<input type="text" class="form-control" name="InputVendorAddress" id="Address" value="' . $data[3] . '">
+					<input type="text" class="form-control" name="InputVendorAddress" id="Address" value="' . $data[3] . '" required>
 				</div>
 			</div>
 			<div style="height: 25px"></div>
 			<div class="form-group row">
 				<div class ="col-lg-5">
 					<label for="InputVendorCity">Vendor City</label>
-					<input type="text" class="form-control" name="InputVendorCity" id="City" value="' . $data[4] . '">
+					<input type="text" class="form-control" name="InputVendorCity" id="City" value="' . $data[4] . '" required>
 				</div>
 				<div class ="col-lg-2">
 					<label for="stateSelect">Vendor State</label>
-					<select class="form-control" name="stateSelect" id="' . $data[5] . '">
+					<select class="form-control" name="stateSelect" id="' . $data[5] . '" required>
 						<option value="AL">Alabama</option>
 						<option value="AK">Alaska</option>
 						<option value="AZ">Arizona</option>
@@ -108,18 +108,18 @@ echo '<div class = "container">
 				</div>
 				<div class ="col-lg-5">
 					<label for="InputVendorZip">Vendor Zip Code</label>
-					<input type="text" class="form-control" name="InputVendorZip" id="Zip" value="' . $data[6] . '">
+					<input type="text" class="form-control" name="InputVendorZip" id="Zip" value="' . $data[6] . '" required>
 				</div>
 			</div>
 			<div style="height: 25px"></div>
 			<div class="form-group row">
 				<div class ="col-lg-6">
 					<label for="InputVendorContactName">Contact Person Name</label>
-					<input type="text" class="form-control" name="InputVendorContactName" id="PersonName" value="' . $data[8] . '">
+					<input type="text" class="form-control" name="InputVendorContactName" id="PersonName" value="' . $data[8] . '" required>
 				</div>
 				<div class ="col-lg-6">
 					<label for="InputVendorContactNumber">Contact Person Phone Number</label>
-					<input type="text" class="form-control" name="InputVendorContactNumber" id="Phone" value="' . $data[7] . '">
+					<input type="text" class="form-control" name="InputVendorContactNumber" id="Phone" value="' . $data[7] . '" required>
 				</div>
 			</div>
 			<div style="height: 25px"></div>
