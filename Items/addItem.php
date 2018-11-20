@@ -20,40 +20,40 @@ echo '<div class = "container">
       <div class="form-group row">
         <div class ="col-lg-3">
           <label for="itemId">Item Number</label>
-          <input type="text" class="form-control" name="itemId" id="number" placeholder="Enter Item Number">
+          <input type="text" class="form-control" name="itemId" id="number" placeholder="Enter Item Number" required>
         </div>
         <div class ="col-lg-9">
           <label for="itemDepartment">Department</label>
-          <input type="text" class="form-control" name="itemDepartment" id="itemDepartment" placeholder="Enter Department of Item">
+          <input type="text" class="form-control" name="itemDepartment" id="itemDepartment" placeholder="Enter Department of Item"  required>
         </div>
       </div>
       <div style="height: 25px"></div>
       <div class="form-group row">
         <div class ="col-lg-4">
           <label for="itemSize">Size</label>
-          <input type="text" class="form-control" name="itemSize" id="Size" placeholder="Enter Item Size">
+          <input type="text" class="form-control" name="itemSize" id="Size" placeholder="Enter Item Size"  required>
         </div>
         <div class ="col-lg-4">
           <label for="itemCost">Item Cost</label>
-          <input type="text" class="form-control" name="itemCost" id="itemCost" placeholder="Enter Item Cost">
+          <input type="text" class="form-control" name="itemCost" id="itemCost" placeholder="Enter Item Cost"  required>
         </div>
         <div class ="col-lg-4">
           <label for="retailPrice">Retail Price</label>
-          <input type="text" class="form-control" name="retailPrice" id="retailPrice" placeholder="Enter Item Retail Price">
+          <input type="text" class="form-control" name="retailPrice" id="retailPrice" placeholder="Enter Item Retail Price"  required>
         </div>
       </div>
       <div style="height: 25px"></div>
       <div class="form-group row">
         <div class ="col-lg-12">
           <label for="itemDescription">Description</label>
-          <input type="text" class="form-control" name="itemDescription" id="Description" placeholder="Enter Item Description">
+          <input type="text" class="form-control" name="itemDescription" id="Description" placeholder="Enter Item Description"  required>
         </div>
       </div>
       <div style="height: 25px"></div>
       <div class="form-group row">
         <div class ="col-lg-4">
           <label for="divisionDropdown">Division</label>
-          <select class="form-control" name="divisionDropdown" id="divisionDropdown" selected="">
+          <select class="form-control" name="divisionDropdown" id="divisionDropdown" selected="" required>
           <option value="" selected>Select a Division</option>
 
 
@@ -64,7 +64,7 @@ echo '<div class = "container">
         </div>
         <div class ="col-lg-4">
           <label for="categoryDropdown">Category</label>
-          <select class="form-control" name="categoryDropdown" id="categoryDropdown" selected="">
+          <select class="form-control" name="categoryDropdown" id="categoryDropdown" selected="" required>
           <option value="" selected>Select a Category</option>
 
 
@@ -74,7 +74,7 @@ echo '<div class = "container">
         </div>
         <div class ="col-lg-4">
           <label for="vendorDropdown">Vendor</label>
-          <select class="form-control" name="vendorDropdown" id="vendorDropdown" selected="">
+          <select class="form-control" name="vendorDropdown" id="vendorDropdown" selected="" required>
           <option value="" selected>Select a Vendor</option>
 
 
