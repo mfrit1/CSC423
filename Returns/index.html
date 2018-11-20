@@ -215,7 +215,7 @@
 		
 			var sel =  document.getElementById("itemDesc");
 			var text= sel.options[sel.selectedIndex].text;
-			var tr = '<tr><td name="itemDescTd">' + text + '</td><td id="Id'+itemIndex+'">' + document.getElementById("itemDesc").value + '</td><td id="Quant'+itemIndex+'">' + document.getElementById("qOrdered").value + '</td><td id="Price'+itemIndex+'">' + getPrice() + '</td><td><input type="button" class="ibtnDel btn btn-md btn-danger " onclick="deleteRow()" value="Delete"></td></tr>';
+			var tr = '<tr><td name="itemDescTd">' + text + '</td><td id="Id'+itemIndex+'">' + document.getElementById("itemDesc").value + '</td><td id="Quant'+itemIndex+'">' + document.getElementById("qReturned").value + '</td></td><td><input type="button" class="ibtnDel btn btn-md btn-danger " onclick="deleteRow()" value="Delete"></td></tr>';
 			 
 			 
 			 $('#myTable').append(tr);
