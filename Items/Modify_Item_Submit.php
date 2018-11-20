@@ -7,10 +7,10 @@ $itemDescription = mysqli_escape_string($conn, $_POST["itemDescription"]);
 $itemSize = mysqli_escape_string($conn, $_POST["itemSize"]);
 $itemCost = mysqli_escape_string($conn, $_POST["itemCost"]);
 $retailPrice = mysqli_escape_string($conn, $_POST["retailPrice"]);
-$divisionDropdown = $_POST["divisionDropdown"]);
-$categoryDropdown = $_POST["categoryDropdown"]);
-$vendorDropdown = $_POST["vendorDropdown"]);
-$itemImagePath = $_POST["itemImagePath"]);
+$divisionDropdown = $_POST["divisionDropdown"];
+$categoryDropdown = $_POST["categoryDropdown"];
+$vendorDropdown = $_POST["vendorDropdown"];
+$itemImagePath = $_POST["itemImagePath"];
 $itemDepartment = mysqli_escape_string($conn, $_POST["itemDepartment"]);
 $trid = $_GET['id'];
 
