@@ -3,11 +3,10 @@
 require '../DBInfo.php';
 
 $storeCode = $_POST["storeCode"];
-$customerCode = $_POST["customerCode"];
-$itemCode = $_POST["itemCode"];
-$totalItems = $_POST["totalItems"];
+$customerCode = $_POST["customerId"];
+$itemCode = $_POST["itemId"];
+$totalItems = $_POST["itemCount"];
 $todayDate = $_POST["date"];
-echo "<script type='text/javascript'>alert(\"WE MADE IT\");</script>";
 
 //$sql = "SELECT vendorId FROM vendor where vendorCode = '{$vendorCode}'";
 //$result= $conn->query($sql);
