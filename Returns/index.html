@@ -24,7 +24,10 @@
 	var alertText= '';
 	var createReturn = true;
 	  
-      $(document).ready(loadDoc('getReturns.php', getReturns))
+      //$(document).ready(loadDoc('getReturns.php', getReturns))
+
+      $(document).ready(loadDoc('getVendorName.php', getVendorName));
+	  $(document).ready(loadDoc('getStoreName.php', getStoreName));
 
       function loadDoc(url, cFunction, params) {
 	 // params = params || 0;
@@ -65,16 +68,14 @@
     }
 	
 	
-	function createReturnStart(){
-	 loadDoc('createNewReturn.php', getNewReturnPHP);
-      //By doing this, we take whatever strings have been echoed by the php file and put it into our current webpage. No need to load a whole new page, It edits the one we are currently on.
-    }
+	// function createReturnStart(){
+	//  loadDoc('createNewReturn.php', getNewReturnPHP);
+ //      //By doing this, we take whatever strings have been echoed by the php file and put it into our current webpage. No need to load a whole new page, It edits the one we are currently on.
+ //    }
 	
 	function getNewReturnPHP(xhttp){
       //By doing this, we take whatever strings have been echoed by the php file and put it into our current webpage. No need to load a whole new page, It edits the one we are currently on.
-      document.getElementById("outsideReturnTable").innerHTML = xhttp.responseText;
-	  $(document).ready(loadDoc('getVendorName.php', getVendorName));
-	  $(document).ready(loadDoc('getStoreName.php', getStoreName));
+      //document.getElementById("outsideReturnTable").innerHTML = xhttp.responseText;
 	}
 	
 	 function getVendorName(xhttp){
