@@ -20,14 +20,14 @@ echo '<div class = "container">
 			<div class="form-group row">
 				<div class ="col-lg-12">
 					<label for="InputVendorCode">Vendor Code</label>
-					<input type="text" class="form-control" name="InputVendorCode" id="Code" placeholder="Enter Vendor Code">
+					<input type="text" class="form-control" name="InputVendorCode" id="Code" placeholder="Enter Vendor Code" required>
 				</div>
 			</div>
 			<div style="height: 25px"></div>
 			<div class="form-group row">
 				<div class ="col-lg-12">
 					<label for="InputVendorName">Vendor Name</label>
-					<input type="text" class="form-control" name="InputVendorName" id="Name" placeholder="Enter Vendor Name">
+					<input type="text" class="form-control" name="InputVendorName" id="Name" placeholder="Enter Vendor Name" required>
 				</div>
 			</div>
 
@@ -35,18 +35,18 @@ echo '<div class = "container">
 			<div class="form-group row">
 				<div class ="col-lg-12">
 					<label for="InputVendorAddress">Vendor Address</label>
-					<input type="text" class="form-control" name="InputVendorAddress" id="Address" placeholder="Enter Vendor Address">
+					<input type="text" class="form-control" name="InputVendorAddress" id="Address" placeholder="Enter Vendor Address" required>
 				</div>
 			</div>
 			<div style="height: 25px"></div>
 			<div class="form-group row">
 				<div class ="col-lg-5">
 					<label for="InputVendorCity">Vendor City</label>
-					<input type="text" class="form-control" name="InputVendorCity" id="City" placeholder="Enter Vendor City">
+					<input type="text" class="form-control" name="InputVendorCity" id="City" placeholder="Enter Vendor City" required>
 				</div>
 				<div class ="col-lg-2">
 					<label for="stateSelect">Vendor State</label>
-					<select class="form-control" name="stateSelect" id="State" selected="New York">
+					<select class="form-control" name="stateSelect" id="State" selected="New York" required>
 						<option value="AL">Alabama</option>
 						<option value="AK">Alaska</option>
 						<option value="AZ">Arizona</option>
@@ -102,18 +102,18 @@ echo '<div class = "container">
 				</div>
 				<div class ="col-lg-5">
 					<label for="InputVendorZip">Vendor Zip Code</label>
-					<input type="text" class="form-control" name="InputVendorZip" id="Zip" placeholder="Enter Vendor Zip Code">
+					<input type="text" class="form-control" name="InputVendorZip" id="Zip" placeholder="Enter Vendor Zip Code" required>
 				</div>
 			</div>
 			<div style="height: 25px"></div>
 			<div class="form-group row">
 				<div class ="col-lg-6">
 					<label for="InputVendorContactName">Contact Person Name</label>
-					<input type="text" class="form-control" name="InputVendorContactName" id="PersonName" placeholder="Enter Vendor Contact Name">
+					<input type="text" class="form-control" name="InputVendorContactName" id="PersonName" placeholder="Enter Vendor Contact Name" required>
 				</div>
 				<div class ="col-lg-6">
 					<label for="InputVendorContactNumber">Contact Person Phone Number</label>
-					<input type="text" class="form-control" name="InputVendorContactNumber" id="Phone" placeholder="Enter Vendor Contact Number">
+					<input type="text" class="form-control" name="InputVendorContactNumber" id="Phone" placeholder="Enter Vendor Contact Number" required>
 				</div>
 			</div>
 			<div style="height: 25px"></div>
