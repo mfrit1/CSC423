@@ -15,20 +15,13 @@
 
     <script type="text/javascript">
 	
-	
-	
-	var itemIds = [];
-	var itemIndex = 0;
-	var itemTotal = 0;
     var fieldCheck = true;
 	var alertText= '';
 	var createOrder = true;
-	  
-    //$(document).ready(loadDoc('createNewOrder.php', getOrders))
 
     function loadDoc(url, cFunction, params) {
-	 // params = params || 0;
-    //Creates an object to run php file
+		// params = params || 0;
+		//Creates an object to run php file
 		var xhttp;
 		xhttp=new XMLHttpRequest();
 		//HERE is when the program actually switches over to the php and runs the file.
@@ -48,18 +41,14 @@
       };
     }
 	
-	function getOrders(xhttp){
-      alert("WORK MOTHA FUCKA");
-    }
-	
 	function createOrderStart(){
-	 loadDoc('createNewOrder.php', getNewOrderPHP);
-      //By doing this, we take whatever strings have been echoed by the php file and put it into our current webpage. No need to load a whole new page, It edits the one we are currently on.
+		loadDoc('createNewOrder.php', getNewOrderPHP);
+		//By doing this, we take whatever strings have been echoed by the php file and put it into our current webpage. No need to load a whole new page, It edits the one we are currently on.
     }
 	
 	function getNewOrderPHP(xhttp){
-      document.getElementById("outsideOrderTable").innerHTML = xhttp.responseText;
-	  $(document).ready(loadDoc('getStoreName.php', getStoreName));
+		document.getElementById("outsideOrderTable").innerHTML = xhttp.responseText;
+		$(document).ready(loadDoc('getStoreName.php', getStoreName));
 	}
 	
 	 function setFields(){
@@ -122,27 +111,6 @@
 	  setItemId();
     }
 	
-	
-//    function filterTable() {
-//      var input, filter, table, tr, td, i;
-//     input = document.getElementById("searchBar");
-//      filter = input.value;
-//      console.log(filter);
-//     table = document.getElementById("orderTable");
-//      tr = table.getElementsByTagName("tr");
- //     for (i = 0; i < tr.length; i++) {
-//        td = tr[i].getElementsByTagName("td")[0];
-//        if (td) {
-//         console.log(td.innerHTML)
-//          if (td.innerHTML.indexOf(filter) > -1) {
-//            tr[i].style.display = "";
-//          } else {
-//            tr[i].style.display = "none";
-//          }
-//        }       
-//      }
-//    }
-	
 	function setStoreCode() {
 		document.getElementById("storeCode").value = document.getElementById("storeName").value;
 	}
@@ -163,16 +131,6 @@
 		
 			var sel =  document.getElementById("itemDesc");
 			var text= sel.options[sel.selectedIndex].text;
-			//var tr = '<tr><td name="itemDescTd">' + text + '</td><td id="Id'+itemIndex+'">' + document.getElementById("itemDesc").value + '</td><td id="Quant'+itemIndex+'">' + document.getElementById("qOrdered").value + '</td><td id="Price'+itemIndex+'">' + getPrice() + '</td><td><input type="button" class="ibtnDel btn btn-md btn-danger " onclick="deleteRow()" value="Delete"></td></tr>';
-			 
-			 
-			//$('#myTable').append(tr);
-			 
-			 itemIndex++;
-			 itemTotal++;
-			 itemIds.push(document.getElementById("itemDesc").value);
-			 
-			
 			 
 			 document.getElementById("qOrdered").value = '';
 			 document.getElementById("itemId").value = '';
@@ -185,13 +143,6 @@
 				}
 			}
 	}
-	
-//	function getPrice(){
-//		var price = document.getElementById(document.getElementById("itemDesc").value).getAttribute("price");
-//		price = price * document.getElementById("qOrdered").value;
-//		price = price.toFixed(2);
-//		return "$" + price;
-//	}
 	
 	function checkQuantityOrdered(){
 		var elemPattern = /^\d{1,10}$/;
@@ -216,16 +167,6 @@
 			return true;
 	}
 	
-//	function deleteRow() {
-     // event.target will be the input element.
-//		var td = event.target.parentNode; 
-//		var tr = td.parentNode; // the row to be removed
-//		tr.parentNode.removeChild(tr);
-//		itemTotal--;
-//		getItemIds();
-//		calculateTotalPrice();
-//	}
-	
 	function getItemIds(){
 		var i = 0;
 		itemIds = [];
@@ -237,44 +178,6 @@
 			i++;
 		}
 	}
-
-//	function checkForTableDuplicates(){
-//		for(var i = 0; i < itemTotal; i++)
-//		{	
-//			if(itemIds[i] === document.getElementById("itemDesc").value)
-//			{
-//				alertText = alertText.concat("\nThis item is already in your order!");
-//				return false;
-//			}
-//		}
-//		return true;
-//	}
-
-//	function turnTableToArray(){
-//		var tableData = [];
-//		var i = 0;
-//		var newIndex = 1;
-//		while(i < itemIndex){
-//			var test = document.getElementById("Id"+i);
-//			if(test){
-//				tableData.push("ID" + newIndex + "=" + document.getElementById("Id"+i).innerHTML + "&" + "Quant" + newIndex + "=" + document.getElementById("Quant"+i).innerHTML + "&");
-//				newIndex++;
-//			}
-//			i++;
-//		}
-//		
-//		return tableToString(tableData);
-//	}
-
-//    function tableToString(tableData){
-//		var tableString = '';
-//		for(var i = 0; i < itemTotal; i++)
-//		{	
-//			tableString = tableString + tableData[i];
-//		}
-//		tableString = tableString.substring(0,tableString.length - 1);
-//		return tableString;
-//	}
 	
 	function getTodayDate()
 	{
@@ -283,45 +186,29 @@
 		var mm = today.getMonth()+1; //January is 0!
 		var yyyy = today.getFullYear();
 
-		if(dd<10) {
-			dd = '0'+dd
-		} 
-
-		if(mm<10) {
-			mm = '0'+mm
-		} 
-
+		if(dd<10) { dd = '0'+dd } 
+		if(mm<10) { mm = '0'+mm } 
+		
 		today = mm + '/' + dd + '/' + yyyy;
-		alert("Today is " + today);
 		return today;
 	}
 	
 	function sendToPHP(){
 		if(checkInputs())
 		{
-		
 			var storeCode = "storeCode=" + document.getElementById("storeCode").value;
 			var customerCode = "customerId=" + document.getElementById("customerId").value; 
 			var itemCode = "itemId=" + document.getElementById("itemId").value; 
 			var totalItems = "itemCount=" + document.getElementById("qOrdered").value;
 			var todayDate = "date=" + getTodayDate();
 			var send = storeCode + "&" + customerCode + "&" + itemCode + "&" + totalItems + "&" + todayDate;
-			//+ "&" + turnTableToArray();
-			alert(" " + send);
 			$(document).ready(loadDoc('submitOrder.php', endMessage, send));
 		}
-		else if(checkInputs() && !createOrder)
-		{
-			var orderId = "orderId=" + document.getElementById("getIndexFromPhp").getAttribute("orderId");
-			var vendorCode = "vendorCode=" + document.getElementById("vendorCode").value; 
-			var storeCode = "storeCode=" + document.getElementById("storeCode").value;
-			var totalIds = "idCount=" + itemTotal;
-			var todayDate = "date=" + document.getElementById("getIndexFromPhp").getAttribute("dateOfTheOrder");
-			var send = orderId + "&" + vendorCode + "&" + storeCode + "&" + totalIds + "&" + todayDate + "&" + turnTableToArray();
-			$(document).ready(loadDoc('submitOrder.php', endMessage, send));
 		
-		}
-		
+	}
+	
+	function checkInStock() {
+		var numOrdered = "numOfItems=" + document.getElementById().value;
 	}
 
 	function endMessage(xhttp){

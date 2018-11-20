@@ -38,7 +38,7 @@ echo '<div class = "container">
 				</div>
 				<div class ="col-lg-5">
 					<label for="quanitiyOrdered">Quantity Purchased</label>
-					<input type="text" class="form-control" name="quanitiyOrdered" id="qOrdered" placeholder="Enter Item quantity">
+					<input type="text" class="form-control" name="quanitiyOrdered" id="qOrdered" placeholder="Enter Item quantity" onchange="checkInStock()">
 				</div>
 			</div>
 			<div style="height: 25px"></div>
