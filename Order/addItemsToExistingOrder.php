@@ -14,12 +14,12 @@ $result= $conn->query($sql);
 
 $data = mysqli_fetch_row($result);
 
-$orderId = $data[0];
-$vendorCode = $data[1];
-$vendorName = $data[2];
-$storeCode = $data[3];
-$storeName = $data[4];
-$dateOfOrder = $data[5];
+$orderId = htmlspecialchars($data[0]);
+$vendorCode = htmlspecialchars($data[1]);
+$vendorName = htmlspecialchars($data[2]);
+$storeCode = htmlspecialchars($data[3]);
+$storeName = htmlspecialchars($data[4]);
+$dateOfOrder = htmlspecialchars($data[5]);
 
 $sql = "SELECT inventoryitem.itemId, inventoryitem.description, inventoryitem.itemCost FROM inventoryitem, vendor where ((vendor.vendorCode='{$vendorCode}') AND (inventoryitem.vendorId = vendor.vendorId) AND (inventoryitem.status = 'Active'))";
 
@@ -32,7 +32,10 @@ $htmlString = "";
 //As long as there is another row to be processed, do the following loop. This adds all returned DB records to the table.
 while($data = mysqli_fetch_row($result))
 {   
-    $htmlString = $htmlString."<option value='$data[0]' id='$data[0]' price='$data[2]'>$data[1]</option>";
+	$id = htmlspecialchars($data[0]);
+	$price = htmlspecialchars($data[2]);
+	$value = htmlspecialchars($data[1]);
+    $htmlString = $htmlString."<option value='$id' id='$id' price='$price'>$value</option>";
 }
 
 
@@ -48,7 +51,7 @@ $itemIndex = 0;
 
 while($data = mysqli_fetch_row($result))
 {   
-    $htmlString2 = $htmlString2.'<tr><td name="itemDescTd">'.$data[2].'</td><td id="Id'.$itemIndex.'">'.$data[1].'</td><td id="Quant'.$itemIndex.'">'.$data[3].'</td><td id="Price'.$itemIndex.'">$'.($data[4]*$data[3]).'</td><td><input type="button" class="ibtnDel btn btn-md btn-danger " onclick="deleteRow()" value="Delete"></td></tr>';
+    $htmlString2 = $htmlString2.'<tr><td name="itemDescTd">'.htmlspecialchars($data[2]).'</td><td id="Id'.$itemIndex.'">'.htmlspecialchars($data[1]).'</td><td id="Quant'.$itemIndex.'">'.htmlspecialchars($data[3]).'</td><td id="Price'.$itemIndex.'">$'.htmlspecialchars(($data[4]*$data[3])).'</td><td><input type="button" class="ibtnDel btn btn-md btn-danger " onclick="deleteRow()" value="Delete"></td></tr>';
 	$itemIndex++; 
 }
 

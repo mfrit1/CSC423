@@ -14,7 +14,10 @@ echo '<option value="" disabled selected hidden>Stores...</option>"';
 //As long as there is another row to be processed, do the following loop. This adds all returned DB records to the table.
 while($data = mysqli_fetch_row($result))
 {   
-    echo "<option value='$data[0]'>$data[1]</option>";
+	$field0 = htmlspecialchars($data[0]);
+	$field1 = htmlspecialchars($data[1]);
+    echo "<option value='$field0'>$field1</option>";
 }
 
+$conn->close();
 ?>

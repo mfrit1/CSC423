@@ -2,11 +2,11 @@
 
 require '../DBInfo.php';
 
-$orderId = $_POST["orderId"];
-$vendorCode = $_POST["vendorCode"];
-$storeCode = $_POST["storeCode"];
-$totalIds = $_POST["idCount"];
-$todayDate = $_POST["date"];
+$orderId = mysqli_escape_string($conn, $_POST["orderId"]);
+$vendorCode = mysqli_escape_string($conn, $_POST["vendorCode"]);
+$storeCode = mysqli_escape_string($conn, $_POST["storeCode"]);
+$totalIds = mysqli_escape_string($conn, $_POST["idCount"]);
+$todayDate = mysqli_escape_string($conn, $_POST["date"]);
 
 
 if(isset($_POST["orderId"]))
@@ -34,12 +34,12 @@ else{
 	$sql = "SELECT vendorId FROM vendor where vendorCode = '{$vendorCode}'";
 	$result= $conn->query($sql);
 	$data = mysqli_fetch_row($result);
-	$vendorId = $data[0];
+	$vendorId = mysqli_escape_string($conn, $data[0]);
 
 	$sql = "SELECT storeId FROM retailstore where storeCode = '{$storeCode}'";
 	$result= $conn->query($sql);
 	$data = mysqli_fetch_row($result);
-	$storeId = $data[0];
+	$storeId = mysqli_escape_string($conn, $data[0]);
 
 
 
@@ -56,7 +56,7 @@ else{
 	$sql = "SELECT MAX(orderId) FROM orders";
 	$result= $conn->query($sql);
 	$data = mysqli_fetch_row($result);
-	$orderId = $data[0];
+	$orderId = mysqli_escape_string($conn, $data[0]);
 
 	for($i = 1; $i <= $totalIds; $i++){
 		$item = $_POST["ID" . $i];

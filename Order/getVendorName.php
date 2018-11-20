@@ -16,7 +16,10 @@ echo '<option value="" disabled selected hidden>Vendors...</option>"';
 
 while($data = mysqli_fetch_row($result))
 {   
-    echo "<option value='$data[0]'>$data[1]</option>";
+	$value = htmlspecialchars($data[0]);
+	$field = htmlspecialchars($data[1]);
+    echo "<option value='$value'>$field</option>";
 }
 
+$conn->close();
 ?>

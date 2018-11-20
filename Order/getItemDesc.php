@@ -3,7 +3,7 @@
 //Sets the database connection. This file must have your own DB information inside of it.
 require '../DBInfo.php';
 
-$vendorCode = $_POST['vendorCode'];
+$vendorCode =  mysqli_escape_string($conn, $_POST['vendorCode']);
 
 
 //SQL statement to get the record.
@@ -18,9 +18,12 @@ echo '<option value="" disabled selected hidden>Items...</option>"';
 //As long as there is another row to be processed, do the following loop. This adds all returned DB records to the table.
 while($data = mysqli_fetch_row($result))
 {   
-    echo "<option value='$data[0]' id='$data[0]' price='$data[2]'>$data[1]</option>";
+	$id = htmlspecialchars($data[0]);
+	$price = htmlspecialchars($data[2]);
+	$value = htmlspecialchars($data[1]);
+    echo "<option value='$id' id='$id' price='$price'>$value</option>";
 }
 
-?>
+$conn->close();
 
 ?>
