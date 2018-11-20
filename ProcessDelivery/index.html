@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Nanno's Foods</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../style.css">
+	
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="http://malsup.github.com/jquery.form.js"></script>
+	<script type="text/javascript" src="../Scripts.js"></script>  	
+	<script type="text/javascript" src="./processDelivery.js"></script>
+
+  </head>
+
+
+  <body style="background-color: rgb(255, 253, 239)">
+  	
+<nav class="navbar navbar-expand-sm navbar-dark" style="background-color: black">
+  <!-- Brand -->
+  <a class="navbar-brand" href="../index.html">Nanno's Foods</a>
+
+  <!-- Links -->
+  <ul class="navbar-nav">
+    <li class="nav-item ">
+      <a class="nav-link" href="../Vendor">Vendors</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../Store">Stores</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../Items">Items</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../Customers">Customers</a>
+    </li>
+	<li class="nav-item" >
+      <a class="nav-link" href="../Order">Orders</a>
+    </li>
+    <li class="nav-item" >
+      <a class="nav-link" href="../Returns">Returns</a>
+    </li>
+    <li class="nav-item active" >
+      <a class="nav-link" href="../processDelivery">Process Delivery</a>
+    </li>
+  </ul>
+</nav>
+	
+  	<div class="container-fluid" id="mainDiv">
+
+    	<div class="row" style="padding-top: 50px">
+  			<div class="col-lg-12">
+  				<div style="text-align: center">
+  					<div class="container">
+						<div class="page-header">
+							<h1>Process a Delivery</h1>      
+						</div>
+						<hr>  
+					</div>
+  				</div>
+  			</div>
+  		</div>
+
+  		<div class="row" id = "outsideMainContainer">
+		<div class="col-lg-12" style="text-align: center">
+          <div style="text-align: center" >
+            <form class="form-horizontal" action="getDelivery.php">
+            	<div style="height: 25px"></div>
+            	<div class="form-group-row">
+	            	<label for="orderNumber">Order number:</label>
+	            	<input type="text" id="orderNumber">
+            	</div>
+            	<div style="height: 25px"></div>
+            	<div class="form-group-row">
+            		<div class="col-lg-2" style="margin:auto;display:block">
+	            		<button type="button" name="button" onclick="createReturnStart()" class="btn btn-primary btn-lg btn-block spacing">Process Delivery</button>
+            		</div>
+            	</div>
+            </form>
+          </div>
+  		</div>
+  		</div>
+
+  </div>
+
+  </body>
+
+</html>
