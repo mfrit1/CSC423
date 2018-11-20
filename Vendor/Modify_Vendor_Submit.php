@@ -4,14 +4,14 @@ require '../DBInfo.php';
 
 $trid = $_GET['id'];
 
-$vendorCode = $_POST["InputVendorCode"];
-$vendorName = $_POST["InputVendorName"];
-$address = $_POST["InputVendorAddress"];
-$city = $_POST["InputVendorCity"];
+$vendorCode = mysqli_escape_string($conn, $_POST["InputVendorCode"]);
+$vendorName = mysqli_escape_string($conn, $_POST["InputVendorName"]);
+$address = mysqli_escape_string($conn, $_POST["InputVendorAddress"]);
+$city = mysqli_escape_string($conn, $_POST["InputVendorCity"]);
 $state = $_POST["stateSelect"];
-$zip = $_POST["InputVendorZip"];
-$phone = $_POST["InputVendorContactNumber"];
-$contactPersonName = $_POST["InputVendorContactName"];
+$zip = mysqli_escape_string($conn, $_POST["InputVendorZip"]);
+$phone = mysqli_escape_string($conn, $_POST["InputVendorContactNumber"]);
+$contactPersonName = mysqli_escape_string($conn, $_POST["InputVendorContactName"]);
 
 //function test_input($data) {
  // $data = trim($data);
