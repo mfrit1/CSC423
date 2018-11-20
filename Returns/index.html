@@ -454,40 +454,97 @@
 
   		<div class="row" id = "outsideReturnTable">
   		<!-- <div class="col-lg-1"></div> -->
-		<div class="col-lg-12" style="text-align: center">
-          <div style="text-align: center" >
-            <table class="table table-bordered" style="max-width: 80% " align="center" >
-              <thead class="thead-dark">
-                <tr>
-                  <th colspan="5">
-                    <form class="form-inline my-2 my-lg-0">
-                      <input class="form-control mr-sm-2" type="search" placeholder="Search by Store ID" aria-label="Search" id="searchBar" onkeyup="filterTable()">
-                      <button type="button" class="btn btn-primary btn-lg">Search</button>
-                    </form>
-                  </th>
-                  <th colspan="5">
-                    <form class="form-inline my-2 my-lg-0" style="float: right;">
-                    <button type="button" class="btn btn-success" onclick="createReturnStart();">Process a Return</button>
-                  </form>
-                  </th>
-                </tr>
-              </thead>
-              <thead class="thead-dark">
-                <tr>
-				   <th scope="col">Return ID</th>
-                  <th scope="col">Vendor Code</th>
-				  <th scope="col">Vendor Name</th>
-                  <th scope="col">Store Code</th>
-				  <th scope="col">Store Name</th>
-                  <th scope="col">Item Description</th>
-                  <th scope="col">Date Fulfilled</th>
-                </tr>
-              </thead>
-              <tbody id = "returnTable" style="background-color: white;">
-              </tbody>
-            </table>
+		<div class = "container">
+		<div class="row">
+			<div class ="col-lg-12">
+				<h2 align="left">PROCESS A RETURN</h2>
+			</div>
+		</div>
+		<form class="form-horizontal">
+			<div style="height: 25px"></div>
+			<div class="form-group row">
+			<div class ="col-lg-2">
+					<label for="vendorSelect">Vendor Name</label>
+					<select class="form-control" name="vendorSelect" id="vendorName"  onchange="setVendorCode()">
+						
+					</select>
+				</div>
 
-          </div>
+				
+				<div class ="col-lg-6">
+					<label for="InputVendorCode">Vendor Code</label>
+					<input type="text" class="form-control" name="InputVendorCode" id="vendorCode" onchange="setVendorName()" placeholder="Enter Vendor Code">
+				</div>
+				<div class ="col-lg-2">
+					<label for="button">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+					<button type="button" class="btn btn-info" name="button" onclick = "setFields()">Lock/Unlock Vendor</button>
+				</div>
+			</div>
+			<div style="height: 25px"></div>
+			<div class="form-group row">
+			<div class ="col-lg-2">
+					<label for="storeSelect">Store Name</label>
+					<select class="form-control" name="storeSelect" id="storeName" onchange="setStoreCode()" disabled>
+						
+					</select>
+				</div>
+				<div class ="col-lg-6">
+					<label for="InputStoreCode">Store Code</label>
+					<input type="text" class="form-control" name="InputStoreCode" id="storeCode" onchange="setStoreName()" placeholder="Enter Store Code" disabled>
+				</div>
+			</div>
+			<div style="height: 25px"></div>
+			<div class="form-group row">
+			<div class ="col-lg-2">
+					<label for="itemDescription">Item Description</label>
+					<select class="form-control" name="itemDescription" id="itemDesc" onchange="setItemId()" disabled>
+						<option value="" disabled selected hidden>Items...</option>"
+					</select>
+				</div>
+			
+				<div class ="col-lg-6">
+					<label for="itemId">Item Id</label>
+					<input type="text" class="form-control" name="itemId" id="itemId" onchange="setItemDesc()" placeholder="Enter Item ID" disabled>
+				</div>
+			</div>
+			<div style="height: 25px"></div>
+			<div class="form-group row">
+				<div class ="col-lg-5">
+					<label for="quanitiyReturned">Quantity Returned</label>
+					<input type="text" class="form-control" name="quantityReturned" id="qReturned" placeholder="Enter return quantity" disabled>
+				</div>
+				
+				<div class ="col-lg-2">
+					<label for="button">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+					<button type="button" class="btn btn-success" name="button" onclick = "addItem()">Process Return</button>
+				</div>
+			</div>
+			<div style="height: 25px"></div>
+			<div class="form-group row">
+				<div class ="col-lg-8">
+					<div class = "container" style="height: 200px; overflow-y: auto;">
+						<table class="table" id="myTable" style="table-layout: fixed;  word-wrap: break-word; width: 100%;">
+							<thead class="bg-secondary">
+								<tr>
+									<th scope="col">Item Desc</th>
+									<th scope="col">Item ID</th>
+									<th scope="col">Quantity</th>
+									<th scope="col">Action</th>
+								</tr>
+							</thead>
+						<tbody  id="tBody" style="background-color: white;">
+						
+							
+						</tbody>
+						</table>
+					</div>
+				</div>
+				<div class ="col-lg-4">
+					<button  type="button" onclick="sendToPHP()" name="button" class="btn btn-primary btn-lg btn-block spacing">Submit Return Information</button>
+				</div>
+			</div>
+		</form>
+	</div>
   		<!-- <div class="col-lg-1"></div> -->
   		</div>
   		</div>
