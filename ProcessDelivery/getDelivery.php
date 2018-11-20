@@ -11,7 +11,8 @@ $sql = "SELECT inventoryitem.description, orderDetail.quantityOrdered FROM order
 $result = $conn->query($sql);
 
 //set up the table
-echo '<div class = "container" style="height: 400px; overflow-y: auto;">
+echo '  <div class="col-lg-12" style="text-align: center">
+        <div class = "container" style="height: 400px; overflow-y: auto;">
                         <table class="table" id="myTable" style="table-layout: fixed;  word-wrap: break-word; width: 100%;">
                             <thead class="bg-secondary">
                                 <tr>
@@ -32,6 +33,11 @@ while($data = mysqli_fetch_row($result))
 
 echo '</tbody>
         </table>
+    </div>
+    
+    <div class="col-lg-2" style="margin:auto;display:block">
+    <button type="button" name="button" onclick="" class="btn btn-primary btn-lg btn-block spacing">Confirm Delivery</button>
+    </div>
     </div>';
 ?>
 
