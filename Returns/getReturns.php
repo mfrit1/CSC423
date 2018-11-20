@@ -2,7 +2,7 @@
 //Sets the database connection. This file must have your own DB information inside of it.
 require '../DBInfo.php';
 //SQL statement to get the record.
-$sql = "SELECT returntovendor.returnToVendorId, vendor.vendorCode, vendor.vendorName, retailstore.storeCode, retailstore.storeName, returntovendor.dateTimeOfReturn FROM returntovendor, vendor, retailstore WHERE ((retuntovendor.vendorId = vendor.vendorId) AND (returntovendor.storeId = retailstore.storeId)) ORDER BY returntovendor.returntovendorId DESC";
+$sql = "SELECT returntovendor.returnToVendorId, vendor.vendorCode, vendor.vendorName, retailstore.storeCode, retailstore.storeName, returntovendor.dateTimeOfReturn FROM returntovendor, vendor, retailstore WHERE ((returntovendor.vendorId = vendor.vendorId) AND (returntovendor.storeId = retailstore.storeId)) ORDER BY returntovendor.returntovendorId DESC";
 //Run the SQL statement and store the returned values in result.
 $result= $conn->query($sql);
 //As long as there is another row to be processed, do the following loop. This adds all returned DB records to the table.
