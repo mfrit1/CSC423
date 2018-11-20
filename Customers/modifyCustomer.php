@@ -23,27 +23,27 @@ echo '<div class = "container">
         
       </div>
     </div>
-    <form class="form-horizontal" method="post" id="myForm" action="Modify_Customer_Submit.php?id=' .  $data[0]  .'" >
+    <form class="form-horizontal" method="post" id="myForm" action="Modify_Customer_Submit.php?id=' .  $data[0]  .'" required>
       <div style="height: 25px"></div>
       <div class="form-group row">
         <div class ="col-lg-8">
           <label for="customerName">Customer Name</label>
-          <input type="text" class="form-control" name="customerName" id="customerName" value="' . $data[1] . '">
+          <input type="text" class="form-control" name="customerName" id="customerName" value="' . $data[1] . '" required>
         </div>
       </div>
       <div style="height: 25px"></div>
       <div class="form-group row">
         <div class ="col-lg-4">
           <label for="customerAddress">Address</label>
-          <input type="text" class="form-control" name="customerAddress" id="customerAddress" value="' . $data[2] . '">
+          <input type="text" class="form-control" name="customerAddress" id="customerAddress" value="' . $data[2] . '" required>
         </div>
         <div class ="col-lg-4">
           <label for="customerCity">City</label>
-          <input type="text" class="form-control" name="customerCity" id="customerCity" value="' . $data[3] . '">
+          <input type="text" class="form-control" name="customerCity" id="customerCity" value="' . $data[3] . '" required>
         </div>
         <div class ="col-lg-2">
           <label for="customerState">State</label>
-          <select class="form-control" name="customerState" id="'. $data[4] .'" selected="">
+          <select class="form-control" name="customerState" id="'. $data[4] .'" selected="" required>
           <option value="AL">AL</option>
           <option value="AK">AK</option>
           <option value="AR">AR</option>  
@@ -99,18 +99,18 @@ echo '<div class = "container">
         </div>
         <div class ="col-lg-2">
             <label for="customerZip">Zip</label>
-            <input type="text" class="form-control" name="customerZip" id="customerZip" value="' . $data[5] . '">
+            <input type="text" class="form-control" name="customerZip" id="customerZip" value="' . $data[5] . '" required>
         </div>
       </div>
       <div style="height: 25px"></div>
       <div class="form-group row">
         <div class ="col-lg-4">
           <label for="customerDescription">Phone</label>
-          <input type="text" class="form-control" name="customerPhone" id="customerPhone" value="' . $data[6] . '">
+          <input type="text" class="form-control" name="customerPhone" id="customerPhone" value="' . $data[6] . '" required>
         </div>
         <div class ="col-lg-8">
           <label for="customerDescription">Email</label>
-          <input type="text" class="form-control" name="customerEmail" id="customerEmail" value="' . $data[7] . '">
+          <input type="text" class="form-control" name="customerEmail" id="customerEmail" value="' . $data[7] . '" required>
         </div>
       </div>
       <div style="height: 25px"></div>
