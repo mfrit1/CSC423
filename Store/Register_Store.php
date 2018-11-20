@@ -20,14 +20,14 @@ echo '<div class = "container">
 			<div class="form-group row">
 				<div class ="col-lg-12">
 					<label for="InputStoreCode">Store Code</label>
-					<input type="text" class="form-control" name="InputStoreCode" id="Code" placeholder="Enter Store Code">
+					<input type="text" class="form-control" name="InputStoreCode" id="Code" placeholder="Enter Store Code" required>
 				</div>
 			</div>
 			<div style="height: 25px"></div>
 			<div class="form-group row">
 				<div class ="col-lg-12">
 					<label for="InputStoreName">Store Name</label>
-					<input type="text" class="form-control" name="InputStoreName" id="Name" placeholder="Enter Store Name">
+					<input type="text" class="form-control" name="InputStoreName" id="Name" placeholder="Enter Store Name"  required>
 				</div>
 			</div>
 
@@ -35,18 +35,18 @@ echo '<div class = "container">
 			<div class="form-group row">
 				<div class ="col-lg-12">
 					<label for="InputStoreAddress">Store Address</label>
-					<input type="text" class="form-control" name="InputStoreAddress" id="Address" placeholder="Enter Store Address">
+					<input type="text" class="form-control" name="InputStoreAddress" id="Address" placeholder="Enter Store Address"  required>
 				</div>
 			</div>
 			<div style="height: 25px"></div>
 			<div class="form-group row">
 				<div class ="col-lg-5">
 					<label for="InputStoreCity">Store City</label>
-					<input type="text" class="form-control" name="InputStoreCity" id="City" placeholder="Enter Store City">
+					<input type="text" class="form-control" name="InputStoreCity" id="City" placeholder="Enter Store City"  required>
 				</div>
 				<div class ="col-lg-2">
 					<label for="stateSelect">Store State</label>
-					<select class="form-control" name="stateSelect" id="State" selected="New York">
+					<select class="form-control" name="stateSelect" id="State" selected="New York"  required>
 						<option value="AL">Alabama</option>
 						<option value="AK">Alaska</option>
 						<option value="AZ">Arizona</option>
@@ -102,18 +102,18 @@ echo '<div class = "container">
 				</div>
 				<div class ="col-lg-5">
 					<label for="InputStoreZip">Store Zip Code</label>
-					<input type="text" class="form-control" name="InputStoreZip" id="Zip" placeholder="Enter Store Zip Code">
+					<input type="text" class="form-control" name="InputStoreZip" id="Zip" placeholder="Enter Store Zip Code"  required>
 				</div>
 			</div>
 			<div style="height: 25px"></div>
 			<div class="form-group row">
 				<div class ="col-lg-6">
 					<label for="InputStoreManager">Manager Name</label>
-					<input type="text" class="form-control" name="InputStoreManager" id="PersonName" placeholder="Enter Store Manager">
+					<input type="text" class="form-control" name="InputStoreManager" id="PersonName" placeholder="Enter Store Manager"  required>
 				</div>
 				<div class ="col-lg-6">
 					<label for="InputStoreContactNumber">Store Phone Number</label>
-					<input type="text" class="form-control" name="InputStoreContactNumber" id="Phone" placeholder="Enter Store Phone Number">
+					<input type="text" class="form-control" name="InputStoreContactNumber" id="Phone" placeholder="Enter Store Phone Number"  required>
 				</div>
 			</div>
 			<div style="height: 25px"></div>
