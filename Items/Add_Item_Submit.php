@@ -2,16 +2,16 @@
 
 require '../DBInfo.php';
 
-$itemId = $_POST["itemId"];
-$itemDescription = $_POST["itemDescription"];
-$itemSize = $_POST["itemSize"];
-$itemCost = $_POST["itemCost"];
-$retailPrice = $_POST["retailPrice"];
+$itemId = mysqli_escape_string($conn, $_POST["itemId"]);
+$itemDescription = mysqli_escape_string($conn, $_POST["itemDescription"]);
+$itemSize = mysqli_escape_string($conn, $_POST["itemSize"]);
+$itemCost = mysqli_escape_string($conn, $_POST["itemCost"]);
+$retailPrice = mysqli_escape_string($conn, $_POST["retailPrice"]);
 $divisionDropdown = $_POST["divisionDropdown"];
 $categoryDropdown = $_POST["categoryDropdown"];
 $vendorDropdown = $_POST["vendorDropdown"];
 $itemImagePath = $_POST["itemImagePath"];
-$itemDepartment = $_POST["itemDepartment"];
+$itemDepartment = mysqli_escape_string($conn, $_POST["itemDepartment"]);
 
 //function test_input($data) {
  // $data = trim($data);
