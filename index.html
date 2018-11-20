@@ -4,93 +4,495 @@
     <title>Nanno's Foods</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="../style.css">
+	
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="http://malsup.github.com/jquery.form.js"></script>
+	<script type="text/javascript" src="../Scripts.js"></script>  	
+	
+
+    <script type="text/javascript">
+	
+	
+	
+	var itemIds = [];
+	var itemIndex = 0;
+	var itemTotal = 0;
+    var fieldCheck = true;
+	var alertText= '';
+	var createReturn = true;
+	  
+      $(document).ready(loadDoc('getReturns.php', getReturns))
+
+      function loadDoc(url, cFunction, params) {
+	 // params = params || 0;
+    //Creates an object to run php file
+      var xhttp;
+	  xhttp=new XMLHttpRequest();
+      //HERE is when the program actually switches over to the php and runs the file.
+      xhttp.open("POST", url, true);
+      xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      xhttp.send(params);
+	  
+	  //This tells the program to run the following code once the php file has run.
+      xhttp.onreadystatechange = function() {
+
+        //A ready status of both 4 and 200 mean that the php file ran okay, meaning no errors.
+        if (this.readyState == 4 && this.status == 200) {
+          //cFunction can change depending on what the user enters as a parameter.
+            cFunction(this);
+			
+        }
+      };
+    }
+	
+	
+	
+	function checkFunctions(){
+		if(itemTotal === 0 || document.getElementById("storeCode").value === ''){
+			alert("You are not yet finished!");
+			return false;
+		}
+		
+		return true;
+	}
+	
+	function getReturns(xhttp){
+      //By doing this, we take whatever strings have been echoed by the php file and put it into our current webpage. No need to load a whole new page, It edits the one we are currently on.
+      document.getElementById("returnTable").innerHTML = xhttp.responseText;
+    }
+	
+	
+	function createReturnStart(){
+	 loadDoc('createNewReturn.php', getNewReturnPHP);
+      //By doing this, we take whatever strings have been echoed by the php file and put it into our current webpage. No need to load a whole new page, It edits the one we are currently on.
+    }
+	
+	function getNewReturnPHP(xhttp){
+      //By doing this, we take whatever strings have been echoed by the php file and put it into our current webpage. No need to load a whole new page, It edits the one we are currently on.
+      document.getElementById("outsideReturnTable").innerHTML = xhttp.responseText;
+	  $(document).ready(loadDoc('getVendorName.php', getVendorName));
+	  $(document).ready(loadDoc('getStoreName.php', getStoreName));
+	}
+	
+	 function getVendorName(xhttp){
+      //By doing this, we take whatever strings have been echoed by the php file and put it into our current webpage. No need to load a whole new page, It edits the one we are currently on.
+      document.getElementById("vendorName").innerHTML = xhttp.responseText;
+	  setVendorCode();
+    }
+	
+	 function setFields(){
+      //By doing this, we take whatever strings have been echoed by the php file and put it into our current webpage. No need to load a whole new page, It edits the one we are currently on.
+	  
+	    if(fieldCheck)
+	    {
+		  if(document.getElementById("vendorCode").value != '' && document.getElementById("vendorName").value != '')
+			{
+				document.getElementById("vendorCode").disabled = true;
+				document.getElementById("vendorName").disabled = true;
+				document.getElementById("itemDesc").disabled = false;
+				document.getElementById("itemId").disabled = false;
+				document.getElementById("qReturned").disabled = false;
+				document.getElementById("storeCode").disabled = false;
+				document.getElementById("storeName").disabled = false;
+				$(document).ready(loadDoc('getItemDesc.php', getItemDesc, "vendorCode="+document.getElementById("vendorCode").value));
+				fieldCheck = false;
+			}
+			else{
+				alert("You need to set the Vendor fields");
+				fieldCheck = false;
+			}
+		}
+		else{
+			document.getElementById("vendorCode").disabled = false;
+			document.getElementById("vendorName").disabled = false;
+			document.getElementById("itemDesc").disabled = true;
+			document.getElementById("itemId").disabled = true;
+			document.getElementById("qReturned").disabled = true;
+			document.getElementById("storeCode").disabled = true;
+			document.getElementById("storeName").disabled = true;
+			
+			document.getElementById("itemDesc").value = '';
+			document.getElementById("itemId").value = '';
+			document.getElementById("qReturned").value = '';
+			document.getElementById("tBody").innerHTML = '';
+			document.getElementById("storeCode").value = '';
+			document.getElementById("storeName").value = '';
+			
+			itemIds = [];
+			itemIndex = 0;
+			itemTotal = 0;
+			
+			fieldCheck = true;
+	    }
+    }
+	
+	
+	
+	function getStoreName(xhttp){
+      //By doing this, we take whatever strings have been echoed by the php file and put it into our current webpage. No need to load a whole new page, It edits the one we are currently on.
+      document.getElementById("storeName").innerHTML = xhttp.responseText;
+	  setStoreCode();
+    }
+	
+	 function getItemDesc(xhttp){
+      //By doing this, we take whatever strings have been echoed by the php file and put it into our current webpage. No need to load a whole new page, It edits the one we are currently on.
+      document.getElementById("itemDesc").innerHTML = xhttp.responseText;
+	  setItemId();
+    }
+	
+	
+    function filterTable() {
+      var input, filter, table, tr, td, i;
+      input = document.getElementById("searchBar");
+      filter = input.value;
+      console.log(filter);
+      table = document.getElementById("returnTable");
+      tr = table.getElementsByTagName("tr");
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+          console.log(td.innerHTML)
+          if (td.innerHTML.indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }       
+      }
+    }
+	 
+	
+	function setVendorCode() {
+	document.getElementById("vendorCode").value = document.getElementById("vendorName").value;
+	}
+	
+	function setVendorName() {
+	var temp = document.getElementById("vendorName").value
+	document.getElementById("vendorName").value = document.getElementById("vendorCode").value;
+	if(document.getElementById("vendorName").value == ''){
+		alert("Invalid vendor code, try another.");
+		document.getElementById("vendorName").value = temp;
+		setVendorCode();
+		}
+	}
+	
+	function setStoreCode() {
+	document.getElementById("storeCode").value = document.getElementById("storeName").value;
+	}
+	
+	function setStoreName() {
+	var temp = document.getElementById("storeName").value
+	document.getElementById("storeName").value = document.getElementById("storeCode").value;
+	if(document.getElementById("storeName").value == ''){
+		alert("Invalid store code, try another.");
+		document.getElementById("storeName").value = temp;
+		setStoreCode();
+		}
+	else
+		$(document).ready(loadDoc('getItemDesc.php', getItemDesc, "vendorCode="+document.getElementById("vendorCode").value));
+	}
+	
+	function setItemId() {
+	document.getElementById("itemId").value = document.getElementById("itemDesc").value;
+	}
+	
+	function setItemDesc() {
+	var temp = document.getElementById("itemDesc").value
+	document.getElementById("itemDesc").value = document.getElementById("itemId").value;
+	if(document.getElementById("itemDesc").value == ''){
+		alert("Invalid item ID, try another.");
+		document.getElementById("itemDesc").value = temp;
+		setItemId();
+		}
+	}
+
+	function addItem(){
+		if(!fieldCheck && checkForTableDuplicates() && checkForItemAndStore() && checkQuantityReturned() ){
+			 
+		
+			var sel =  document.getElementById("itemDesc");
+			var text= sel.options[sel.selectedIndex].text;
+			var tr = '<tr><td name="itemDescTd">' + text + '</td><td id="Id'+itemIndex+'">' + document.getElementById("itemDesc").value + '</td><td id="Quant'+itemIndex+'">' + document.getElementById("qOrdered").value + '</td><td id="Price'+itemIndex+'">' + getPrice() + '</td><td><input type="button" class="ibtnDel btn btn-md btn-danger " onclick="deleteRow()" value="Delete"></td></tr>';
+			 
+			 
+			 $('#myTable').append(tr);
+			 
+			 itemIndex++;
+			 itemTotal++;
+			 itemIds.push(document.getElementById("itemDesc").value);
+			 
+			
+			 
+			 document.getElementById("qReturned").value = '';
+			 document.getElementById("itemId").value = '';
+			 document.getElementById("itemDesc").value = '';
+		 }
+		else{
+				if(!fieldCheck){
+					alert(alertText);
+					alertText = '';
+				}
+			}
+		//calculateTotalPrice();
+	}
+	
+	// function getPrice(){
+	// 	var price = document.getElementById(document.getElementById("itemDesc").value).getAttribute("price");
+	// 	price = price * document.getElementById("qOrdered").value;
+	// 	price = price.toFixed(2);
+	// 	return "$" + price;
+	// }
+	
+	// function calculateTotalPrice(){
+	// 	var i = 0;
+	// 	var total = 0;
+
+	// 	while(i < itemIndex){
+	// 		var test = document.getElementById("Price"+i);
+	// 		if(test){
+	// 			var priceNoSign = (document.getElementById("Price"+i).innerHTML).substring(1);
+	// 			total = parseFloat(total) + parseFloat(priceNoSign);
+	// 			total = total.toFixed(2);
+	// 		}
+	// 		i++;
+	// 	}
+	// 	document.getElementById("totalPrice").innerHTML = 'Price: $'+total;
+	// }
+	
+	function checkQuantityReturned(){
+		var elemPattern = /^\d{1,10}$/;
+		var re = new RegExp(elemPattern);
+		if(!re.test(document.getElementById("qReturned").value))
+		{
+			alertText = alertText.concat("\nQuantity Returned is not formatted correctly!");
+			return false;
+		}
+		//INSERT CHECK FOR QUANTITY RETURNED < QUANTITY IN STOCK HERE?
+		else
+			return true;
+	}
+	
+	function checkForItemAndStore(){
+		if(!document.getElementById("itemId").value != '' || !document.getElementById("storeCode").value != '')
+		{
+			alertText = alertText.concat("\nPlease finish entering the information.");
+			return false;
+		}
+		else
+			return true;
+	}
+	
+	function deleteRow() {
+      // event.target will be the input element.
+      var td = event.target.parentNode; 
+      var tr = td.parentNode; // the row to be removed
+      tr.parentNode.removeChild(tr);
+	  itemTotal--;
+	  getItemIds();
+	  calculateTotalPrice();
+	}
+	
+	function getItemIds(){
+		var i = 0;
+		itemIds = [];
+		while(i < itemIndex){
+			var test = document.getElementById("Id"+i);
+			if(test){
+				itemIds.push(document.getElementById("Id"+i).innerHTML);
+			}
+			i++;
+		}
+	}
+
+	function checkForTableDuplicates(){
+		for(var i = 0; i < itemTotal; i++)
+		{	
+			if(itemIds[i] === document.getElementById("itemDesc").value)
+			{
+				alertText = alertText.concat("\nThis item is already a return!");
+				return false;
+			}
+		}
+		return true;
+	}
+
+	function turnTableToArray(){
+		var tableData = [];
+		var i = 0;
+		var newIndex = 1;
+		while(i < itemIndex){
+			var test = document.getElementById("Id"+i);
+			if(test){
+				tableData.push("ID" + newIndex + "=" + document.getElementById("Id"+i).innerHTML + "&" + "Quant" + newIndex + "=" + document.getElementById("Quant"+i).innerHTML + "&");
+				newIndex++;
+			}
+			i++;
+		}
+		
+		return tableToString(tableData);
+	}
+
+    function tableToString(tableData){
+		var tableString = '';
+		for(var i = 0; i < itemTotal; i++)
+		{	
+			tableString = tableString + tableData[i];
+		}
+		tableString = tableString.substring(0,tableString.length - 1);
+		return tableString;
+	}
+	
+	function getTodayDate()
+	{
+		var today = new Date();
+		var dd = today.getDate();
+		var mm = today.getMonth()+1; //January is 0!
+		var yyyy = today.getFullYear();
+
+		if(dd<10) {
+			dd = '0'+dd
+		} 
+
+		if(mm<10) {
+			mm = '0'+mm
+		} 
+
+		today = mm + '/' + dd + '/' + yyyy;
+		return today;
+	}
+	
+	function sendToPHP(){
+		if(createReturn && checkFunctions())
+		{
+			var vendorCode = "vendorCode=" + document.getElementById("vendorCode").value; 
+			var storeCode = "storeCode=" + document.getElementById("storeCode").value;
+			var totalIds = "idCount=" + itemTotal;
+			var todayDate = "date=" + getTodayDate();
+			var send = vendorCode + "&" + storeCode + "&" + totalIds + "&" + todayDate + "&" + turnTableToArray();
+			$(document).ready(loadDoc('submitReturn.php', endMessage, send));
+		}
+		else if(checkFunctions() && !createOrder)
+		{
+			var returnToVendorId = "returnToVendorId=" + document.getElementById("getIndexFromPhp").getAttribute("returnToVendorId");
+			var vendorCode = "vendorCode=" + document.getElementById("vendorCode").value; 
+			var storeCode = "storeCode=" + document.getElementById("storeCode").value;
+			var totalIds = "idCount=" + itemTotal;
+			var todayDate = "date=" + document.getElementById("getIndexFromPhp").getAttribute("dateOfTheOrder");
+			var send = returnToVendorId + "&" + vendorCode + "&" + storeCode + "&" + totalIds + "&" + todayDate + "&" + turnTableToArray();
+			$(document).ready(loadDoc('submitReturn.php', endMessage, send));
+		
+		}
+		
+	}
+	
+	
+
+	
+	function endMessage(xhttp){
+		alert("Return has been processed");
+		itemIds = [];
+		itemIndex = 0;
+		itemTotal = 0;
+		fieldCheck = true;
+		alertText= '';
+		window.location.href = ".";
+	}
+	
+    </script>
+
   </head>
 
 
-  <body class="background">
+  <body style="background-color: rgb(255, 253, 239)">
   	
-    <nav class="navbar navbar-inverse navbar-fixed-top navbar-center">
-  			<div class="container-fluid">
+<nav class="navbar navbar-expand-sm navbar-dark" style="background-color: black">
+  <!-- Brand -->
+  <a class="navbar-brand" href="../index.html">Nanno's Foods</a>
 
-  				<div class="navbar-header">
-        	   <a class="navbar-brand" href="#">Nanno's Foods</a>
-      		</div>
-
-    			<ul class="nav navbar-nav">
-       			<li class="active"><a href="index.html">Home</a></li>
-        		<li class="dropdown">
-				<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-					Vendors <span class="caret"></span></a>
-					<ul class="dropdown-menu" role="menu">
-						<li><a href="Vendor/Register_Vendor.html">Register a Vendor</a></li>
-						<li><a href="Vendor/Update_Vendor.html">Update a Vendor</a></li>
-						<li><a href="Vendor/Remove_Vendor.html">Remove a Vendor</a></li>                        
-					</ul>
-				</li>
-        		<li class="dropdown">
-				<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-					Stores <span class="caret"></span></a>
-					<ul class="dropdown-menu" role="menu">
-						<li><a href="Store/Add_Store.html">Add a Store</a></li>
-						<li><a href="Store/Update_Store.html">Update a Store</a></li>
-						<li><a href="Store/Remove_Store.html">Remove a Store</a></li>                        
-					</ul>
-				</li>
-				<li class="dropdown">
-				<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-					Items <span class="caret"></span></a>
-					<ul class="dropdown-menu" role="menu">
-						<li><a href="Item/Add_Item.html">Add an Item</a></li>
-						<li><a href="Item/Update_Item.html">Update an Item</a></li>
-						<li><a href="Item/Remove_Item.html">Remove an Item</a></li>                        
-					</ul>
-				</li>
-        		<li class="dropdown">
-				<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-					Customers <span class="caret"></span></a>
-					<ul class="dropdown-menu" role="menu">
-						<li><a href="Customer/Add_Customer.html">Add a Customer</a></li>
-						<li><a href="Customer/Update_Customer.html">Update a Customer</a></li>
-						<li><a href="Customer/Remove_Customer.html">Remove a Customer</a></li>                        
-					</ul>
-				</li>
-    			</ul>
-
-  			</div>
-		</nav>
+  <!-- Links -->
+  <ul class="navbar-nav">
+    <li class="nav-item ">
+      <a class="nav-link" href="../Vendor">Vendors</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../Store">Stores</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../Items">Items</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../Customers">Customers</a>
+    </li>
+	<li class="nav-item active" >
+      <a class="nav-link" href="index.html">Orders</a>
+    </li>
+    <li class="nav-item active" >
+      <a class="nav-link" href="index.html">Returns</a>
+    </li>
+  </ul>
+</nav>
 	
-  	
-    <div class="row" style="height: 100%">
+  	<div class="container-fluid" id="mainDiv">
+
+    	<div class="row" style="padding-top: 50px">
   		<!-- <div class="col-lg-1"></div> -->
-  		<div class="col-lg-12 fader">
-  			<img src="Pictures/Logo2.png" class="center">
-  			<div style="height: 45px"></div>
-			
-  			  	<div class="form-group row" class="left" style = "width: 100%">
-				<div class ="col-lg-4" style="margin-left: 2%">
-					<h3 style = "text-align: left">Contact Management</h3>
-					<p style="text-align:left"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent volutpat pharetra porttitor. Curabitur at euismod lectus. Sed sed suscipit ante. Aenean volutpat ac arcu in rutrum. Proin porttitor dui aliquam lorem convallis vestibulum. Vivamus iaculis condimentum justo, sed rutrum lacus pellentesque sit amet. Quisque nec urna eget dolor semper consectetur. Donec in vestibulum risus. Ut ac velit consectetur, tristique ligula sit amet, placerat nisi. Etiam sit amet porta neque. Fusce at feugiat magna, a egestas massa. Etiam aliquam arcu ut felis dictum, pulvinar finibus est pretium. Aenean commodo, sem et gravida ullamcorper, erat diam convallis leo, quis interdum enim augue vel libero. Nullam elementum tristique eros, et laoreet nibh consequat quis. Sed vitae ex viverra, vulputate mi et, fringilla elit.
-
-					Nullam vestibulum augue ac libero faucibus interdum. Nullam orci lorem, fermentum ut laoreet vitae, rutrum vel lorem. Etiam eleifend congue facilisis. Sed ultrices sapien eu mi suscipit, nec eleifend dui scelerisque. Aliquam vehicula turpis vitae nisi commodo, nec condimentum risus maximus. Mauris tempor ullamcorper pharetra. Mauris posuere neque sit amet quam mollis, a volutpat ante rutrum. Vestibulum at justo tempus, iaculis leo vel, blandit ipsum. Donec ultrices lectus at tincidunt tristique. Vivamus eu libero diam. Integer nulla neque, cursus a hendrerit sit amet, porttitor a tellus. 
-					</p>
-				</div>
-				<div class ="col-lg-4" style="margin-left: 30%">
-					<h3 style= "text-align: left">About</h3>
-					<p style="text-align:left"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent volutpat pharetra porttitor. Curabitur at euismod lectus. Sed sed suscipit ante. Aenean volutpat ac arcu in rutrum. Proin porttitor dui aliquam lorem convallis vestibulum. Vivamus iaculis condimentum justo, sed rutrum lacus pellentesque sit amet. Quisque nec urna eget dolor semper consectetur. Donec in vestibulum risus. Ut ac velit consectetur, tristique ligula sit amet, placerat nisi. Etiam sit amet porta neque. Fusce at feugiat magna, a egestas massa. Etiam aliquam arcu ut felis dictum, pulvinar finibus est pretium. Aenean commodo, sem et gravida ullamcorper, erat diam convallis leo, quis interdum enim augue vel libero. Nullam elementum tristique eros, et laoreet nibh consequat quis. Sed vitae ex viverra, vulputate mi et, fringilla elit.
-
-					Nullam vestibulum augue ac libero faucibus interdum. Nullam orci lorem, fermentum ut laoreet vitae, rutrum vel lorem. Etiam eleifend congue facilisis. Sed ultrices sapien eu mi suscipit, nec eleifend dui scelerisque. Aliquam vehicula turpis vitae nisi commodo, nec condimentum risus maximus. Mauris tempor ullamcorper pharetra. Mauris posuere neque sit amet quam mollis, a volutpat ante rutrum. Vestibulum at justo tempus, iaculis leo vel, blandit ipsum. Donec ultrices lectus at tincidunt tristique. Vivamus eu libero diam. Integer nulla neque, cursus a hendrerit sit amet, porttitor a tellus. 
-					</p>
-				</div>
+  			<div class="col-lg-12">
+  				<div style="text-align: center">
+  					<div class="container">
+						<div class="page-header">
+							<h1>Welcome To The Return Portal</h1>      
+						</div>
+						<hr>  
+					</div>
+  				</div>
+  			</div>
+  		<!-- <div class="col-lg-1"></div> -->
   		</div>
+
+  		<div class="row" id = "outsideReturnTable">
   		<!-- <div class="col-lg-1"></div> -->
-  	</div>
+		<div class="col-lg-12" style="text-align: center">
+          <div style="text-align: center" >
+            <table class="table table-bordered" style="max-width: 80% " align="center" >
+              <thead class="thead-dark">
+                <tr>
+                  <th colspan="5">
+                    <form class="form-inline my-2 my-lg-0">
+                      <input class="form-control mr-sm-2" type="search" placeholder="Search by Store ID" aria-label="Search" id="searchBar" onkeyup="filterTable()">
+                      <button type="button" class="btn btn-primary btn-lg">Search</button>
+                    </form>
+                  </th>
+                  <th colspan="5">
+                    <form class="form-inline my-2 my-lg-0" style="float: right;">
+                    <button type="button" class="btn btn-success" onclick="createReturnStart();">Process a Return</button>
+                  </form>
+                  </th>
+                </tr>
+              </thead>
+              <thead class="thead-dark">
+                <tr>
+				   <th scope="col">Return ID</th>
+                  <th scope="col">Vendor Code</th>
+				  <th scope="col">Vendor Name</th>
+                  <th scope="col">Store Code</th>
+				  <th scope="col">Store Name</th>
+                  <th scope="col">Item Description</th>
+                  <th scope="col">Date Fulfilled</th>
+                </tr>
+              </thead>
+              <tbody id = "returnTable" style="background-color: white;">
+              </tbody>
+            </table>
 
-			</div>
+          </div>
+  		<!-- <div class="col-lg-1"></div> -->
+  		</div>
+  		</div>
 
+  </div>
 
   </body>
 
