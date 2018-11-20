@@ -2,14 +2,14 @@
 
 require '../DBInfo.php';
 
-$storeCode = $_POST["InputStoreCode"];
-$storeName = $_POST["InputStoreName"];
-$address = $_POST["InputStoreAddress"];
-$city = $_POST["InputStoreCity"];
-$state = $_POST["stateSelect"];
-$zip = $_POST["InputStoreZip"];
-$phone = $_POST["InputStoreContactNumber"];
-$contactPersonName = $_POST["InputStoreManager"];
+$storeCode = mysqli_escape_string($conn, $_POST["InputStoreCode"]);
+$storeName = mysqli_escape_string($conn, $_POST["InputStoreName"]);
+$address = mysqli_escape_string($conn, $_POST["InputStoreAddress"]);
+$city = mysqli_escape_string($conn, $_POST["InputStoreCity"]);
+$state = mysqli_escape_string($conn, $_POST["stateSelect"]);
+$zip = mysqli_escape_string($conn, $_POST["InputStoreZip"]);
+$phone = mysqli_escape_string($conn, $_POST["InputStoreContactNumber"]);
+$contactPersonName = mysqli_escape_string($conn, $_POST["InputStoreManager"]);
 
 
 	$sql = "SELECT * FROM retailstore WHERE (storeCode='{$storeCode}')";
