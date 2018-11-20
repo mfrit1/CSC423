@@ -28,7 +28,7 @@ echo '<div class = "container">
 		<div style="height: 10%"></div>
 		<div class="row">
 			<div class ="col-lg-12" align="center">
-			<button type="button" align="center" class="btn btn-success" onclick="fixFormatStart();">Back to Vendor</button>
+			<button type="button" align="center" class="btn btn-success" onclick="backToNormalTable()";">Back to Vendor</button>
 			</div>
 		</div>
 	</div>';
