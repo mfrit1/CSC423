@@ -4,7 +4,10 @@
 require '../../DBInfo.php';
 
 //SQL statement to get the record.
-$sql = "SELECT * FROM inventoryitem WHERE status='Active' ORDER BY ItemId";
+
+if(isset(($_POST["id"]))){
+$id = mysqli_escape_string($conn, $_POST["id"]);
+$sql = "SELECT inventoryitem.itemId, inventoryitem.description, inventoryitem.size, inventoryitem.division, inventoryitem.department, inventoryitem.category, inventoryitem.itemCost, inventoryitem.itemRetail, inventoryitem.imageFileName, inventoryitem.vendorId, inventory.quantityInStock FROM inventoryitem, inventory, retailstore WHERE ((inventoryitem.status='Active') AND (inventory.itemId = inventoryitem.itemId) AND (retailstore.storeCode ='{$id}') AND (retailstore.storeId = inventory.storeId)) ORDER BY inventoryitem.itemId";
 
 //Run the SQL statement and store the returned values in result.
 $result= $conn->query($sql);
@@ -49,9 +52,11 @@ else{
 		echo "<td align=center style='padding-top: 50px'>$data[5]</td>";
 		echo "<td align=center style='padding-top: 50px'>$data[6]</td>";
 		echo "<td align=center style='padding-top: 50px'>$data[7]</td>";
+		echo "<td align=center style='padding-top: 50px'>$data[10]</td>";
 		echo "<td align=center><img src='../../FD Images/$data[8]' height='125px' width='125px' class='zoom'></td>";
 		echo "</tr>";
 	}
+}
 }
 
 ?>

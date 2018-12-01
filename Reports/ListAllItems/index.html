@@ -20,7 +20,6 @@
     $('#imagemodal').modal('show'); // imagemodal is the id attribute assigned to the bootstrap modal, then i use the show function
     });
       //This loads all current vendors onto the page.
-      $(document).ready(loadDoc('getItem.php', getItems))
       function loadDoc(url, cFunction, params) {
     //Creates an object to run php file
       var xhttp;
@@ -40,7 +39,33 @@
         }
       };
     }
-	 $(document).ready(loadDoc('getItem.php', fillHtml, 'check=1'))
+	 
+	 $(document).ready(loadDoc('getStoreName.php', getStoreName));
+	 
+	 function getStoreName(xhttp){
+      //By doing this, we take whatever strings have been echoed by the php file and put it into our current webpage. No need to load a whole new page, It edits the one we are currently on.
+      document.getElementById("storeName").innerHTML = xhttp.responseText;
+	  setStoreCode();
+    }
+	
+	function setStoreCode() {
+	document.getElementById("storeCode").value = document.getElementById("storeName").value;
+	loadDoc('getItem.php', getItems, "id="+document.getElementById("storeCode").value);
+	
+	}
+	
+	function setStoreName() {
+	var temp = document.getElementById("storeName").value
+	document.getElementById("storeName").value = document.getElementById("storeCode").value;
+	if(document.getElementById("storeName").value == ''){
+		alert("Invalid store code, try another.");
+		document.getElementById("storeName").value = temp;
+		setStoreCode();
+		}
+	else{
+		loadDoc('getItem.php', getItems, "id="+document.getElementById("storeCode").value);
+		}
+	}
 	 
 	 function fillHtml(xhttp){
 	 document.getElementById("fillLink").innerHTML = xhttp.responseText;
@@ -49,6 +74,7 @@
 	 function getItems(xhttp){
       //By doing this, we take whatever strings have been echoed by the php file and put it into our current webpage. No need to load a whole new page, It edits the one we are currently on.
       document.getElementById("itemTable").innerHTML = xhttp.responseText;
+	  loadDoc('getItem.php', fillHtml, 'check=1&id='+document.getElementById("storeCode").value);
     }
 	
     //start the register vendor stuff.
@@ -285,77 +311,7 @@
 			
 		}
 	}
-  function checkDepartment(elem) {
-      var elemPattern = /^[A-Za-z0-9\s-]+$/;
-      var re = new RegExp(elemPattern);
-      if(!re.test(elem.value))
-      {
-        alertText = alertText.concat("\nDepartment");
-      }
-    }
-    function checkSize(elem) {
-      if(elem.value=="")
-      {
-        alertText = alertText.concat("\nSize");
-      }
-    }
-    function checkItemCost(elem) {
-      var elemPattern = /^\d+(\.\d{1,2})?$/;
-      var re = new RegExp(elemPattern);
-      if(!re.test(elem.value))
-      {
-        alertText = alertText.concat("\nItem Cost");
-      }
-    }
-    function checkRetailPrice(elem) {
-      var elemPattern = /^\d+(\.\d{1,2})?$/;
-      var re = new RegExp(elemPattern);
-      if(!re.test(elem.value))
-      {
-        alertText = alertText.concat("\nRetailPrice");
-      }
-    }
-    function checkDescription(elem) {
-      if(elem.value=="")
-      {
-        alertText = alertText.concat("\nDescription");
-      }
-    }
-    function checkDivisionDropdown(elem) {
-      if(elem.value=="")
-      {
-        alertText = alertText.concat("\nDivision");
-      }
-    }
-    function checkCategoryDropdown(elem) {
-      if(elem.value=="")
-      {
-        alertText = alertText.concat("\nCategory");
-      }
-    }
-    function checkVendorDropdown(elem) {
-      if(elem.value=="")
-      {
-        alertText = alertText.concat("\nVendor");
-      }
-    }
-    function checkItemImagePath(elem) {
-      var elemPattern = /^([a-zA-Z0-9\s_\\.\-\(\):])+(.jpg|.pdf)$/;
-      var re = new RegExp(elemPattern);
-      if(!re.test(elem.value))
-      {
-        alertText = alertText.concat("\nImage Name");
-      }
-    }
-    function checkNumber(elem)
-    {
-      var elemPattern = /^\d+$/;
-      var re = new RegExp(elemPattern);
-      if(!re.test(elem.value))
-      {
-        alertText = alertText.concat("\nItem Number");
-      }
-    }
+ 
     </script>
 
   </head>
@@ -431,26 +387,37 @@
                 <tr>
                   <th colspan="7">
                     <form class="form-inline my-2 my-lg-0">
-                      <input class="form-control mr-sm-2" type="search" placeholder="Search Item ID" aria-label="Search" id="searchBar" onkeyup="filterTableByID()">
-                      <input class="form-control mr-sm-2" type="search" placeholder="Search Item Description" aria-label="Search" id="searchBar2" onkeyup="filterTableByDescription()">
+                     <div class="form-group row">
+			
+					<div style= "padding-left: 40px; padding-right: 40px;">
+					<select class="form-control" name="storeSelect" id="storeName" onchange="setStoreCode()" >
+						
+					</select>
+					</div>
+			
+					
+					<input type="text" class="form-control" name="InputStoreCode" id="storeCode" onchange="setStoreName()" placeholder="Enter Store Code" >
+		
+					</div>
                     </form>
                   </th>
-				  <th colspan="2">
+				  <th colspan="3">
                     <form class="form-inline my-2 my-lg-0" style="float: right;" id="fillLink">
                     
-                  </form>
+					</form>
                 </tr>
               </thead>
               <thead class="thead-dark">
                 <tr>
-                  <th scope="col" onclick="loadDoc('getItem.php', getItems)">Item ID</th>
-                  <th scope="col" onclick="loadDoc('getItemsByDescription.php', getItems)">Descripton</th>
+                  <th scope="col">Item ID</th>
+                  <th scope="col">Descripton</th>
                   <th scope="col">Size</th>
                   <th scope="col">Division</th>
                   <th scope="col">Department</th>
                   <th scope="col">Category</th>
                   <th scope="col">Item Cost</th>
                   <th scope="col">Retail Price</th>
+				  <th scope="col">Quantity</th>
                   <th scope="col">Image</th>
                 </tr>
               </thead>
