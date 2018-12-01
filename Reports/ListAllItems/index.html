@@ -3,15 +3,15 @@
 <html>
   <head>
     <title>Nanno's Foods</title>
-    <meta charset="utf-8">
+   <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="../../style.css">
-	
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	  <script src="http://malsup.github.com/jquery.form.js"></script>
-	  <script type="text/javascript" src="../../Scripts.js"></script>  	
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	 <script type="text/javascript" src="../../Scripts.js"></script>  	
 	
 
     <script type="text/javascript">
@@ -66,16 +66,53 @@
 		loadDoc('getItem.php', getItems, "id="+document.getElementById("storeCode").value);
 		}
 	}
+	
+	 function fillTable(xhttp){
+		 document.getElementById("itemTable").innerHTML = xhttp.responseText;
+		 loadDoc('getItem.php', fillHtml, 'check=1&id='+document.getElementById("storeCode").value);
+	 }
+	 
+	 function fillTableWithQuantity(xhttp){
+		 document.getElementById("itemTable").innerHTML = xhttp.responseText;
+		 
+		var quantity = document.getElementById("checkQuantity").value;
+		if(!checkifNumber(quantity))
+			quantity = '0';
+			
+		 loadDoc('getItem.php', fillHtml, 'check=1&id='+document.getElementById("storeCode").value+'&checkQuantity=' + quantity);
+	 }
+	 
 	 
 	 function fillHtml(xhttp){
-	 document.getElementById("fillLink").innerHTML = xhttp.responseText;
+		document.getElementById("fillLink").innerHTML = xhttp.responseText;
 	 }
 	 
 	 function getItems(xhttp){
       //By doing this, we take whatever strings have been echoed by the php file and put it into our current webpage. No need to load a whole new page, It edits the one we are currently on.
       document.getElementById("itemTable").innerHTML = xhttp.responseText;
-	  loadDoc('getItem.php', fillHtml, 'check=1&id='+document.getElementById("storeCode").value);
+	  loadDoc('getItem.php', fillTable, 'id='+document.getElementById("storeCode").value);
     }
+	
+	 function filterTable() {
+	 
+		var quantity = document.getElementById("checkQuantity").value;
+		
+		if(!checkifNumber(quantity))
+			quantity = '0';
+		loadDoc('getItem.php', fillTableWithQuantity, 'id='+document.getElementById("storeCode").value+'&checkQuantity='+quantity);
+		
+    }
+	
+	function checkifNumber(elem) {
+		var elemPattern = /^\d+$/;
+		var re = new RegExp(elemPattern);
+		if(!re.test(elem))
+		{
+			return false;
+		}
+		return true;
+	}
+	
 	
     //start the register vendor stuff.
 	function addItemStart() {
@@ -245,45 +282,7 @@
     alert("The Item has been deleted.");
     document.location.href="index.html";
   }
-    function filterTableByID() {
-      var input, filter, table, tr, td, i;
-      input = document.getElementById("searchBar");
-      filter = input.value;
-      console.log(filter);
-      table = document.getElementById("itemTable");
-      tr = table.getElementsByTagName("tr");
-      for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[0];
-        if (td) {
-          console.log(td.innerHTML)
-          if (td.innerHTML.indexOf(filter) > -1) {
-            tr[i].style.display = "";
-          } else {
-            tr[i].style.display = "none";
-          }
-        }       
-      }
-    }
-    function filterTableByDescription() {
-      var input, filter, table, tr, td, i;
-      input = document.getElementById("searchBar2");
-      filter = input.value;
-      console.log(filter);
-      table = document.getElementById("itemTable");
-      tr = table.getElementsByTagName("tr");
-      for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[1];
-        if (td) {
-          console.log(td.innerHTML)
-          if (td.innerHTML.indexOf(filter) > -1) {
-            tr[i].style.display = "";
-          } else {
-            tr[i].style.display = "none";
-          }
-        }       
-      }
-    }
-	
+   
 	var alertText = "The following are entered incorrectly:";
 	var alertTextLength = alertText.length;
 	function checkFunctions() {
@@ -385,24 +384,23 @@
             <table class="table table-bordered" style="max-width: 100% " align="center" >
               <thead class="thead-dark">
                 <tr>
-                  <th colspan="7">
+                  <th colspan="9">
                     <form class="form-inline my-2 my-lg-0">
-                     <div class="form-group row">
-			
-					<div style= "padding-left: 40px; padding-right: 40px;">
-					<select class="form-control" name="storeSelect" id="storeName" onchange="setStoreCode()" >
-						
-					</select>
-					</div>
-			
+					<input class="form-control mr-sm-2" type="search" placeholder="Overstocked Quantity" aria-label="Search" id="checkQuantity">
+					<button type="button" class="btn btn-primary btn-lg" onclick="filterTable();">Search</button>
 					
-					<input type="text" class="form-control" name="InputStoreCode" id="storeCode" onchange="setStoreName()" placeholder="Enter Store Code" >
-		
+					 <div class="form-group row">
+						<div style= "padding-left: 100px; padding-right: 100px;">
+							<select class="form-control" name="storeSelect" id="storeName" onchange="setStoreCode()" >
+								
+							</select>
+							<input type="text" class="form-control" name="InputStoreCode" id="storeCode" onchange="setStoreName()" placeholder="Enter Store Code" >
+						</div>
 					</div>
                     </form>
                   </th>
-				  <th colspan="3">
-                    <form class="form-inline my-2 my-lg-0" style="float: right;" id="fillLink">
+				  <th colspan="1">
+                    <form id="fillLink">
                     
 					</form>
                 </tr>
