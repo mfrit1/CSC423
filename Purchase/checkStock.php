@@ -4,7 +4,7 @@
 require '../DBInfo.php';
 
 $storeCode = $_POST["storeCode"];
-$itemId = $_POST["itemCode"];
+$itemId = $_POST["itemId"];
 
 //SQL statement to get the record.
 $sql = "SELECT quantityInStock FROM inventory WHERE storeId = '{$storeCode}' AND itemId = '{$itemId}' ";
