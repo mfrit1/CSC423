@@ -50,12 +50,12 @@ else
         echo "<td align=center>$data[1]</td>";
         echo "</tr>";
 
-        //If the data already exists, grab the amount and update it. If not, insert new row
+        //If the item already exists in inventory, grab the amount and update it. If not, insert new row
         $sqlCheck = "SELECT quantityInStock FROM inventory WHERE storeId = {$storeId} AND itemId = {$data[2]}";
         $responseCheck = $conn->query($sqlCheck);
         if(mysqli_num_rows($responseCheck) < 1)
         {
-            $sqlStatement = "INSERT INTO inventory (storeId, itemId, quantityInStock) VALUES {$storeId}, {$data[2]}, {$data[1]})";
+            $sqlStatement = "INSERT INTO inventory (storeId, itemId, quantityInStock) VALUES ({$storeId}, {$data[2]}, {$data[1]})";
         }
         else
         {
@@ -73,7 +73,9 @@ else
         <div class="col-lg-4" style="margin:auto;display:block">
         <h3>This order has been delivered</h3>
         </div>
-        <div id="neededData" style="display:none"> ' . json_encode($jsonObject) . '</div>
         </div>';
+
+        $updateDateSQL = "UPDATE orders SET dateTimeOfFulfilment = '" . date("m/d/Y") . "', status = 'Delivered' WHERE orderId = {$orderNumber} AND storeId = {$storeId}";
+        $conn->query($updateDateSQL);
 }
 ?>
