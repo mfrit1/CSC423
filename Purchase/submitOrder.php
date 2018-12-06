@@ -32,7 +32,7 @@ if ($conn->query($sql) === TRUE) {
 
 $updatedStock = $_POST["newStock"];
 
-$sql = "UPDATE inventory SET quantityInStock ='45' WHERE storeId = '{$storeCode}' AND itemId = '{$itemId}'";
+$sql = "UPDATE inventory SET quantityInStock ='{$updatedStock}' WHERE storeId = '{$storeCode}' AND itemId = '{$itemCode}'";
 
 if ($conn->query($sql) === TRUE) {
     	$res="Data Inserted Successfully:";
