@@ -364,28 +364,40 @@
 		today = mm + '/' + dd + '/' + yyyy;
 		return today;
 	}
+
+
+	function checkInputs(){
+		if(document.getElementById("itemId").value = '')
+		{
+			//alertText = alertText.concat("\nPlease make sure all fields have been completed.");
+			alert("\nPlease make sure all fields have been completed.");
+			return false;
+		}
+		else
+			return true;
+	}
 	
 	function sendToPHP(){
-		if(createReturn && checkFunctions())
+
+		if(checkInputs())
 		{
+			
 			var vendorCode = "vendorCode=" + document.getElementById("vendorCode").value; 
 			var storeCode = "storeCode=" + document.getElementById("storeCode").value;
 			var totalIds = "idCount=" + itemTotal;
+			var itemCode = "itemId=" + document.getElementById("itemId").value; 
 			var todayDate = "date=" + getTodayDate();
-			var send = vendorCode + "&" + storeCode + "&" + totalIds + "&" + todayDate + "&" + turnTableToArray();
-			$(document).ready(loadDoc('submitReturn.php', endMessage, send));
+			var send = vendorCode + "&" + storeCode + "&" + totalIds + "&" + todayDate + "&" + itemCode + "&" + turnTableToArray();
+			$(document).ready(loadDoc('checkStock.php', endMessage1, send));
 		}
-		else if(checkFunctions() && !createOrder)
-		{
-			var returnToVendorId = "returnToVendorId=" + document.getElementById("getIndexFromPhp").getAttribute("returnToVendorId");
-			var vendorCode = "vendorCode=" + document.getElementById("vendorCode").value; 
-			var storeCode = "storeCode=" + document.getElementById("storeCode").value;
-			var totalIds = "idCount=" + itemTotal;
-			var todayDate = "date=" + document.getElementById("getIndexFromPhp").getAttribute("dateOfTheOrder");
-			var send = returnToVendorId + "&" + vendorCode + "&" + storeCode + "&" + totalIds + "&" + todayDate + "&" + turnTableToArray();
-			$(document).ready(loadDoc('submitReturn.php', endMessage, send));
-		
-		}
+			
+			
+			//var inStock = xhttp.responseText;
+			if(flag){
+				var stockUpdate = "newStock=" + globalStock;
+				var send1 = storeCode + "&" + vendorCode + "&" + totalIds + "&" + todayDate + "&" + stockUpdate;
+				$(document).ready(loadDoc('submitReturn.php', endMessage, send1));
+			}
 		
 	}
 	
@@ -402,6 +414,33 @@
 		window.location.href = ".";
 	}
 	
+	function endMessage1(xhttp){
+		//alert(xhttp.responseText + "in stock");
+		var numInStock = xhttp.responseText;
+		var totalItems = parseInt(document.getElementById("qReturned").value, 10);
+		
+
+		if(numInStock < totalItems){
+			alert("There is not enough of this item in stock! \n Returned: " + totalItems + " In Stock: " + numInStock);
+			flag = false;
+			alert("less");
+		}
+		else{ 
+			globalStock = numInStock - totalItems;
+			flag = true; 
+
+			var vendorCode = "vendorCode=" + document.getElementById("vendorCode").value; 
+			var storeCode = "storeCode=" + document.getElementById("storeCode").value;
+			var totalIds = "idCount=" + itemTotal;
+			var itemCode = "itemId=" + document.getElementById("itemId").value; 
+			var todayDate = "date=" + getTodayDate();
+
+			var stockUpdate = "newStock=" + globalStock;
+			var send1 = storeCode + "&" + vendorCode + "&" + totalIds + "&" + todayDate + "&" + stockUpdate;
+			$(document).ready(loadDoc('submitReturn.php', endMessage, send1));
+		}
+	}
+
     </script>
 
   </head>
