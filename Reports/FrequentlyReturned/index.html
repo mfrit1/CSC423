@@ -1,0 +1,488 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Nanno's Foods</title>
+   <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../../style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	 <script type="text/javascript" src="../../Scripts.js"></script>  	
+	
+
+    <script type="text/javascript">
+    $("#pop").on("click", function() {
+    $('#imagepreview').attr('src', $('#imageresource').attr('src')); // here asign the image to the modal when the user click the enlarge link
+    $('#imagemodal').modal('show'); // imagemodal is the id attribute assigned to the bootstrap modal, then i use the show function
+    });
+      //This loads all current vendors onto the page.
+      function loadDoc(url, cFunction, params) {
+    //Creates an object to run php file
+      var xhttp;
+	   xhttp=new XMLHttpRequest();
+      //HERE is when the program actually switches over to the php and runs the file.
+      xhttp.open("POST", url, true);
+	   xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      xhttp.send(params);
+	  
+	  //This tells the program to run the following code once the php file has run.
+      xhttp.onreadystatechange = function() {
+        //A ready status of both 4 and 200 mean that the php file ran okay, meaning no errors.
+        if (this.readyState == 4 && this.status == 200) {
+          //cFunction can change depending on what the user enters as a parameter.
+            cFunction(this);
+			
+        }
+      };
+    }
+	 
+	 $(document).ready(loadDoc('getStoreName.php', getStoreName));
+	 
+	 function getStoreName(xhttp){
+      //By doing this, we take whatever strings have been echoed by the php file and put it into our current webpage. No need to load a whole new page, It edits the one we are currently on.
+      document.getElementById("storeName").innerHTML = xhttp.responseText;
+      var today = new Date();
+      var dd = today.getDate();
+      var mm = today.getMonth()+1;
+      var yyyy = today.getFullYear();
+
+      if (dd < 10)
+      {
+        dd = "0" + dd;
+      }
+
+      if (mm < 10)
+      {
+        dd = "0" + mm;
+      }
+
+      document.getElementById("endDate").value = mm + "/" + dd + "/" + yyyy;
+
+      today.setMonth(today.getMonth() - 6);
+      mm = today.getMonth();
+      if (mm < 10)
+      {
+        mm = "0" + mm;
+      }
+      document.getElementById("startDate").value = mm + "/" + dd + "/" + yyyy;
+
+	    filterTable();
+    }
+	
+	function setStoreCode() {
+	//document.getElementById("storeCode").value = document.getElementById("storeName").value;
+	   //loadDoc('getItem.php', filterTable, "id="+document.getElementById("storeName").value+'&startDate='+startDate+'&endDate='+endDate);
+	 filterTable();
+	}
+	
+	// function setStoreName() {
+	// var temp = document.getElementById("storeName").value
+	// document.getElementById("storeName").value = document.getElementById("storeCode").value;
+	// if(document.getElementById("storeName").value == ''){
+	// 	alert("Invalid store code, try another.");
+	// 	document.getElementById("storeName").value = temp;
+	// 	setStoreCode();
+	// 	}
+	// else{
+	// 	loadDoc('getItem.php', getItems, "id="+document.getElementById("storeCode").value);
+	// 	}
+	// }
+	
+	 function fillTable(xhttp){
+		 document.getElementById("itemTable").innerHTML = xhttp.responseText;
+		 loadDoc('getItem.php', fillHtml, 'check=1&id='+document.getElementById("storeName").value+'&startDate='+document.getElementById('startDate').value+'&endDate='+document.getElementById('endDate').value);
+	 }
+	 
+	 // function fillTableWithQuantity(xhttp){
+		//  document.getElementById("itemTable").innerHTML = xhttp.responseText;
+		 
+		// var quantity = document.getElementById("checkQuantity").value;
+		// if(!checkifNumber(quantity))
+		// 	quantity = '0';
+			
+		//  loadDoc('getItem.php', fillHtml, 'check=1&id='+document.getElementById("storeCode").value+'&checkQuantity=' + quantity);
+	 // }
+	 
+	 
+	 function fillHtml(xhttp){
+    //console.log(xhttp.responseText)
+		document.getElementById("fillLink").innerHTML = xhttp.responseText;
+	 }
+	 
+	 function getItems(xhttp){
+      //By doing this, we take whatever strings have been echoed by the php file and put it into our current webpage. No need to load a whole new page, It edits the one we are currently on.
+      document.getElementById("itemTable").innerHTML = xhttp.responseText;
+	   loadDoc('getItem.php', fillTable, 'id='+document.getElementById("storeName").value+'&startDate='+document.getElementById('startDate').value+'&endDate='+document.getElementById('endDate').value);
+    }
+	
+	 function filterTable() {
+	 
+		var startDate = document.getElementById("startDate").value;
+    var endDate = document.getElementById("endDate").value;
+    var dateRegex = /^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/;
+    var re = new RegExp(dateRegex);
+    if(!re.test(startDate) || !re.test(endDate))
+      {
+        alert("A date is invalid. Please enter dates in the format: mm/dd/yyyy");
+      }
+
+      else{
+
+    var endDateValues = endDate.split('/');
+    var startDateValues = startDate.split('/');
+
+    var d1 = new Date(startDateValues[2], startDateValues[0] - 1, startDateValues[1])
+    var d2 = new Date(endDateValues[2], endDateValues[0] - 1, endDateValues[1])
+
+    if(d1 > d2)
+    {
+      alert("Your start date has to be either on or before the end date.")
+    }
+
+    else
+    {
+      loadDoc('getItem.php', fillTable, 'id='+document.getElementById("storeName").value+'&startDate='+startDate+'&endDate='+endDate);
+    }
+		
+    }
+  }
+	
+	function checkifNumber(elem) {
+		var elemPattern = /^\d+$/;
+		var re = new RegExp(elemPattern);
+		if(!re.test(elem))
+		{
+			return false;
+		}
+		return true;
+	}
+	
+	
+    //start the register vendor stuff.
+	// function addItemStart() {
+	//  loadDoc('addItem.php', addItem);
+ //   }
+  //  function addItem(xhttp){
+  //    //By doing this, we take whatever strings have been echoed by the php file and put it into our current webpage. No need to load a whole new page, It edits the one we are currently on.
+  //    document.getElementById("outsideItemTable").innerHTML = xhttp.responseText;
+   
+  //  $(document).ready(function() { 
+  //           // bind 'myForm' and provide a simple callback function 
+  //           // attach handler to form's submit event 
+  //     getVendorDropdown();
+  //     $('#myForm').submit(function() { 
+      
+  //     if(checkFunctions()){
+  //     //  console.log("I MADE IT");
+  //       //alert($('#myForm').serialize()+"&id=registerVendorSubmit");
+  //       $(this).ajaxSubmit(); // submit the form 
+  //     }
+      
+  //     return false; // return false to prevent normal browser submit and page navigation 
+  //     })
+  //       }); 
+    
+  //   $(document).ajaxSuccess(function (evt, jqXHR, settings) {
+  //     alert("Item successfully added.");
+  //     window.location.href = 'index.html';
+  //   });
+    
+  //   $(document).ajaxError(function (evt, jqXHR, settings, err) {
+  //   alert("The Item Number must be unique. That Item Number has already been taken.");
+  //   });
+  
+  // }
+   // function getVendorDropdown()
+   // {
+   //  loadDoc('getVendorDropdown.php', buildVendorDropdown)
+   // }
+   // function buildVendorDropdown(xhttp)
+   //  {
+   //      document.getElementsByName("vendorDropdown")[0].innerHTML = xhttp.responseText;
+   //      getCategoryDropdown();
+   //  }
+   //  function getCategoryDropdown()
+   //  {
+   //   loadDoc('getCategoryDropdown.php', buildCategoryDropdown)
+   //  }
+   //  function buildCategoryDropdown(xhttp)
+   //  {
+   //      document.getElementsByName("categoryDropdown")[0].innerHTML = xhttp.responseText;
+   //      getDivisionDropdown();
+   //  }
+   //  function getDivisionDropdown()
+   //  {
+   //    loadDoc('getDivisionDropdown.php', buildDivisionDropdown)
+   //  }
+   //  function buildDivisionDropdown(xhttp)
+   //  {
+   //    document.getElementsByName("divisionDropdown")[0].innerHTML = xhttp.responseText;
+   //  }
+   //  function getVendorModifyDropdown()
+   // {
+   //  loadDoc('getVendorDropdown.php', buildVendorModifyDropdown)
+   // }
+   // function buildVendorModifyDropdown(xhttp)
+   //  {
+   //      document.getElementsByName("vendorDropdown")[0].innerHTML = xhttp.responseText;
+   //      getDivisionModifyDropdown();
+   //  }
+   // function getDivisionModifyDropdown()
+   // {
+   //  loadDoc('getDivisionDropdown.php', buildDivisionModifyDropdown)
+   // }
+   // function buildDivisionModifyDropdown(xhttp)
+   //  {
+   //    document.getElementsByName("divisionDropdown")[0].innerHTML = xhttp.responseText;
+   //    getCategoryModifyDropdown();
+   //  }
+   //   function getCategoryModifyDropdown()
+   //  {
+   //   loadDoc('getCategoryDropdown.php', buildCategoryModifyDropdown)
+   //  }
+   //  function buildCategoryModifyDropdown(xhttp)
+   //  {
+   //      document.getElementsByName("categoryDropdown")[0].innerHTML = xhttp.responseText;
+   //      setDropdowns();
+   //  }
+    function getImage()
+    {
+      document.getElementById("itemImage").src = "../FD Images/" + document.getElementById("itemImagePath").value;
+    }
+    // function setDropdowns()
+    // {
+    //   var division = $('[name="divisionDropdown"]').attr("id");
+    //   $("[name='divisionDropdown'] option[value=" + division + "]").attr('selected', 'selected');
+    //   var category = $('[name="categoryDropdown"]').attr("id");
+    //   $("[name='categoryDropdown'] option[value=" + category + "]").attr('selected', 'selected');
+    //   var vendor = $('[name="vendorDropdown"]').attr("id");
+    //   $("[name='vendorDropdown'] option[value=" + vendor + "]").attr('selected', 'selected');
+    // }
+  //Start the modify vendor stuff
+  // function modifyItem(button){
+  //   var trid = button.closest('tr').attr('id');
+  //   var url = 'modifyItem.php?id=' + trid;
+  //   loadDoc(url, getTableRowModify);
+  // }
+  // function getTableRowModify(xhttp){
+  //   document.getElementById("outsideItemTable").innerHTML = xhttp.responseText;
+  //   //document.getElementsByName("stateSelect").val = $('[name="stateSelect"]').attr("id");
+  //   $(document).ready(function() { 
+  //           // bind 'myForm' and provide a simple callback function 
+  //           // attach handler to form's submit event
+  //       getVendorModifyDropdown();
+  //     $('#myForm').submit(function() { 
+      
+  //     if(checkFunctions()){
+  //     //  console.log("I MADE IT");
+  //       //alert($('#myForm').serialize()+"&id=registerVendorSubmit");
+  //       $(this).ajaxSubmit(); // submit the form 
+  //     }
+      
+  //     return false; // return false to prevent normal browser submit and page navigation 
+  //     })
+  //       }); 
+    
+  //   $(document).ajaxSuccess(function (evt, jqXHR, settings) {
+  //     confirmUpdate();
+  //   });
+    
+  //   $(document).ajaxError(function (evt, jqXHR, settings, err) {
+  //   alert("The Item Number must be unique. That Item Number has already been taken.");
+  //   });
+  // }
+  // function confirmUpdate(){
+  //   alert("The Item has been updated.");
+  //   document.location.href="index.html";
+  // }
+  // //This is where the delete stuff will be
+  // function deleteItem(button){
+  //   var trid = button.closest('tr').attr('id');
+  //   var url = 'deleteItem.php?id=' + trid;
+  //   loadDoc(url, getTableRowDelete);
+  // }
+  // function getTableRowDelete(xhttp){
+  //   document.getElementById("outsideItemTable").innerHTML = xhttp.responseText;
+  //   //document.getElementsByName("stateSelect").val = $('[name="stateSelect"]').attr("id");
+  //   getVendorModifyDropdown();
+  //   $(document).ready(function() { 
+  //           // bind 'myForm' and provide a simple callback function 
+  //           // attach handler to form's submit event 
+  //     $('#myForm').submit(function() { 
+      
+  //     //  console.log("I MADE IT");
+  //       //alert($('#myForm').serialize()+"&id=registerVendorSubmit");
+  //       $(this).ajaxSubmit(); // submit the form 
+      
+  //     return false; // return false to prevent normal browser submit and page navigation 
+  //     })
+  //       }); 
+    
+  //   $(document).ajaxSuccess(function (evt, jqXHR, settings) {
+  //     confirmDelete();
+  //   });
+  // }
+  // function confirmDelete(){
+  //   alert("The Item has been deleted.");
+  //   document.location.href="index.html";
+  // }
+   
+	// var alertText = "The following are entered incorrectly:";
+	// var alertTextLength = alertText.length;
+	// function checkFunctions() {
+		
+	// 	alertText = "The following are entered incorrectly:";
+		//checkNumber(document.getElementById("number"));
+		//checkDepartment(document.getElementById("itemDepartment"));
+		//checkSize(document.getElementById("Size"));
+		// checkItemCost(document.getElementById("itemCost"));
+		// checkRetailPrice(document.getElementById("retailPrice"));
+		//checkDescription(document.getElementById("Description"));
+		//checkDivisionDropdown(document.getElementsByName("divisionDropdown")[0]);
+    //checkCategoryDropdown(document.getElementsByName("categoryDropdown")[0]);
+    //checkVendorDropdown(document.getElementsByName("vendorDropdown")[0]);
+    //checkItemImagePath(document.getElementById("itemImagePath"));
+		// if(alertText.length == alertTextLength)
+		// {
+		// 	return true;
+				
+		// }else{
+			
+		// 	alert(alertText);
+				
+		// 	return false;
+			
+		// }
+	//}
+ 
+    </script>
+
+  </head>
+
+
+
+  <body style="background-color: rgb(255, 253, 239)">
+  	
+<nav class="navbar navbar-expand-sm navbar-dark" style="background-color: black">
+  <!-- Brand -->
+  <a class="navbar-brand" href="../../index.html">Nanno's Foods</a>
+
+  <!-- Links -->
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" href="../../Vendor">Vendors</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../../Store">Stores</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../../Items/index.html">Items</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../../Customers">Customers</a>
+    </li>
+  <li class="nav-item">
+      <a class="nav-link" href="../../Order">Orders</a>
+    </li>
+	<li class="nav-item">
+      <a class="nav-link" href="../../Returns">Returns</a>
+    </li>
+	  <li class="nav-item" >
+      <a class="nav-link" href="../../ProcessDelivery">Process Delivery</a>
+    </li>
+	<li class="nav-item dropdown active">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Reports
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="../ListAllItems/index.html">List All Items</a>
+          <a class="dropdown-item" href="index.html">List Frequently Returned Items</a>
+		</div>
+      </li>
+  </ul>
+</nav>
+	
+  	<div class="container-fluid" id="mainDiv">
+
+    	<div class="row" style="padding-top: 50px">
+  		<!-- <div class="col-lg-1"></div> -->
+  			<div class="col-lg-12">
+  				<div style="text-align: center">
+  					<div class="container">
+						<div class="page-header">
+							<h1>Returned Items</h1>      
+						</div>
+						<hr>  
+					</div>
+  				</div>
+  			</div>
+  		<!-- <div class="col-lg-1"></div> -->
+  		</div>
+
+  		<div class="row" id = "outsideItemTable">
+  		<!-- <div class="col-lg-1"></div> -->
+      <div class="col-lg-1">
+      </div>
+		<div class="col-lg-10" style="text-align: center">
+          <div style="text-align: center; overflow-y:auto; max-height: 750px;" >
+            <table class="table table-bordered" style="max-width: 100% " align="center" >
+              <thead class="thead-dark">
+                <tr>
+                  <th colspan="9">
+                    <form class="form-inline my-2 my-lg-0">
+                      <label style="padding-right: 10px">Start Date:</label>
+					            <input class="form-control mr-sm-2" type="search" aria-label="Search" id="startDate" name='startDate' style="width: 125px">
+                      <label style="padding-right: 10px">End Date:</label>
+                      <input class="form-control mr-sm-2" type="search" aria-label="Search" id="endDate" name='endDate' style="width: 125px">
+					            <button type="button" class="btn btn-primary btn-lg" onclick="filterTable();">Search</button>
+					
+					 <div class="form-group row">
+						<div style= "padding-left: 100px; padding-right: 50px;">
+							<select class="form-control" name="storeSelect" id="storeName" onchange="setStoreCode()">
+								
+							</select>
+						</div>
+					</div>
+                    </form>
+                  </th>
+				  <th colspan="1">
+                    <form id="fillLink">
+                    
+					</form>
+                </tr>
+              </thead>
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">Item ID</th>
+                  <th scope="col">Descripton</th>
+                  <th scope="col">Size</th>
+                  <th scope="col">Division</th>
+                  <th scope="col">Department</th>
+                  <th scope="col">Category</th>
+                  <th scope="col">Item Cost</th>
+                  <th scope="col">Retail Price</th>
+                  <th scope="col">Image</th>
+                  <th scope="col">Quantity Returned</th>
+                </tr>
+              </thead>
+              <tbody id = "itemTable" style="background-color: white;">
+              </tbody>
+            </table>
+
+          </div>
+  		<!-- <div class="col-lg-1"></div> -->
+  		</div>
+      <div class="col-lg-1">
+      </div>
+  		</div>
+
+  </div>
+
+  </body>
+
+</html>
+
