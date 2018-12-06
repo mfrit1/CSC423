@@ -30,23 +30,18 @@ if ($conn->query($sql) === TRUE) {
 	echo json_encode($error);
 }
 
-//$sql = "SELECT MAX(orderId) FROM orders";
-//$result= $conn->query($sql);
-//$data = mysqli_fetch_row($result);
-//$orderId = $data[0];
-//for($i = 1; $i <= $totalIds; $i++){
-//	$item = $_POST["ID" . $i];
-//	$quantity = $_POST["Quant" . $i];
-//	$sql = "INSERT INTO orderdetail (orderId, itemId, quantityOrdered) VALUES ('{$orderId}','{$item}','{$quantity}')";
-//	
-//	if ($conn->query($sql) === TRUE) {
-//		$res="Data Inserted Successfully:";
-//		echo json_encode($res);
-//	} else {
-//		$error="Not Inserted, Some Problems Occurred.";
-//		echo json_encode($error);
-//	}
-//}
+$updatedStock = $_POST["newStock"];
+
+$sql = "UPDATE inventory SET quantityInStock ='45' WHERE storeId = '{$storeCode}' AND itemId = '{$itemId}'";
+
+if ($conn->query($sql) === TRUE) {
+    	$res="Data Inserted Successfully:";
+		echo json_encode($res);
+	} else {
+   		$error="Not Inserted, Some Problems Occurred.";
+		echo json_encode($error);
+	}
+
 	
 $conn->close();
 
