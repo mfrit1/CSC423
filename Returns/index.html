@@ -116,13 +116,13 @@
 			document.getElementById("storeName").disabled = true;
 			
 			document.getElementById("itemDesc").value = '';
-			document.getElementById("itemId").value = '';
-			document.getElementById("qReturned").value = '';
+			//document.getElementById("itemId").value = '';
+			//document.getElementById("qReturned").value = '';
 			document.getElementById("tBody").innerHTML = '';
 			document.getElementById("storeCode").value = '';
 			document.getElementById("storeName").value = '';
 			
-			itemIds = [];
+			//itemIds = [];
 			itemIndex = 0;
 			itemTotal = 0;
 			
@@ -227,9 +227,9 @@
 			 
 			
 			 
-			 document.getElementById("qReturned").value = '';
-			 document.getElementById("itemId").value = '';
-			 document.getElementById("itemDesc").value = '';
+			 //document.getElementById("qReturned").value = '';
+			 //document.getElementById("itemId").value = '';
+			 //document.getElementById("itemDesc").value = '';
 		 }
 		else{
 				if(!fieldCheck){
@@ -367,7 +367,7 @@
 
 
 	function checkInputs(){
-		if(document.getElementById("itemId").value = '')
+		if(!document.getElementById("itemId").value != '')
 		{
 			//alertText = alertText.concat("\nPlease make sure all fields have been completed.");
 			alert("\nPlease make sure all fields have been completed.");
@@ -385,19 +385,19 @@
 			var vendorCode = "vendorCode=" + document.getElementById("vendorCode").value; 
 			var storeCode = "storeCode=" + document.getElementById("storeCode").value;
 			var totalIds = "idCount=" + itemTotal;
-			var itemCode = "itemId=" + document.getElementById("itemId").value; 
+			var itemId = "itemId=" + document.getElementById("itemId").value; 
 			var todayDate = "date=" + getTodayDate();
-			var send = vendorCode + "&" + storeCode + "&" + totalIds + "&" + todayDate + "&" + itemCode + "&" + turnTableToArray();
+			var send = vendorCode + "&" + storeCode + "&" + totalIds + "&" + todayDate + "&" + itemId + "&" + turnTableToArray();
 			$(document).ready(loadDoc('checkStock.php', endMessage1, send));
 		}
 			
 			
 			//var inStock = xhttp.responseText;
-			if(flag){
-				var stockUpdate = "newStock=" + globalStock;
-				var send1 = storeCode + "&" + vendorCode + "&" + totalIds + "&" + todayDate + "&" + stockUpdate;
-				$(document).ready(loadDoc('submitReturn.php', endMessage, send1));
-			}
+			// if(flag){
+			// 	var stockUpdate = "newStock=" + globalStock;
+			// 	var send1 = storeCode + "&" + vendorCode + "&" + totalIds + "&" + todayDate + "&" + stockUpdate;
+			// 	$(document).ready(loadDoc('submitReturn.php', endMessage, send1));
+			// }
 		
 	}
 	
@@ -418,25 +418,30 @@
 		//alert(xhttp.responseText + "in stock");
 		var numInStock = xhttp.responseText;
 		var totalItems = parseInt(document.getElementById("qReturned").value, 10);
+
 		
 
-		if(numInStock < totalItems){
+		if(totalItems > numInStock){
 			alert("There is not enough of this item in stock! \n Returned: " + totalItems + " In Stock: " + numInStock);
 			flag = false;
-			alert("less");
+			document.getElementById("qReturned").value = '';
+			
 		}
 		else{ 
+			
 			globalStock = numInStock - totalItems;
 			flag = true; 
 
 			var vendorCode = "vendorCode=" + document.getElementById("vendorCode").value; 
 			var storeCode = "storeCode=" + document.getElementById("storeCode").value;
 			var totalIds = "idCount=" + itemTotal;
-			var itemCode = "itemId=" + document.getElementById("itemId").value; 
+			var itemId = "itemId=" + document.getElementById("itemId").value; 
 			var todayDate = "date=" + getTodayDate();
+			var qReturned = "qReturned=" + document.getElementById("qReturned").value;
 
+			
 			var stockUpdate = "newStock=" + globalStock;
-			var send1 = storeCode + "&" + vendorCode + "&" + totalIds + "&" + todayDate + "&" + stockUpdate;
+			var send1 = storeCode + "&" + vendorCode + "&" + totalIds + "&" + todayDate + "&" + stockUpdate + "&" + qReturned + "&" + itemId;
 			$(document).ready(loadDoc('submitReturn.php', endMessage, send1));
 		}
 	}
@@ -554,17 +559,17 @@
 			<div class="form-group row">
 				<div class ="col-lg-5">
 					<label for="quanitiyReturned">Quantity Returned</label>
-					<input type="text" class="form-control" name="quantityReturned" id="qReturned" placeholder="Enter return quantity" disabled>
+					<input type="text" class="form-control" name="qReturned" id="qReturned" placeholder="Enter return quantity" disabled>
 				</div>
 				
-				<div class ="col-lg-2">
+				<!-- <div class ="col-lg-2">
 					<label for="button">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 					<button type="button" class="btn btn-success" name="button" onclick = "addItem()">Process Return</button>
-				</div>
+				</div> -->
 			</div>
 			<div style="height: 25px"></div>
 			<div class="form-group row">
-				<div class ="col-lg-8">
+				<!-- <div class ="col-lg-8">
 					<div class = "container" style="height: 200px; overflow-y: auto;">
 						<table class="table" id="myTable" style="table-layout: fixed;  word-wrap: break-word; width: 100%;">
 							<thead class="bg-secondary">
@@ -581,7 +586,7 @@
 						</tbody>
 						</table>
 					</div>
-				</div>
+				</div> -->
 				<div class ="col-lg-4">
 					<button  type="button" onclick="sendToPHP()" name="button" class="btn btn-primary btn-lg btn-block spacing">Submit Return Information</button>
 				</div>
