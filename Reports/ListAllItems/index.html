@@ -40,38 +40,64 @@
       };
     }
 	 
-	 $(document).ready(loadDoc('getStoreName.php', getStoreName));
+	$(document).ready(loadDoc('getStoreName.php', getStoreName));
 	 
-	 function getStoreName(xhttp){
-      //By doing this, we take whatever strings have been echoed by the php file and put it into our current webpage. No need to load a whole new page, It edits the one we are currently on.
-      document.getElementById("storeName").innerHTML = xhttp.responseText;
-	  setStoreCode();
+	function getStoreName(xhttp){
+		document.getElementById("storeName").innerHTML = xhttp.responseText;
+		setStoreCode();
     }
 	
 	function setStoreCode() {
-	document.getElementById("storeCode").value = document.getElementById("storeName").value;
-	loadDoc('getItem.php', getItems, "id="+document.getElementById("storeCode").value);
-	
+		document.getElementById("storeCode").value = document.getElementById("storeName").value;
+		loadDoc('getItem.php', getItems, "id="+document.getElementById("storeCode").value);
 	}
 	
 	function setStoreName() {
-	var temp = document.getElementById("storeName").value
-	document.getElementById("storeName").value = document.getElementById("storeCode").value;
-	if(document.getElementById("storeName").value == ''){
-		alert("Invalid store code, try another.");
-		document.getElementById("storeName").value = temp;
-		setStoreCode();
-		}
-	else{
-		loadDoc('getItem.php', getItems, "id="+document.getElementById("storeCode").value);
-		}
+		var temp = document.getElementById("storeName").value
+		document.getElementById("storeName").value = document.getElementById("storeCode").value;
+		if(document.getElementById("storeName").value == ''){
+			alert("Invalid store code, try another.");
+			document.getElementById("storeName").value = temp;
+			setStoreCode();
+			}
+		else{
+			loadDoc('getItem.php', getItems, "id="+document.getElementById("storeCode").value);
+			}
 	}
 	
-	 function fillTable(xhttp){
-		 document.getElementById("itemTable").innerHTML = xhttp.responseText;
+	 
+	
+	 
+	 
+	//If there is only a store entered, these are called.
+	function getItems(xhttp){
+		document.getElementById("itemTable").innerHTML = xhttp.responseText;
+		loadDoc('getItem.php', fillHTMLWithoutQuantity, 'id='+document.getElementById("storeCode").value);
+    }
+	
+	 function fillHTMLWithoutQuantity(xhttp){
 		 loadDoc('getItem.php', fillHtml, 'check=1&id='+document.getElementById("storeCode").value);
 	 }
 	 
+	 
+	 //This is called by both of them.
+	 function fillHtml(xhttp){
+		document.getElementById("fillLink").innerHTML = xhttp.responseText;
+	 }
+	 
+	
+	//If the quantity is entered and searched, these are called.
+	function filterTable() {
+	 
+		var quantity = document.getElementById("checkQuantity").value;
+		
+		if(!checkifNumber(quantity))
+			quantity = '0';
+			
+		loadDoc('getItem.php', fillTableWithQuantity, 'id='+document.getElementById("storeCode").value+'&checkQuantity='+quantity);
+		
+    }
+	
 	 function fillTableWithQuantity(xhttp){
 		 document.getElementById("itemTable").innerHTML = xhttp.responseText;
 		 
@@ -82,26 +108,6 @@
 		 loadDoc('getItem.php', fillHtml, 'check=1&id='+document.getElementById("storeCode").value+'&checkQuantity=' + quantity);
 	 }
 	 
-	 
-	 function fillHtml(xhttp){
-		document.getElementById("fillLink").innerHTML = xhttp.responseText;
-	 }
-	 
-	 function getItems(xhttp){
-      //By doing this, we take whatever strings have been echoed by the php file and put it into our current webpage. No need to load a whole new page, It edits the one we are currently on.
-      document.getElementById("itemTable").innerHTML = xhttp.responseText;
-	  loadDoc('getItem.php', fillTable, 'id='+document.getElementById("storeCode").value);
-    }
-	
-	 function filterTable() {
-	 
-		var quantity = document.getElementById("checkQuantity").value;
-		
-		if(!checkifNumber(quantity))
-			quantity = '0';
-		loadDoc('getItem.php', fillTableWithQuantity, 'id='+document.getElementById("storeCode").value+'&checkQuantity='+quantity);
-		
-    }
 	
 	function checkifNumber(elem) {
 		var elemPattern = /^\d+$/;
@@ -114,202 +120,6 @@
 	}
 	
 	
-    //start the register vendor stuff.
-	function addItemStart() {
-	 loadDoc('addItem.php', addItem);
-   }
-   function addItem(xhttp){
-     //By doing this, we take whatever strings have been echoed by the php file and put it into our current webpage. No need to load a whole new page, It edits the one we are currently on.
-     document.getElementById("outsideItemTable").innerHTML = xhttp.responseText;
-   
-   $(document).ready(function() { 
-            // bind 'myForm' and provide a simple callback function 
-            // attach handler to form's submit event 
-      getVendorDropdown();
-      $('#myForm').submit(function() { 
-      
-      if(checkFunctions()){
-      //  console.log("I MADE IT");
-        //alert($('#myForm').serialize()+"&id=registerVendorSubmit");
-        $(this).ajaxSubmit(); // submit the form 
-      }
-      
-      return false; // return false to prevent normal browser submit and page navigation 
-      })
-        }); 
-    
-    $(document).ajaxSuccess(function (evt, jqXHR, settings) {
-      alert("Item successfully added.");
-      window.location.href = 'index.html';
-    });
-    
-    $(document).ajaxError(function (evt, jqXHR, settings, err) {
-    alert("The Item Number must be unique. That Item Number has already been taken.");
-    });
-  
-  }
-   function getVendorDropdown()
-   {
-    loadDoc('getVendorDropdown.php', buildVendorDropdown)
-   }
-   function buildVendorDropdown(xhttp)
-    {
-        document.getElementsByName("vendorDropdown")[0].innerHTML = xhttp.responseText;
-        getCategoryDropdown();
-    }
-    function getCategoryDropdown()
-    {
-     loadDoc('getCategoryDropdown.php', buildCategoryDropdown)
-    }
-    function buildCategoryDropdown(xhttp)
-    {
-        document.getElementsByName("categoryDropdown")[0].innerHTML = xhttp.responseText;
-        getDivisionDropdown();
-    }
-    function getDivisionDropdown()
-    {
-      loadDoc('getDivisionDropdown.php', buildDivisionDropdown)
-    }
-    function buildDivisionDropdown(xhttp)
-    {
-      document.getElementsByName("divisionDropdown")[0].innerHTML = xhttp.responseText;
-    }
-    function getVendorModifyDropdown()
-   {
-    loadDoc('getVendorDropdown.php', buildVendorModifyDropdown)
-   }
-   function buildVendorModifyDropdown(xhttp)
-    {
-        document.getElementsByName("vendorDropdown")[0].innerHTML = xhttp.responseText;
-        getDivisionModifyDropdown();
-    }
-   function getDivisionModifyDropdown()
-   {
-    loadDoc('getDivisionDropdown.php', buildDivisionModifyDropdown)
-   }
-   function buildDivisionModifyDropdown(xhttp)
-    {
-      document.getElementsByName("divisionDropdown")[0].innerHTML = xhttp.responseText;
-      getCategoryModifyDropdown();
-    }
-     function getCategoryModifyDropdown()
-    {
-     loadDoc('getCategoryDropdown.php', buildCategoryModifyDropdown)
-    }
-    function buildCategoryModifyDropdown(xhttp)
-    {
-        document.getElementsByName("categoryDropdown")[0].innerHTML = xhttp.responseText;
-        setDropdowns();
-    }
-    function getImage()
-    {
-      document.getElementById("itemImage").src = "../FD Images/" + document.getElementById("itemImagePath").value;
-    }
-    function setDropdowns()
-    {
-      var division = $('[name="divisionDropdown"]').attr("id");
-      $("[name='divisionDropdown'] option[value=" + division + "]").attr('selected', 'selected');
-      var category = $('[name="categoryDropdown"]').attr("id");
-      $("[name='categoryDropdown'] option[value=" + category + "]").attr('selected', 'selected');
-      var vendor = $('[name="vendorDropdown"]').attr("id");
-      $("[name='vendorDropdown'] option[value=" + vendor + "]").attr('selected', 'selected');
-    }
-  //Start the modify vendor stuff
-  function modifyItem(button){
-    var trid = button.closest('tr').attr('id');
-    var url = 'modifyItem.php?id=' + trid;
-    loadDoc(url, getTableRowModify);
-  }
-  function getTableRowModify(xhttp){
-    document.getElementById("outsideItemTable").innerHTML = xhttp.responseText;
-    //document.getElementsByName("stateSelect").val = $('[name="stateSelect"]').attr("id");
-    $(document).ready(function() { 
-            // bind 'myForm' and provide a simple callback function 
-            // attach handler to form's submit event
-        getVendorModifyDropdown();
-      $('#myForm').submit(function() { 
-      
-      if(checkFunctions()){
-      //  console.log("I MADE IT");
-        //alert($('#myForm').serialize()+"&id=registerVendorSubmit");
-        $(this).ajaxSubmit(); // submit the form 
-      }
-      
-      return false; // return false to prevent normal browser submit and page navigation 
-      })
-        }); 
-    
-    $(document).ajaxSuccess(function (evt, jqXHR, settings) {
-      confirmUpdate();
-    });
-    
-    $(document).ajaxError(function (evt, jqXHR, settings, err) {
-    alert("The Item Number must be unique. That Item Number has already been taken.");
-    });
-  }
-  function confirmUpdate(){
-    alert("The Item has been updated.");
-    document.location.href="index.html";
-  }
-  //This is where the delete stuff will be
-  function deleteItem(button){
-    var trid = button.closest('tr').attr('id');
-    var url = 'deleteItem.php?id=' + trid;
-    loadDoc(url, getTableRowDelete);
-  }
-  function getTableRowDelete(xhttp){
-    document.getElementById("outsideItemTable").innerHTML = xhttp.responseText;
-    //document.getElementsByName("stateSelect").val = $('[name="stateSelect"]').attr("id");
-    getVendorModifyDropdown();
-    $(document).ready(function() { 
-            // bind 'myForm' and provide a simple callback function 
-            // attach handler to form's submit event 
-      $('#myForm').submit(function() { 
-      
-      //  console.log("I MADE IT");
-        //alert($('#myForm').serialize()+"&id=registerVendorSubmit");
-        $(this).ajaxSubmit(); // submit the form 
-      
-      return false; // return false to prevent normal browser submit and page navigation 
-      })
-        }); 
-    
-    $(document).ajaxSuccess(function (evt, jqXHR, settings) {
-      confirmDelete();
-    });
-  }
-  function confirmDelete(){
-    alert("The Item has been deleted.");
-    document.location.href="index.html";
-  }
-   
-	var alertText = "The following are entered incorrectly:";
-	var alertTextLength = alertText.length;
-	function checkFunctions() {
-		
-		alertText = "The following are entered incorrectly:";
-		//checkNumber(document.getElementById("number"));
-		//checkDepartment(document.getElementById("itemDepartment"));
-		//checkSize(document.getElementById("Size"));
-		checkItemCost(document.getElementById("itemCost"));
-		checkRetailPrice(document.getElementById("retailPrice"));
-		//checkDescription(document.getElementById("Description"));
-		//checkDivisionDropdown(document.getElementsByName("divisionDropdown")[0]);
-    //checkCategoryDropdown(document.getElementsByName("categoryDropdown")[0]);
-    //checkVendorDropdown(document.getElementsByName("vendorDropdown")[0]);
-    //checkItemImagePath(document.getElementById("itemImagePath"));
-		if(alertText.length == alertTextLength)
-		{
-			return true;
-				
-		}else{
-			
-			alert(alertText);
-				
-			return false;
-			
-		}
-	}
  
     </script>
 
