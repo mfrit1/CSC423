@@ -18,6 +18,8 @@
     var fieldCheck = true;
 	var alertText= '';
 	var createOrder = true;
+	var flag = false;
+	var globalStock = 0;
 
     function loadDoc(url, cFunction, params) {
 		// params = params || 0;
@@ -172,7 +174,7 @@
 		var re = new RegExp(elemPattern);
 		if(!re.test(document.getElementById("qOrdered").value))
 		{
-			alertText = alertText.concat("\nQuantity Ordered is not formatted correctly!");
+			alertText = alertText.concat("\nQuantity is not formatted correctly!");
 			return false;
 		}
 		else
@@ -217,7 +219,8 @@
 	}
 	
 	function sendToPHP(){
-		//getStock();
+		  
+		 
 		if(checkInputs())
 		{
 			var storeCode = "storeCode=" + document.getElementById("storeCode").value;
@@ -227,31 +230,42 @@
 			var todayDate = "date=" + getTodayDate();
 			var send = storeCode + "&" + customerCode + "&" + itemCode + "&" + totalItems + "&" + todayDate;
 			$(document).ready(loadDoc('checkStock.php', endMessage1, send));
-			//var inStock = xhttp.responseText;
 			
-			$(document).ready(loadDoc('submitOrder.php', endMessage, send));
+			//var inStock = xhttp.responseText;
+			if(flag){
+				var stockUpdate = "newStock=" + globalStock;
+				var send1 = storeCode + "&" + customerCode + "&" + itemCode + "&" + totalItems + "&" + todayDate + "&" + stockUpdate;
+				$(document).ready(loadDoc('submitOrder.php', endMessage, send1));
+			}
 		}
 		
 	}
 
 	function endMessage(xhttp){
-		alert("Order has been submitted");
+		alert("Purchase has been submitted");
 		itemIds = [];
 		itemIndex = 0;
 		itemTotal = 0;
+		globalStock = 0;
 		fieldCheck = true;
+		flag = false;
 		alertText= '';
 		window.location.href = ".";
 	}
 	
 	function endMessage1(xhttp){
-		alert(xhttp.responseText + "in stock")
-		itemIds = [];
-		itemIndex = 0;
-		itemTotal = 0;
-		fieldCheck = true;
-		alertText= '';
-		window.location.href = ".";
+		//alert(xhttp.responseText + "in stock");
+		var numInStock = xhttp.responseText;
+		var totalItems = parseInt(document.getElementById("qOrdered").value, 10);
+		
+		if(numInStock < totalItems){
+			alert("There is not enough of this item in stock! \n Ordered: " + totalItems + " In Stock: " + numInStock);
+			flag = false;
+		}
+		else{ 
+			globalStock = numInStock - totalItems;
+			flag = true; 
+		}
 	}
 	
     </script>
