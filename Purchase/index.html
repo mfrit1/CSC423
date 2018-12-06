@@ -97,7 +97,19 @@
 	    }
     }
 	
+	function getStock(){
+		loadDoc("checkStock.php", checkStock);
+	}
 	
+	function checkStock(xhttp){
+		alert("Made it to function");
+		var quantityOrdered = document.getElementById("qOrdered").value;
+		var storeCode = "storeCode=" + document.getElementById("storeCode").value;
+		var itemId = "itemId=" + document.getElementById("itemId").value;
+		var inStock = xhttp.responseText;
+		
+		alert("Amount in stock is " + inStock);
+	}
 	
 	function getStoreName(xhttp){
       //By doing this, we take whatever strings have been echoed by the php file and put it into our current webpage. No need to load a whole new page, It edits the one we are currently on.
@@ -194,6 +206,7 @@
 	}
 	
 	function sendToPHP(){
+		getStock();
 		if(checkInputs())
 		{
 			var storeCode = "storeCode=" + document.getElementById("storeCode").value;
@@ -205,10 +218,6 @@
 			$(document).ready(loadDoc('submitOrder.php', endMessage, send));
 		}
 		
-	}
-	
-	function checkInStock() {
-		var numOrdered = "numOfItems=" + document.getElementById().value;
 	}
 
 	function endMessage(xhttp){
