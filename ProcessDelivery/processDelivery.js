@@ -21,35 +21,15 @@
 }
 
 function createReturnStart(){
-	console.log(document.getElementById("orderNumber").value);
  loadDoc('getDelivery.php', makeTable, "orderNumber="+document.getElementById("orderNumber").value);
   //By doing this, we take whatever strings have been echoed by the php file and put it into our current webpage. No need to load a whole new page, It edits the one we are currently on.
 }
+
 
 function makeTable(xhttp){
   //By doing this, we take whatever strings have been echoed by the php file and put it into our current webpage. No need to load a whole new page, It edits the one we are currently on.
   document.getElementById("outsideMainContainer").innerHTML = xhttp.responseText;
 }
-
-// function filterTable() {
-//   var input, filter, table, tr, td, i;
-//   input = document.getElementById("searchBar");
-//   filter = input.value;
-//   console.log(filter);
-//   table = document.getElementById("returnTable");
-//   tr = table.getElementsByTagName("tr");
-//   for (i = 0; i < tr.length; i++) {
-//     td = tr[i].getElementsByTagName("td")[0];
-//     if (td) {
-//       console.log(td.innerHTML)
-//       if (td.innerHTML.indexOf(filter) > -1) {
-//         tr[i].style.display = "";
-//       } else {
-//         tr[i].style.display = "none";
-//       }
-//     }       
-//   }
-// }
 
 // function getTodayDate()
 // {
@@ -71,7 +51,7 @@ function makeTable(xhttp){
 //}
 
 function sendToPHP(){
-	if(createReturn && checkFunctions())
+	if(createReturn)
 	{
 		var vendorCode = "vendorCode=" + document.getElementById("vendorCode").value; 
 		var storeCode = "storeCode=" + document.getElementById("storeCode").value;
@@ -91,11 +71,10 @@ function sendToPHP(){
 		$(document).ready(loadDoc('submitReturn.php', endMessage, send));
 	
 	}
-	
 }
 
 function endMessage(xhttp){
-	alert("Return has been processed");
+	alert("Delivery has been processed");
 	itemIds = [];
 	itemIndex = 0;
 	itemTotal = 0;
