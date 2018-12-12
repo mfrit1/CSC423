@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Nanno's Foods</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../style.css">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="http://malsup.github.com/jquery.form.js"></script>
+	<script type="text/javascript" src="../Scripts.js"></script>  	
+	
+
+    <script type="text/javascript">
+	
+    var fieldCheck = true;
+	var alertText= '';
+	var createOrder = true;
+	var flag = false;
+	var globalStock = 0;
+
+    function loadDoc(url, cFunction, params) {
+		// params = params || 0;
+		//Creates an object to run php file
+		var xhttp;
+		xhttp=new XMLHttpRequest();
+		//HERE is when the program actually switches over to the php and runs the file.
+		xhttp.open("POST", url, true);
+		xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xhttp.send(params);
+	  
+		//This tells the program to run the following code once the php file has run.
+		xhttp.onreadystatechange = function() {
+
+		//A ready status of both 4 and 200 mean that the php file ran okay, meaning no errors.
+        if (this.readyState == 4 && this.status == 200) {
+			//cFunction can change depending on what the user enters as a parameter.
+            cFunction(this);
+			
+        }
+      };
+    }
+	
+	function createOrderStart(){
+		loadDoc('createNewOrder.php', getNewOrderPHP);
+		//By doing this, we take whatever strings have been echoed by the php file and put it into our current webpage. No need to load a whole new page, It edits the one we are currently on.
+    }
+	
+	function getNewOrderPHP(xhttp){
+		document.getElementById("outsideOrderTable").innerHTML = xhttp.responseText;
+		$(document).ready(loadDoc('getStoreName.php', getStoreName));
+	}
+	
+	 function setFields(){
+      //By doing this, we take whatever strings have been echoed by the php file and put it into our current webpage. No need to load a whole new page, It edits the one we are currently on.
+	  
+	    if(fieldCheck)
+	    {
+		  if(document.getElementById("vendorCode").value != '' && document.getElementById("vendorName").value != '')
+			{
+				document.getElementById("vendorCode").disabled = true;
+				document.getElementById("vendorName").disabled = true;
+				document.getElementById("itemDesc").disabled = false;
+				document.getElementById("itemId").disabled = false;
+				document.getElementById("qOrdered").disabled = false;
+				document.getElementById("storeCode").disabled = false;
+				document.getElementById("storeName").disabled = false;
+				$(document).ready(loadDoc('getItemDesc.php', getItemDesc, "vendorCode="+document.getElementById("vendorCode").value));
+				fieldCheck = false;
+			}
+			else{
+				alert("You need to set the Vendor fields");
+				fieldCheck = false;
+			}
+		}
+		else{
+			document.getElementById("vendorCode").disabled = false;
+			document.getElementById("vendorName").disabled = false;
+			document.getElementById("itemDesc").disabled = true;
+			document.getElementById("itemId").disabled = true;
+			document.getElementById("qOrdered").disabled = true;
+			document.getElementById("storeCode").disabled = true;
+			document.getElementById("storeName").disabled = true;
+			
+			document.getElementById("itemDesc").value = '';
+			document.getElementById("itemId").value = '';
+			document.getElementById("qOrdered").value = '';
+			document.getElementById("tBody").innerHTML = '';
+			document.getElementById("storeCode").value = '';
+			document.getElementById("storeName").value = '';
+			
+			itemIds = [];
+			itemIndex = 0;
+			itemTotal = 0;
+			
+			fieldCheck = true;
+	    }
+    }
+	
+	// function getStock(){
+	// 	loadDoc("checkStock.php", checkStock);
+	// }
+	
+	// function checkStock(xhttp){
+	// 	alert("Made it to function");
+	// 	// var quantityOrdered = document.getElementById("qOrdered").value;
+	// 	// var storeCode = "storeCode=" + document.getElementById("storeCode").value;
+	// 	// var itemId = "itemId=" + document.getElementById("itemId").value;
+	// 	// var inStock = xhttp.responseText;
+	// 	// var send = storeCode + "&" + customerCode + "&" + itemCode + "&" + totalItems + "&" + todayDate;
+	// 	// 	$(document).ready(loadDoc('submitOrder.php', endMessage, send));
+		
+
+	// 		var storeCode = "storeCode=" + document.getElementById("storeCode").value;
+	// 		var itemCode = "itemId=" + document.getElementById("itemId").value; 
+	// 		var totalItems = "itemCount=" + document.getElementById("qOrdered").value;
+	// 		var send = storeCode + "&" + itemCode + "&" + totalItems;
+	// 		var inStock = xhttp.responseText;
+	// 		$(document).ready(loadDoc('checkStock.php', endMessage1, send));
+	// 	//alert("Amount in stock is " + inStock);
+	// }
+	
+	
+
+	function getStoreName(xhttp){
+      //By doing this, we take whatever strings have been echoed by the php file and put it into our current webpage. No need to load a whole new page, It edits the one we are currently on.
+      document.getElementById("storeName").innerHTML = xhttp.responseText;
+	  setStoreCode();
+    }
+	
+	 function getItemDesc(xhttp){
+      //By doing this, we take whatever strings have been echoed by the php file and put it into our current webpage. No need to load a whole new page, It edits the one we are currently on.
+      document.getElementById("itemDesc").innerHTML = xhttp.responseText;
+	  setItemId();
+    }
+	
+	function setStoreCode() {
+		document.getElementById("storeCode").value = document.getElementById("storeName").value;
+	}
+	
+	function setStoreName() {
+		var temp = document.getElementById("storeName").value
+		document.getElementById("storeName").value = document.getElementById("storeCode").value;
+		if(document.getElementById("storeName").value == ''){
+			alert("Invalid store code, try another.");
+			document.getElementById("storeName").value = temp;
+			setStoreCode();
+		}
+	}
+
+	function addItem(){
+		if(checkQuantityOrdered()){
+			 
+		
+			var sel =  document.getElementById("itemDesc");
+			var text= sel.options[sel.selectedIndex].text;
+			 
+			 document.getElementById("qOrdered").value = '';
+			 document.getElementById("itemId").value = '';
+			 document.getElementById("itemDesc").value = '';
+		 }
+		else{
+				if(!fieldCheck){
+					alert(alertText);
+					alertText = '';
+				}
+			}
+	}
+	
+	function checkQuantityOrdered(){
+		var elemPattern = /^\d{1,10}$/;
+		var re = new RegExp(elemPattern);
+		if(!re.test(document.getElementById("qOrdered").value))
+		{
+			alertText = alertText.concat("\nQuantity is not formatted correctly!");
+			return false;
+		}
+		else
+			return true;
+	}
+	
+	function checkInputs(){
+		if(!document.getElementById("itemId").value != '' || !document.getElementById("storeCode").value != '' || !document.getElementById("customerId").value != '')
+		{
+			//alertText = alertText.concat("\nPlease make sure all fields have been completed.");
+			alert("\nPlease make sure all fields have been completed.");
+			return false;
+		}
+		else
+			return true;
+	}
+	
+	function getItemIds(){
+		var i = 0;
+		itemIds = [];
+		while(i < itemIndex){
+			var test = document.getElementById("Id"+i);
+			if(test){
+				itemIds.push(document.getElementById("Id"+i).innerHTML);
+			}
+			i++;
+		}
+	}
+	
+	function getTodayDate()
+	{
+		var today = new Date();
+		var dd = today.getDate();
+		var mm = today.getMonth()+1; //January is 0!
+		var yyyy = today.getFullYear();
+
+		if(dd<10) { dd = '0'+dd } 
+		if(mm<10) { mm = '0'+mm } 
+		
+		today = mm + '/' + dd + '/' + yyyy;
+		return today;
+	}
+	
+	function sendToPHP(){
+		  
+		 
+		if(checkInputs())
+		{
+			var storeCode = "storeCode=" + document.getElementById("storeCode").value;
+			var customerCode = "customerId=" + document.getElementById("customerId").value; 
+			var itemCode = "itemId=" + document.getElementById("itemId").value; 
+			var totalItems = "itemCount=" + document.getElementById("qOrdered").value;
+			var todayDate = "date=" + getTodayDate();
+			var send = storeCode + "&" + customerCode + "&" + itemCode + "&" + totalItems + "&" + todayDate;
+			$(document).ready(loadDoc('checkStock.php', endMessage1, send));
+			
+			//var inStock = xhttp.responseText;
+			if(flag){
+				var stockUpdate = "newStock=" + globalStock;
+				var send1 = storeCode + "&" + customerCode + "&" + itemCode + "&" + totalItems + "&" + todayDate + "&" + stockUpdate;
+				$(document).ready(loadDoc('submitOrder.php', endMessage, send1));
+			}
+		}
+		
+	}
+
+	function endMessage(xhttp){
+		alert("Purchase has been submitted");
+		itemIds = [];
+		itemIndex = 0;
+		itemTotal = 0;
+		globalStock = 0;
+		fieldCheck = true;
+		flag = false;
+		alertText= '';
+		window.location.href = ".";
+	}
+	
+	function endMessage1(xhttp){
+		//alert(xhttp.responseText + "in stock");
+		var numInStock = xhttp.responseText;
+		var totalItems = parseInt(document.getElementById("qOrdered").value, 10);
+		
+		if(numInStock < totalItems){
+			alert("There is not enough of this item in stock! \n Ordered: " + totalItems + " In Stock: " + numInStock);
+			flag = false;
+		}
+		else{ 
+			globalStock = numInStock - totalItems;
+			flag = true; 
+		}
+	}
+	
+    </script>
+
+  </head>
+
+
+  <body style="background-color: rgb(255, 253, 239)">
+  	
+<nav class="navbar navbar-expand-sm navbar-dark" style="background-color: black">
+  <!-- Brand -->
+  <a class="navbar-brand" href="../index.html">Nanno's Foods</a>
+
+  <!-- Links -->
+  <ul class="navbar-nav">
+    <li class="nav-item ">
+      <a class="nav-link" href="../Vendor">Vendors</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../Store">Stores</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../Items">Items</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../Customers">Customers</a>
+    </li>
+	<li class="nav-item" >
+      <a class="nav-link" href="index.html">Orders</a>
+    </li>
+	  <li class="nav-item" >
+      <a class="nav-link" href="../Returns">Returns</a>
+    </li>
+	  <li class="nav-item" >
+      <a class="nav-link" href="../ProcessDelivery">Process Delivery</a>
+	  </li>
+	<li class="nav-item active" >
+      <a class="nav-link" href="index.html">Purchase</a>
+    </li>
+	<li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Reports
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="../Reports/ListAllItems">List All Items</a>
+		<a class="dropdown-item" href="../Reports/FrequentlyReturned">Frequently Returned</a>
+        </div>
+    </li>	  
+  </ul>
+</nav>
+	
+<div class="container-fluid" id="mainDiv">
+	<div class="row" style="padding-top: 50px">
+  		<div class="col-lg-12">
+  			<div style="text-align: center">
+  				<div class="container">
+					<div class="page-header">
+						<h1>Welcome To The Purchase Portal</h1>      
+					</div>
+					<hr>  
+				</div>
+  			</div>
+  		</div>
+	</div>
+	<div class="row" id = "outsideOrderTable">
+		<div class="col-lg-12" style="text-align: center">
+			<div style="text-align: center" >
+				<button type="button" class="btn btn-success" onclick="createOrderStart();">Log Purchase</button>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+
+</html>

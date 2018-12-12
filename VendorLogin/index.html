@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Nanno's Foods</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../style.css">
+	
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="http://malsup.github.com/jquery.form.js"></script>
+	<script type="text/javascript" src="../Scripts.js"></script>  	
+	
+
+    <script type="text/javascript">
+
+
+      function loadDoc(url, cFunction) {
+
+    //Creates an object to run php file
+      var xhttp;
+	  xhttp=new XMLHttpRequest();
+      //HERE is when the program actually switches over to the php and runs the file.
+      xhttp.open("POST", url, true);
+      xhttp.send();
+	  
+	  //This tells the program to run the following code once the php file has run.
+      xhttp.onreadystatechange = function() {
+
+        //A ready status of both 4 and 200 mean that the php file ran okay, meaning no errors.
+        if (this.readyState == 4 && this.status == 200) {
+          //cFunction can change depending on what the user enters as a parameter.
+            cFunction(this);
+			
+        }
+      };
+    }
+
+
+
+
+    $(document).ready(function() { 
+            // bind 'myForm' and provide a simple callback function 
+            // attach handler to form's submit event 
+      $('#myForm').submit(function() { 
+      //  console.log("I MADE IT");
+        //alert($('#myForm').serialize()+"&id=registerVendorSubmit");
+        $(this).ajaxSubmit(); // submit the form 
+      
+      return false; // return false to prevent normal browser submit and page navigation 
+      })
+    }); 
+    
+    $(document).ajaxSuccess(function (evt, jqXHR, settings) {
+      var url = "viewOrders.html?vendorCode=" + document.getElementById("vendorCode").value;
+      window.location.href = url;
+    });
+    
+    $(document).ajaxError(function (evt, jqXHR, settings, err) {
+      alert("Your Vendor Code or Password is incorrect.");
+      document.getElementById("password").value = "";
+    });
+	
+
+
+    </script>
+
+  </head>
+
+
+  <body style="background-color: rgb(255, 253, 239)">
+    
+<nav class="navbar navbar-expand-sm navbar-dark" style="background-color: black">
+  <!-- Brand -->
+  <a class="navbar-brand" href="index.html">Nanno's Foods</a>
+
+</nav>
+  
+    <div class = "container">
+    <div class="row" style="padding-top: 125px">
+      <!-- <div class="col-lg-1"></div> -->
+        <div class="col-lg-12">
+          <div style="text-align: center">
+            <div class="container">
+            <div class="page-header">
+              <h1>Vendor Login</h1>      
+            </div>
+            <hr>  
+          </div>
+          </div>
+        </div>
+      </div>
+    <form class="form-horizontal" method="post" id = "myForm" action = "verifyVendor.php" autocomplete="off">
+
+      <div style="height: 25px"></div>
+
+      <div class="form-group row">
+        <div class ="col-lg-1"></div>
+        <div class ="col-lg-10">
+          <h4 align="center">Welcome to the Vendor login page! Please enter your unique Vendor Code and password to see your orders!</h4>
+        </div>
+        <div class ="col-lg-1"></div>
+      </div>
+
+      <div style="height: 50px"></div>
+
+      <div class="form-group row">
+        <div class="col-lg-3"></div>
+        <div class ="col-lg-6">
+          <h4 align="left">Vendor Code</h4>
+        </div>
+        <div class="col-lg-3"></div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-lg-3"></div>
+        <div class ="col-lg-6">
+          <input type="text" class="form-control" name="vendorCode" id="vendorCode" placeholder="Enter Vendor Code">
+        </div>
+        <div class="col-lg-3"></div>
+      </div>
+
+      <div style="height: 25px"></div>
+
+      <div class="form-group row">
+        <div class="col-lg-3"></div>
+        <div class ="col-lg-6">
+          <h4 align="left">Password</h4>
+        </div>
+        <div class="col-lg-3"></div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-lg-3"></div>
+        <div class ="col-lg-6">
+          <input type="password" class="form-control" name="password" id="password" placeholder="Enter Password">
+        </div>
+        <div class="col-lg-3"></div>
+      </div>
+
+      <div style="height: 50px"></div>
+
+      <div class="form-group row">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6">
+          <button type="submit" button name="submit" id="submit" class="btn btn-success btn-lg btn-block spacing">Login<i class='fa fa-sign-in' style="padding-left: 10px"></i></button>
+        </div>
+        <div class="col-lg-3"></div>
+      </div>
+    </form>
+  </div>'
+
+  </body>
+
+</html>

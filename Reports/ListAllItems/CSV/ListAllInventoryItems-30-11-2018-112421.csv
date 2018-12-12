@@ -1,0 +1,5 @@
+itemId,description,size,division,department,category,itemCost,itemRetail,imageFileName,vendorId,status
+1,Shells,16,shoes,feet,"feet socks",5.99,6.99,abcd.jpg,1,Active
+2,"BEtter than shells",16,shoes,feet,"feet socks",8.00,8.00,abcd.jpg,1,Active
+123312,<h5>hi</h5>,23,shoes,Iran,"feet socks",44.87,67.88,hello.jpg,3,Active
+123314,"Large Item",23,shoes,Iran,"feet socks",44.87,35.67,hello.jpg,2,Active

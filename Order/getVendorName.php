@@ -1,0 +1,25 @@
+<?php
+
+//Sets the database connection. This file must have your own DB information inside of it.
+require '../DBInfo.php';
+
+//SQL statement to get the record.
+$sql = "SELECT vendorCode, vendorName FROM vendor WHERE status = 'Active' ORDER BY vendorName ASC";
+
+//Run the SQL statement and store the returned values in result.
+$result= $conn->query($sql);
+
+
+echo '<option value="" disabled selected hidden>Vendors...</option>"';
+
+//As long as there is another row to be processed, do the following loop. This adds all returned DB records to the table.
+
+while($data = mysqli_fetch_row($result))
+{   
+	$value = htmlspecialchars($data[0]);
+	$field = htmlspecialchars($data[1]);
+    echo "<option value='$value'>$field</option>";
+}
+
+$conn->close();
+?>

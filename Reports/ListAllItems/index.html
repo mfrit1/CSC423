@@ -1,0 +1,251 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Nanno's Foods</title>
+   <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../../style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	 <script type="text/javascript" src="../../Scripts.js"></script>  	
+	
+
+    <script type="text/javascript">
+    $("#pop").on("click", function() {
+    $('#imagepreview').attr('src', $('#imageresource').attr('src')); // here asign the image to the modal when the user click the enlarge link
+    $('#imagemodal').modal('show'); // imagemodal is the id attribute assigned to the bootstrap modal, then i use the show function
+    });
+      //This loads all current vendors onto the page.
+      function loadDoc(url, cFunction, params) {
+    //Creates an object to run php file
+      var xhttp;
+	   xhttp=new XMLHttpRequest();
+      //HERE is when the program actually switches over to the php and runs the file.
+      xhttp.open("POST", url, true);
+	   xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      xhttp.send(params);
+	  
+	  //This tells the program to run the following code once the php file has run.
+      xhttp.onreadystatechange = function() {
+        //A ready status of both 4 and 200 mean that the php file ran okay, meaning no errors.
+        if (this.readyState == 4 && this.status == 200) {
+          //cFunction can change depending on what the user enters as a parameter.
+            cFunction(this);
+			
+        }
+      };
+    }
+	 
+	$(document).ready(loadDoc('getStoreName.php', getStoreName));
+	 
+	function getStoreName(xhttp){
+		document.getElementById("storeName").innerHTML = xhttp.responseText;
+		setStoreCode();
+    }
+	
+	function setStoreCode() {
+		document.getElementById("storeCode").value = document.getElementById("storeName").value;
+		loadDoc('getItem.php', getItems, "id="+document.getElementById("storeCode").value);
+	}
+	
+	function setStoreName() {
+		var temp = document.getElementById("storeName").value
+		document.getElementById("storeName").value = document.getElementById("storeCode").value;
+		if(document.getElementById("storeName").value == ''){
+			alert("Invalid store code, try another.");
+			document.getElementById("storeName").value = temp;
+			setStoreCode();
+			}
+		else{
+			loadDoc('getItem.php', getItems, "id="+document.getElementById("storeCode").value);
+			}
+	}
+	
+	 
+	
+	 
+	 
+	//If there is only a store entered, these are called.
+	function getItems(xhttp){
+		document.getElementById("itemTable").innerHTML = xhttp.responseText;
+		loadDoc('getItem.php', fillHTMLWithoutQuantity, 'id='+document.getElementById("storeCode").value);
+    }
+	
+	 function fillHTMLWithoutQuantity(xhttp){
+		 loadDoc('getItem.php', fillHtml, 'check=1&id='+document.getElementById("storeCode").value);
+	 }
+	 
+	 
+	 //This is called by both of them.
+	 function fillHtml(xhttp){
+		document.getElementById("fillLink").innerHTML = xhttp.responseText;
+	 }
+	 
+	
+	//If the quantity is entered and searched, these are called.
+	function filterTable() {
+	 
+		var quantity = document.getElementById("checkQuantity").value;
+		
+		if(!checkifNumber(quantity))
+			quantity = '0';
+			
+		loadDoc('getItem.php', fillTableWithQuantity, 'id='+document.getElementById("storeCode").value+'&checkQuantity='+quantity);
+		
+    }
+	
+	 function fillTableWithQuantity(xhttp){
+		 document.getElementById("itemTable").innerHTML = xhttp.responseText;
+		 
+		var quantity = document.getElementById("checkQuantity").value;
+		if(!checkifNumber(quantity))
+			quantity = '0';
+			
+		 loadDoc('getItem.php', fillHtml, 'check=1&id='+document.getElementById("storeCode").value+'&checkQuantity=' + quantity);
+	 }
+	 
+	
+	function checkifNumber(elem) {
+		var elemPattern = /^\d+$/;
+		var re = new RegExp(elemPattern);
+		if(!re.test(elem))
+		{
+			return false;
+		}
+		return true;
+	}
+	
+	
+ 
+    </script>
+
+  </head>
+
+
+
+  <body style="background-color: rgb(255, 253, 239)">
+  	
+<nav class="navbar navbar-expand-sm navbar-dark" style="background-color: black">
+  <!-- Brand -->
+  <a class="navbar-brand" href="../../index.html">Nanno's Foods</a>
+
+  <!-- Links -->
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" href="../../Vendor">Vendors</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../../Store">Stores</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="index.html">Items</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../../Customers">Customers</a>
+    </li>
+  <li class="nav-item">
+      <a class="nav-link" href="../../Order">Orders</a>
+    </li>
+	<li class="nav-item">
+      <a class="nav-link" href="../../Returns">Returns</a>
+    </li>
+	  <li class="nav-item" >
+      <a class="nav-link" href="../../ProcessDelivery">Process Delivery</a>
+    </li>
+	 <li class="nav-item" >
+      <a class="nav-link" href="../../Purchase">Purchase</a>
+    </li>
+	<li class="nav-item dropdown active">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Reports
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href=".">List All Items</a>
+		<a class="dropdown-item" href="../FrequentlyReturned/index.html">Frequently Returned</a>
+		</div>
+      </li>
+  </ul>
+</nav>
+	
+  	<div class="container-fluid" id="mainDiv">
+
+    	<div class="row" style="padding-top: 50px">
+  		<!-- <div class="col-lg-1"></div> -->
+  			<div class="col-lg-12">
+  				<div style="text-align: center">
+  					<div class="container">
+						<div class="page-header">
+							<h1>Item List</h1>      
+						</div>
+						<hr>  
+					</div>
+  				</div>
+  			</div>
+  		<!-- <div class="col-lg-1"></div> -->
+  		</div>
+
+  		<div class="row" id = "outsideItemTable">
+  		<!-- <div class="col-lg-1"></div> -->
+      <div class="col-lg-1">
+      </div>
+		<div class="col-lg-10" style="text-align: center">
+          <div style="text-align: center; overflow-y:auto; max-height: 750px;" >
+            <table class="table table-bordered" style="max-width: 100% " align="center" >
+              <thead class="thead-dark">
+                <tr>
+                  <th colspan="9">
+                    <form class="form-inline my-2 my-lg-0">
+					<input class="form-control mr-sm-2" type="search" placeholder="Overstocked Quantity" aria-label="Search" id="checkQuantity">
+					<button type="button" class="btn btn-primary btn-lg" onclick="filterTable();">Search</button>
+					
+					 <div class="form-group row">
+						<div style= "padding-left: 100px; padding-right: 100px;">
+							<select class="form-control" name="storeSelect" id="storeName" onchange="setStoreCode()" >
+								
+							</select>
+							<input type="text" class="form-control" name="InputStoreCode" id="storeCode" onchange="setStoreName()" placeholder="Enter Store Code" >
+						</div>
+					</div>
+                    </form>
+                  </th>
+				  <th colspan="1">
+                    <form id="fillLink">
+                    
+					</form>
+                </tr>
+              </thead>
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">Item ID</th>
+                  <th scope="col">Descripton</th>
+                  <th scope="col">Size</th>
+                  <th scope="col">Division</th>
+                  <th scope="col">Department</th>
+                  <th scope="col">Category</th>
+                  <th scope="col">Item Cost</th>
+                  <th scope="col">Retail Price</th>
+				  <th scope="col">Quantity</th>
+                  <th scope="col">Image</th>
+                </tr>
+              </thead>
+              <tbody id = "itemTable" style="background-color: white;">
+              </tbody>
+            </table>
+
+          </div>
+  		<!-- <div class="col-lg-1"></div> -->
+  		</div>
+      <div class="col-lg-1">
+      </div>
+  		</div>
+
+  </div>
+
+  </body>
+
+</html>
+

@@ -1,0 +1,134 @@
+DROP TABLE IF EXISTS RETAILSTORE;
+CREATE TABLE RETAILSTORE(
+    storeId int NOT NULL AUTO_INCREMENT,
+    storeCode varchar(30),
+    storeName varchar(50),
+    address varchar(50),
+    city varchar(30),
+    state char(2),
+    zip char(5),
+    phone varchar(15),
+    managerName varchar(30),
+    status ENUM ('Active', 'Inactive') DEFAULT 'Active',
+    PRIMARY KEY(storeId),
+    UNIQUE(storeCode)
+);
+
+DROP TABLE IF EXISTS VENDOR;
+CREATE TABLE VENDOR(
+    vendorId int NOT NULL AUTO_INCREMENT,
+    vendorCode varchar(30),
+    vendorName varchar(50),
+    address varchar(50),
+    city varchar(30),
+    state char(2),
+    zip char(5),
+    phone varchar(15),
+    contactPersonName varchar(40),
+    password varchar(40),
+    status ENUM ('Active', 'Inactive') DEFAULT 'Active',
+    PRIMARY KEY(vendorId),
+    UNIQUE(vendorCode)
+);
+
+DROP TABLE IF EXISTS INVENTORYITEM;
+CREATE TABLE INVENTORYITEM(
+    itemId int NOT NULL AUTO_INCREMENT,
+    description varchar(40),
+    size varchar(10),
+    division varchar(20),
+    department varchar(20),
+    category varchar(20),
+    itemCost varchar(10),
+    itemRetail varchar(10),
+    imageFileName varchar(50),
+    vendorId int,
+    status ENUM ('Active', 'Inactive') DEFAULT 'Active',
+    PRIMARY KEY(itemId),
+    FOREIGN KEY (vendorId) REFERENCES VENDOR(vendorId)
+);
+
+DROP TABLE IF EXISTS INVENTORY;
+CREATE TABLE INVENTORY(
+    inventoryId int NOT NULL AUTO_INCREMENT,
+    storeId int,
+    itemId int,
+    quantityInStock int,
+    FOREIGN KEY (storeId) REFERENCES RETAILSTORE(storeId),
+    FOREIGN KEY (itemId) REFERENCES INVENTORYITEM(itemId),
+    PRIMARY KEY(inventoryId)
+);
+
+DROP TABLE IF EXISTS CUSTOMER;
+CREATE TABLE CUSTOMER(
+    customerId int NOT NULL AUTO_INCREMENT,
+    name varchar(30),
+    address varchar(50),
+    city varchar(30),
+    state char(2),
+    zip char(5),
+    phone varchar(15),
+    email varchar (20),
+    status ENUM ('Active', 'Inactive') DEFAULT 'Active',
+    PRIMARY KEY(customerId)
+);
+
+DROP TABLE IF EXISTS CUSTOMERPURCHASE;
+CREATE TABLE CUSTOMERPURCHASE(
+    customerPurchaseId int NOT NULL AUTO_INCREMENT,
+    customerId int,
+    itemId int,
+    storeId int,
+    quantityPurchased int,
+    dateTimeOfPurchase varchar(20),
+    FOREIGN KEY (storeId) REFERENCES RETAILSTORE(storeId),
+    FOREIGN KEY (itemId) REFERENCES INVENTORYITEM(itemId),
+    FOREIGN KEY (customerId) REFERENCES CUSTOMER(customerId),
+    PRIMARY KEY(customerPurchaseId)
+);
+
+DROP TABLE IF EXISTS ORDERS;
+CREATE TABLE ORDERS(
+    orderId int NOT NULL AUTO_INCREMENT,
+    vendorId int,
+    storeId int,
+    dateTimeOfOrder varchar(20),
+    status ENUM ('Pending', 'Delivered', 'Canceled') DEFAULT 'Pending',
+    dateTimeOfFulfilment varchar(20),
+    FOREIGN KEY (storeId) REFERENCES RETAILSTORE(storeId),
+    FOREIGN KEY (vendorId) REFERENCES VENDOR(vendorId),
+    PRIMARY KEY(orderId)
+);
+
+DROP TABLE IF EXISTS ORDERDETAIL;
+CREATE TABLE ORDERDETAIL(
+    orderDetailId int NOT NULL AUTO_INCREMENT,
+    orderId int,
+    itemId int,
+    quantityOrdered int,
+    FOREIGN KEY (itemId) REFERENCES INVENTORYITEM(itemId),
+    FOREIGN KEY (orderId) REFERENCES ORDERS(orderId),
+    PRIMARY KEY(orderDetailId)
+);
+
+DROP TABLE IF EXISTS RETURNTOVENDOR;
+CREATE TABLE RETURNTOVENDOR(
+   returnToVendorId int NOT NULL AUTO_INCREMENT,
+    vendorId int,
+    storeId int,
+    dateTimeOfReturn varchar(20),
+    FOREIGN KEY (vendorId) REFERENCES VENDOR(vendorId),
+    FOREIGN KEY (storeId) REFERENCES RETAILSTORE(storeId),
+    PRIMARY KEY(returnToVendorId)
+);
+
+DROP TABLE IF EXISTS RETURNTOVENDORDETAIL;
+CREATE TABLE RETURNTOVENDORDETAIL(
+    returnToVendorDetailId int NOT NULL AUTO_INCREMENT,
+    returnToVendorId int,
+    itemId int,
+    quantityReturned int,
+    FOREIGN KEY (returnToVendorId) REFERENCES RETURNTOVENDOR(returnToVendorId),
+    FOREIGN KEY (itemId) REFERENCES INVENTORYITEM(itemId),
+    PRIMARY KEY(returnToVendorDetailId)
+);
