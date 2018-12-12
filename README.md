@@ -6,31 +6,31 @@
 
 ## PROJECT FEATURES
 1. CRUD operations on Vendors
->Vendors can be created, read, updated, or deleted.
+    >Vendors can be created, read, updated, or deleted.
 
 2. CRUD operations on Stores
->Stores can be created, read, updated, or deleted.
+    >Stores can be created, read, updated, or deleted.
 
 3. CRUD operations on Items 
->Items can be created, read, updated, or deleted.
+    >Items can be created, read, updated, or deleted.
 
 4. CRUD operations on Customers
->Customers can be created, read, updated, or deleted.
+    >Customers can be created, read, updated, or deleted.
 
 5. CRU operations on Orders
->Orders can be created, read, or updated. They cannot be deleted. 
+    >Orders can be created, read, or updated. They cannot be deleted. 
 
 6. Process a return
->Return items to the Vendor. Decrement item stocks by the respective quanties.
+    >Return items to the Vendor. Decrement item stocks by the respective quanties.
 
 7. Process a delivery
->Mark a deliver as "Fufilled" once it makes it to the specified store. Increment item stocks by the respective quantities.
+    >Mark a deliver as "Fufilled" once it makes it to the specified store. Increment item stocks by the respective quantities.
 
 8. Create a purchase
->A purchase is made to a customer from a store. the quantity in-stock of the item is deducted respectively.
+    >A purchase is made to a customer from a store. the quantity in-stock of the item is deducted respectively.
 
 9. View orders from vendors
->Requires the vendor to log in, they they are shown the current orders.
+    >Requires the vendor to log in, they they are shown the current orders.
 
 10. Reports to be saved to CSV
     - List all items report
@@ -43,23 +43,30 @@
       - Retirves all 'Inventory' records that have been given out up to a certain date
       
  ## GUI Screenshots
- 
-![Screenshot](screenshots/mainmenu.png)
+![Screenshot](Screenshots/Homepage.png)
 
-![Screenshot](screenshots/screenshot1.png)
+![Screenshot](Screenshots/VendorPortal.png)
 
-![Screenshot](screenshots/screenshot2.png)
+![Screenshot](Screenshots/Add Vendor.png)
 
-![Screenshot](screenshots/screenshot3.png)
+![Screenshot](Screenshots/ModifyVendor.png)
 
-![Screenshot](screenshots/screenshot4.png)
+![Screenshot](Screenshots/DeleteVendor.png)
 
-![Screenshot](screenshots/screenshot5.png)
+![Screenshot](Screenshots/StorePortal.png)
 
-![Screenshot](screenshots/screenshot6.png)
+![Screenshot](Screenshots/CustomerPortal.png)
 
-![Screenshot](screenshots/screenshot8.png)
+![Screenshot](Screenshots/ItemPortal.png)
 
-![Screenshot](screenshots/screenshot7.png)
+![Screenshot](Screenshots/OrderPortal.png)
 
-![Screenshot](screenshots/screenshot9.png)
+![Screenshot](Screenshots/CreateOrder.png)
+
+![Screenshot](Screenshots/processDelivery.png)
+
+![Screenshot](Screenshots/Purchase.png)
+
+![Screenshot](Screenshots/Returns.png)
+
+![Screenshot](Screenshots/Reports.png)
