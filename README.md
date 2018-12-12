@@ -43,30 +43,30 @@
       - Retirves all 'Inventory' records that have been given out up to a certain date
       
  ## GUI Screenshots
-![Screenshot](Screenshots/Homepage.png)
+![Screenshot](Screenshots/Homepage.PNG)
 
-![Screenshot](Screenshots/VendorPortal.png)
+![Screenshot](Screenshots/VendorPortal.PNG)
 
-![Screenshot](Screenshots/Add Vendor.png)
+![Screenshot](Screenshots/AddVendor.PNG)
 
-![Screenshot](Screenshots/ModifyVendor.png)
+![Screenshot](Screenshots/ModifyVendor.PNG)
 
-![Screenshot](Screenshots/DeleteVendor.png)
+![Screenshot](Screenshots/DeleteVendor.PNG)
 
-![Screenshot](Screenshots/StorePortal.png)
+![Screenshot](Screenshots/StorePortal.PNG)
 
-![Screenshot](Screenshots/CustomerPortal.png)
+![Screenshot](Screenshots/CustomerPortal.PNG)
 
-![Screenshot](Screenshots/ItemPortal.png)
+![Screenshot](Screenshots/ItemPortal.PNG)
 
-![Screenshot](Screenshots/OrderPortal.png)
+![Screenshot](Screenshots/OrderPortal.PNG)
 
-![Screenshot](Screenshots/CreateOrder.png)
+![Screenshot](Screenshots/CreateOrder.PNG)
 
-![Screenshot](Screenshots/processDelivery.png)
+![Screenshot](Screenshots/ProcessDelivery.PNG)
 
-![Screenshot](Screenshots/Purchase.png)
+![Screenshot](Screenshots/Purchase.PNG)
 
-![Screenshot](Screenshots/Returns.png)
+![Screenshot](Screenshots/Returns.PNG)
 
-![Screenshot](Screenshots/Reports.png)
+![Screenshot](Screenshots/Reports.PNG)
