@@ -30,17 +30,17 @@
     >A purchase is made to a customer from a store. the quantity in-stock of the item is deducted respectively.
 
 9. View orders from vendors
-    >Requires the vendor to log in, they they are shown the current orders.
+    >Requires the vendor to log in. After login, they they are shown the current orders.
 
 10. Reports to be saved to CSV
     - List all items report
-      - Retrives all the Donors from the 'Inventory' records with the number of items they have donated
+      - Retrieves all the Donors from the 'Inventory' records with the number of items they have donated
     - List all overdue items report
-      - Retrives all 'Inventory' records that are available to give out (Status is "donated")
+      - Retrieves all 'Inventory' records that are available to give out (Status is "donated")
     - Report items delievered in a certain time period
-      - Retirves all 'Inventory' records that have been given out up to a certain date
+      - Retrieves all 'Inventory' records that have been given out up to a certain date
     - List top 10 items returned in a time period report
-      - Retirves all 'Inventory' records that have been given out up to a certain date
+      - Retrieves all 'Inventory' records that have been given out up to a certain date
       
  ## GUI Screenshots
 ![Screenshot](Screenshots/Homepage.PNG)
