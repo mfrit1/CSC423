@@ -1,5 +1,5 @@
 ## CSC423 PROJECT PROBLEM DESCRIPTION
-*Overseen by Sandeep Mitra and an unofficial representative from the company Dunnhumby* 
+*Overseen by Sandeep Mitra and an unofficial employee from the company Dunnhumby* 
 
 ###### HTML/CSS/JAVASCRIPT/PHP Based Web Application for the Imaginary Company "Nanno's Foods"
 > Nanno's Foods is a company that owns multiple stores in a certain area. It has suppliers that supply these stores with their goods. In order to keep track of their operations, Nannos's foods requires a web application that keeps track of item stocks in each store, current vendors, item orders from the vendors, current customers, deliveries from the vendors, and returns to the vendors (vendors are required to dispose of not sold items).
